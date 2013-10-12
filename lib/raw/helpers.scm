@@ -67,3 +67,20 @@
        body: body-string)
      (define func-name-symbol
        (foreign-lambda* void () body-string)))))
+
+
+(define-syntax define-enum
+  (syntax-rules ()
+    ((define-enum enum-name value-name ...)
+     (begin
+       (define-foreign-type enum-name integer)
+       (define value-name (foreign-value value-name enum-name))
+       ...))))
+
+
+(define-syntax define-and-export-enum
+  (syntax-rules ()
+    ((define-and-export-enum enum-name value-name ...)
+     (begin
+       (export value-name ...)
+       (define-enum enum-name value-name ...)))))
