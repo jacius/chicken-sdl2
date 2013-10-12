@@ -1,0 +1,38 @@
+;;;; -*- Scheme -*-
+
+(define version "0.1")
+(define modules '(sdl2-raw))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(define sdl2-flags
+  (with-input-from-pipe "sdl2-config --cflags --libs" read-lines))
+
+(define emit-types? (version>=? (chicken-version) "4.7.4"))
+
+(define (module-file module extension)
+  (string-append (symbol->string module) extension))
+
+(define (compile-module module)
+  (compile -J -v -s -O3 -d1 ,@sdl2-flags
+           ,@(if emit-types?
+                 `(-emit-type-file ,(module-file module ".types"))
+                 '())
+           ,(module-file module ".scm"))
+  (compile -v -s -O3 -d0 ,(module-file module ".import.scm")))
+
+(for-each compile-module modules)
+
+(define build-products
+  (append-map (lambda (module)
+                (cons* (module-file module ".so")
+                       (module-file module ".import.so")
+                       (if emit-types?
+                           (list (module-file module ".types"))
+                           '())))
+              modules))
+
+(install-extension
+ 'sdl2
+ build-products
+ `((version ,version)))

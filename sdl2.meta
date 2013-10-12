@@ -1,0 +1,16 @@
+;;;; -*- Scheme -*-
+
+((egg "protolk.egg")
+ (synopsis "Bindings to SDL 2 (Simple DirectMedia Layer 2)")
+ (author "John Croisant <john+chicken@croisant.net>")
+ (category io)
+ (license "BSD")
+ (foreign-depends ">=SDL-2.0.0")
+ (files "sdl2.meta"
+	"sdl2.setup"
+        "sdl2-raw.scm"
+        "lib/types.scm"
+        "lib/raw/general.scm"
+        "lib/raw/helpers.scm"
+        "lib/raw/video-display-mode.scm"
+        "lib/raw/window.scm"))
