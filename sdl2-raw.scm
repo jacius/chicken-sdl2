@@ -10,7 +10,7 @@
 (foreign-declare "#include \"SDL.h\"")
 (foreign-declare "#include \"SDL_syswm.h\"")
 
-(include "lib/types.scm")
+(include "lib/raw/foreign-types.scm")
 
 (include "lib/raw/helpers.scm")
 (include "lib/raw/general.scm")
