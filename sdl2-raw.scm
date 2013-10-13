@@ -6,6 +6,7 @@
 (module sdl2-raw ()
 
 (import scheme chicken foreign)
+(require-extension sdl2-record-types)
 
 (foreign-declare "#include \"SDL.h\"")
 (foreign-declare "#include \"SDL_syswm.h\"")

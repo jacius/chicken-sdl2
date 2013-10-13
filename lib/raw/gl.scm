@@ -45,16 +45,16 @@
 
 
 (define-function-binding SDL_GL_CreateContext
-  return: (SDL_GLContext new-context)
+  return: (SDL_GLContext* new-context)
   args: ((SDL_Window* window)))
 
 (define-function-binding SDL_GL_DeleteContext
-  args: ((SDL_GLContext context)))
+  args: ((SDL_GLContext* context)))
 
 (define-function-binding SDL_GL_MakeCurrent
   return: (integer zero-if-success)
   args: ((SDL_Window* window)
-         (SDL_GLContext context)))
+         (SDL_GLContext* context)))
 
 
 (define-function-binding SDL_GL_GetAttribute
