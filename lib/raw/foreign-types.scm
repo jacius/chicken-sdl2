@@ -16,7 +16,7 @@
 
 (define-foreign-type SDL_Rect*
   (c-pointer "SDL_Rect")
-  %sdl-rect-buffer %wrap-sdl-rect)
+  %sdl-rect-pointer %wrap-sdl-rect)
 
 (define-foreign-type SDL_SysWMinfo*
   (c-pointer "SDL_SysWMinfo")
