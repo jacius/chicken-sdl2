@@ -6,12 +6,15 @@
 (module sdl2-raw ()
 
 (import scheme chicken foreign)
-(require-extension sdl2-record-types)
+(require-extension sdl2-types)
 
 (foreign-declare "#include \"SDL.h\"")
 (foreign-declare "#include \"SDL_syswm.h\"")
 
 (include "lib/helpers.scm")
+
+;;; Foreign type definitions aren't exported from modules, so we need
+;;; to define the same foreign types in each module that uses them.
 (include "lib/types/foreign-types.scm")
 
 (include "lib/raw/general.scm")

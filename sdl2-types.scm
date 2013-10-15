@@ -1,5 +1,5 @@
 
-(module sdl2-record-types ()
+(module sdl2-types ()
 
 (import scheme chicken foreign)
 

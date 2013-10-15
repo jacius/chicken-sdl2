@@ -1,7 +1,7 @@
 ;;;; -*- Scheme -*-
 
 (define version "0.1")
-(define modules '(sdl2-record-types sdl2-raw))
+(define modules '(sdl2-types sdl2-raw))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
