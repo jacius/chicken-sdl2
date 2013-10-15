@@ -52,31 +52,31 @@
   args: ((SDL_GLContext* context)))
 
 (define-function-binding SDL_GL_MakeCurrent
-  return: (integer zero-if-success)
+  return: (int zero-if-success)
   args: ((SDL_Window* window)
          (SDL_GLContext* context)))
 
 
 (define-function-binding SDL_GL_GetAttribute
-  return: (integer zero-if-success)
+  return: (int zero-if-success)
   args: ((SDL_GLattr attr_id)
-         ((c-pointer integer) value)))
+         ((c-pointer int) value)))
 
 (define-function-binding SDL_GL_SetAttribute
-  return: (integer zero-if-success)
+  return: (int zero-if-success)
   args: ((SDL_GLattr attr_id)
-         (integer value)))
+         (int value)))
 
 
 (define-function-binding SDL_GL_SwapWindow
   args: ((SDL_Window* window)))
 
 (define-function-binding SDL_GL_GetSwapInterval
-  return: (integer interval))
+  return: (int interval))
 
 (define-function-binding SDL_GL_SetSwapInterval
-  return: (integer zero-if-success)
-  args: ((integer interval)))
+  return: (int zero-if-success)
+  args: ((int interval)))
 
 
 (define-function-binding SDL_GL_ExtensionSupported
@@ -89,19 +89,19 @@
   args: ((c-string proc)))
 
 (define-function-binding SDL_GL_LoadLibrary
-  return: (integer zero-if-success)
+  return: (int zero-if-success)
   args: ((c-string path)))
 
 (define-function-binding SDL_GL_UnloadLibrary)
 
 
 (define-function-binding SDL_GL_BindTexture
-  return: (integer zero-if-success)
+  return: (int zero-if-success)
   args: ((SDL_Texture* texture)
          ((c-pointer float) texw)
          ((c-pointer float) texh)))
 
 (define-function-binding SDL_GL_UnbindTexture
-  return: (integer zero-if-success)
+  return: (int zero-if-success)
   args: ((SDL_Texture* texture)))
 

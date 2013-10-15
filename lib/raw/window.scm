@@ -68,9 +68,9 @@
 (define-function-binding SDL_CreateWindow
   return: (SDL_Window* new-window)
   args: (((const c-string) title)
-         (integer x) (integer y)
-         (integer w) (integer h)
-         (unsigned-integer32 flags)))
+         (int x) (int y)
+         (int w) (int h)
+         (unsigned-int32 flags)))
 
 ;;; TODO?: SDL_CreateWindowAndRenderer
 ;;; TODO?: SDL_CreateWindowFrom
@@ -83,11 +83,11 @@
 ;;; UPDATE WINDOW SURFACE
 
 (define-function-binding SDL_UpdateWindowSurface
-  return: (integer zero-if-success)
+  return: (int zero-if-success)
   args: ((SDL_Window* window)))
 
 (define-function-binding SDL_UpdateWindowSurfaceRects
-  return: (integer zero-if-success)
+  return: (int zero-if-success)
   args: ((SDL_Window* window)
          ((const c-pointer) rects)
          (int numrects)))
@@ -128,35 +128,35 @@
          ((const c-string) data-key)))
 
 (define-function-binding SDL_GetWindowDisplayIndex
-  return: (integer display-index)
+  return: (int display-index)
   args: ((SDL_Window* window)))
 
 (define-function-binding SDL_GetWindowDisplayMode
-  return: (integer zero-if-success)
+  return: (int zero-if-success)
   args: ((SDL_Window* window)
          (SDL_DisplayMode* mode-out)))
 
 (define-function-binding SDL_GetWindowFlags
-  return: (unsigned-integer32 flags)
+  return: (unsigned-int32 flags)
   args: ((SDL_Window* window)))
 
 (define-function-binding SDL_GetWindowFromID
   return: (SDL_Window* window-or-null)
-  args: ((unsigned-integer32 id)))
+  args: ((unsigned-int32 id)))
 
 (define-function-binding SDL_GetWindowGammaRamp
-  return: (integer zero-if-success)
+  return: (int zero-if-success)
   args: ((SDL_Window* window)
-         ((c-pointer unsigned-integer16) red-array-out)
-         ((c-pointer unsigned-integer16) green-array-out)
-         ((c-pointer unsigned-integer16) blue-array-out)))
+         ((c-pointer unsigned-int16) red-array-out)
+         ((c-pointer unsigned-int16) green-array-out)
+         ((c-pointer unsigned-int16) blue-array-out)))
 
 (define-function-binding SDL_GetWindowGrab
   return: (bool grabbed?)
   args: ((SDL_Window* window)))
 
 (define-function-binding SDL_GetWindowID
-  return: (unsigned-integer32 id)
+  return: (unsigned-int32 id)
   args: ((SDL_Window* window)))
 
 (define-function-binding SDL_GetWindowMaximumSize
@@ -170,7 +170,7 @@
          ((c-pointer int) h-out)))
 
 (define-function-binding SDL_GetWindowPixelFormat
-  return: (unsigned-integer32 format)
+  return: (unsigned-int32 format)
   args: ((SDL_Window* window)))
 
 (define-function-binding SDL_GetWindowPosition
@@ -201,7 +201,7 @@
 ;;; SET WINDOW PROPERTIES
 
 (define-function-binding SDL_SetWindowBrightness
-  return: (integer zero-if-success)
+  return: (int zero-if-success)
   args: ((SDL_Window* window)
          (float brightness)))
 
@@ -212,21 +212,21 @@
          (c-pointer data-value)))
 
 (define-function-binding SDL_SetWindowDisplayMode
-  return: (integer zero-if-success)
+  return: (int zero-if-success)
   args: ((SDL_Window* window)
          ((const SDL_DisplayMode*) mode)))
 
 (define-function-binding SDL_SetWindowFullscreen
-  return: (integer zero-if-success)
+  return: (int zero-if-success)
   args: ((SDL_Window* window)
-         (unsigned-integer32 fullscreen-flags)))
+         (unsigned-int32 fullscreen-flags)))
 
 (define-function-binding SDL_SetWindowGammaRamp
-  return: (integer zero-if-success)
+  return: (int zero-if-success)
   args: ((SDL_Window* window)
-         ((const (c-pointer unsigned-integer16)) red-array)
-         ((const (c-pointer unsigned-integer16)) green-array)
-         ((const (c-pointer unsigned-integer16)) blue-array)))
+         ((const (c-pointer unsigned-int16)) red-array)
+         ((const (c-pointer unsigned-int16)) green-array)
+         ((const (c-pointer unsigned-int16)) blue-array)))
 
 (define-function-binding SDL_SetWindowGrab
   args: ((SDL_Window* window)
@@ -238,23 +238,23 @@
 
 (define-function-binding SDL_SetWindowMaximumSize
   args: ((SDL_Window* window)
-         (integer max_w)
-         (integer max_h)))
+         (int max_w)
+         (int max_h)))
 
 (define-function-binding SDL_SetWindowMinimumSize
   args: ((SDL_Window* window)
-         (integer min_w)
-         (integer min_h)))
+         (int min_w)
+         (int min_h)))
 
 (define-function-binding SDL_SetWindowPosition
   args: ((SDL_Window* window)
-         (integer x)
-         (integer y)))
+         (int x)
+         (int y)))
 
 (define-function-binding SDL_SetWindowSize
   args: ((SDL_Window* window)
-         (integer w)
-         (integer h)))
+         (int w)
+         (int h)))
 
 (define-function-binding SDL_SetWindowTitle
   args: ((SDL_Window* window)

@@ -1,6 +1,6 @@
 
-(define-foreign-type unsigned-integer8 unsigned-byte)
-(define-foreign-type unsigned-integer16 unsigned-short)
+(define-foreign-type unsigned-int8 unsigned-byte)
+(define-foreign-type unsigned-int16 unsigned-short)
 
 
 (define-foreign-type SDL_Color*
