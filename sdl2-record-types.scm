@@ -6,7 +6,7 @@
 (foreign-declare "#include \"SDL.h\"")
 (foreign-declare "#include \"SDL_syswm.h\"")
 
-(include "lib/raw/helpers.scm")
+(include "lib/helpers.scm")
 
 ;;; NOTE: The ordering of these includes is important!
 
@@ -15,7 +15,7 @@
 (include "lib/types/record-types.scm")
 
 ;;; 2. We declare foreign types, which depend on the pointer wrappers.
-(include "lib/raw/foreign-types.scm")
+(include "lib/types/foreign-types.scm")
 
 ;;; 3. We define struct field pseudo-accessors, which depend on the
 ;;; foreign type definitions.

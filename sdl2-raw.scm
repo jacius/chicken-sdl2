@@ -11,9 +11,9 @@
 (foreign-declare "#include \"SDL.h\"")
 (foreign-declare "#include \"SDL_syswm.h\"")
 
-(include "lib/raw/foreign-types.scm")
+(include "lib/helpers.scm")
+(include "lib/types/foreign-types.scm")
 
-(include "lib/raw/helpers.scm")
 (include "lib/raw/general.scm")
 (include "lib/raw/video-display-mode.scm")
 (include "lib/raw/window.scm")
