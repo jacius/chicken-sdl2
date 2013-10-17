@@ -29,7 +29,8 @@
 
 (define-foreign-type SDL_Rect*
   (c-pointer "SDL_Rect")
-  %sdl-rect-pointer %wrap-sdl-rect)
+  %sdl-rect->SDL_Rect*
+  %SDL_Rect*->sdl-rect)
 
 (define-foreign-type SDL_Surface*
   (c-pointer "SDL_Surface")
