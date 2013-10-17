@@ -5,7 +5,8 @@
 
 (define-foreign-type SDL_Color*
   (c-pointer "SDL_Color")
-  %sdl-color-pointer %wrap-sdl-color)
+  %sdl-color->SDL_Color*
+  %SDL_Color*->sdl-color)
 
 (define-foreign-type SDL_DisplayMode*
   (c-pointer "SDL_DisplayMode")

@@ -2,6 +2,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; HELPERS
 
+(define (%displayify out . things)
+  (for-each (lambda (thing) (display thing out))
+            things))
+
+
 ;;; Convenience and descriptiveness wrapper around foreign-lambda.
 ;;; Usage (stuff in square brackets can be omitted):
 ;;;
