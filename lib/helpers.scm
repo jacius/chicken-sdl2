@@ -155,7 +155,7 @@
                  void
                  ((,(inject struct-type) ,(inject obj))
                   (,(inject field-type) ,(inject val)))
-                 ,(sprintf "C_return(~S->~S);" obj field-name)))
+                 ,(sprintf "~S->~S = ~S;" obj field-name val)))
               (define ,(inject getter-name)
                 (getter-with-setter
                  (foreign-lambda*
