@@ -52,3 +52,74 @@
 (define-foreign-type SDL_Window*
   (c-pointer "SDL_Window")
   %sdl-window-pointer %wrap-sdl-window)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; EVENTS
+
+(define-foreign-type SDL_Event*
+  (c-pointer "SDL_Event"))
+
+;; (define-foreign-type SDL_DollarGestureEvent*
+;;   (c-pointer "SDL_DollarGestureEvent"))
+
+(define-foreign-type SDL_DropEvent*
+  (c-pointer "SDL_DropEvent"))
+
+(define-foreign-type SDL_JoyAxisEvent*
+  (c-pointer "SDL_JoyAxisEvent"))
+
+(define-foreign-type SDL_JoyBallEvent*
+  (c-pointer "SDL_JoyBallEvent"))
+
+(define-foreign-type SDL_JoyButtonEvent*
+  (c-pointer "SDL_JoyButtonEvent"))
+
+(define-foreign-type SDL_JoyHatEvent*
+  (c-pointer "SDL_JoyHatEvent"))
+
+(define-foreign-type SDL_KeyboardEvent*
+  (c-pointer "SDL_KeyboardEvent"))
+
+(define-foreign-type SDL_MouseButtonEvent*
+  (c-pointer "SDL_MouseButtonEvent"))
+
+(define-foreign-type SDL_MouseMotionEvent*
+  (c-pointer "SDL_MouseMotionEvent"))
+
+(define-foreign-type SDL_MouseWheelEvent*
+  (c-pointer "SDL_MouseWheelEvent"))
+
+;; (define-foreign-type SDL_MultiGestureEvent*
+;;   (c-pointer "SDL_MultiGestureEvent"))
+
+(define-foreign-type SDL_QuitEvent*
+  (c-pointer "SDL_QuitEvent"))
+
+(define-foreign-type SDL_SysWMEvent*
+  (c-pointer "SDL_SysWMEvent"))
+
+(define-foreign-type SDL_TextEditingEvent*
+  (c-pointer "SDL_TextEditingEvent"))
+
+(define-foreign-type SDL_TextInputEvent*
+  (c-pointer "SDL_TextInputEvent"))
+
+;; (define-foreign-type SDL_TouchFingerEvent*
+;;   (c-pointer "SDL_TouchFingerEvent"))
+
+(define-foreign-type SDL_UserEvent*
+  (c-pointer "SDL_UserEvent"))
+
+(define-foreign-type SDL_WindowEvent*
+  (c-pointer "SDL_WindowEvent"))
+
+;;; EVENT-RELATED TYPES
+
+(define-foreign-type SDL_EventFilter
+  (function int (c-pointer SDL_Event*)))
+
+(define-foreign-type SDL_EventFilter*
+  (c-pointer (function int (c-pointer SDL_Event*))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
