@@ -46,7 +46,8 @@
 
 (define-foreign-type SDL_version*
   (c-pointer "SDL_version")
-  %sdl-version-pointer %wrap-sdl-version)
+  %sdl-version->SDL_version*
+  %SDL_version*->sdl-version)
 
 (define-foreign-type SDL_Window*
   (c-pointer "SDL_Window")

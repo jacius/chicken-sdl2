@@ -55,17 +55,14 @@
 ;; TODO?: SDL_GetRevision
 ;; TODO?: SDL_GetRevisionNumber
 
-;; Taking some creative liberties here. Output parameters are awkward.
-(define-function-binding* SDL_GetVersion
-  return: (SDL_version* version)
-  body: "SDL_version* v; SDL_GetVersion(v); C_return(v);")
+(define-function-binding SDL_GetVersion
+  args: ((SDL_version* version)))
 
 ;; TODO?: SDL_REVISION
 
-;; Taking some creative liberties here. Output parameters are awkward.
 (define-function-binding* SDL_VERSION
-  return: (SDL_version* version)
-  body: "SDL_version* v; SDL_VERSION(v); C_return(v);")
+  args: ((SDL_version* version))
+  body: "SDL_VERSION(version);")
 
 ;; TODO?: SDL_VERSIONNUM
 ;; TODO?: SDL_VERSION_ATLEAST
