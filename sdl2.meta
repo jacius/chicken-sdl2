@@ -1,7 +1,7 @@
 ;;;; -*- Scheme -*-
 
-((egg "protolk.egg")
- (synopsis "Bindings to SDL 2 (Simple DirectMedia Layer 2)")
+((egg "sdl2.egg")
+ (synopsis "Chicken bindings to SDL 2 (Simple DirectMedia Layer 2)")
  (author "John Croisant <john+chicken@croisant.net>")
  (category io)
  (license "BSD")
