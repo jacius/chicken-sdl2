@@ -10,6 +10,12 @@
 (include "lib/types/record-types/display-mode.scm")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; EVENTS / INPUT
+
+(include "lib/types/record-types/input.scm")
+(include "lib/types/record-types/events.scm")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; GL-CONTEXT
 
 (include "lib/types/record-types/gl-context.scm")
