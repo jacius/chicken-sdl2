@@ -1,7 +1,22 @@
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; GENERIC
+
 (define-foreign-type unsigned-int8 unsigned-byte)
 (define-foreign-type unsigned-int16 unsigned-short)
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ENUMS
+
+(define-foreign-type SDL_EventType int)
+(define-foreign-type SDL_eventaction int)
+(define-foreign-type SDL_GLattr int)
+(define-foreign-type SDL_WindowFlags int)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; STRUCTS
 
 (define-foreign-type SDL_Color*
   (c-pointer "SDL_Color")

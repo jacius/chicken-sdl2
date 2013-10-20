@@ -81,7 +81,6 @@
   (syntax-rules ()
     ((define-enum enum-name value-name ...)
      (begin
-       (define-foreign-type enum-name int)
        (define value-name (foreign-value value-name enum-name))
        ...))))
 
