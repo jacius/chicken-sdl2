@@ -5,6 +5,12 @@
 (include "lib/types/accessors/color.scm")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; EVENTS / INPUT
+
+(include "lib/types/accessors/input.scm")
+(include "lib/types/accessors/events.scm")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; DISPLAY-MODE
 
 (include "lib/types/accessors/display-mode.scm")
