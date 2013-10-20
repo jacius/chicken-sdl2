@@ -12,6 +12,9 @@
 (define-foreign-type SDL_EventType int)
 (define-foreign-type SDL_eventaction int)
 (define-foreign-type SDL_GLattr int)
+(define-foreign-type SDL_Keycode int)
+(define-foreign-type SDL_Keymod int)
+(define-foreign-type SDL_Scancode int)
 (define-foreign-type SDL_WindowFlags int)
 
 
