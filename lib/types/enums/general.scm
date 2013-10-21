@@ -30,10 +30,25 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-(include "lib/types/enums/general.scm")
-(include "lib/types/enums/events.scm")
-(include "lib/types/enums/gl.scm")
-(include "lib/types/enums/keycode.scm")
-(include "lib/types/enums/mouse.scm")
-(include "lib/types/enums/scancode.scm")
-(include "lib/types/enums/window.scm")
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; INIT / SUBSYSTEMS
+
+(export SDL_INIT_AUDIO
+        SDL_INIT_EVENTS
+        SDL_INIT_EVERYTHING
+        SDL_INIT_GAMECONTROLLER
+        SDL_INIT_HAPTIC
+        SDL_INIT_JOYSTICK
+        SDL_INIT_NOPARACHUTE
+        SDL_INIT_TIMER
+        SDL_INIT_VIDEO)
+
+(define SDL_INIT_VIDEO          (foreign-value "SDL_INIT_VIDEO"          unsigned-int32))
+(define SDL_INIT_AUDIO          (foreign-value "SDL_INIT_AUDIO"          unsigned-int32))
+(define SDL_INIT_TIMER          (foreign-value "SDL_INIT_TIMER"          unsigned-int32))
+(define SDL_INIT_JOYSTICK       (foreign-value "SDL_INIT_JOYSTICK"       unsigned-int32))
+(define SDL_INIT_HAPTIC         (foreign-value "SDL_INIT_HAPTIC"         unsigned-int32))
+(define SDL_INIT_GAMECONTROLLER (foreign-value "SDL_INIT_GAMECONTROLLER" unsigned-int32))
+(define SDL_INIT_EVENTS         (foreign-value "SDL_INIT_EVENTS"         unsigned-int32))
+(define SDL_INIT_EVERYTHING     (foreign-value "SDL_INIT_EVERYTHING"     unsigned-int32))
+(define SDL_INIT_NOPARACHUTE    (foreign-value "SDL_INIT_NOPARACHUTE"    unsigned-int32))

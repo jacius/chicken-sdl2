@@ -30,6 +30,49 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
+(export SDL_WINDOWPOS_UNDEFINED_MASK
+        SDL_WINDOWPOS_UNDEFINED
+        SDL_WINDOWPOS_UNDEFINED_DISPLAY
+        SDL_WINDOWPOS_ISUNDEFINED
+
+        SDL_WINDOWPOS_CENTERED_MASK
+        SDL_WINDOWPOS_CENTERED
+        SDL_WINDOWPOS_CENTERED_DISPLAY
+        SDL_WINDOWPOS_ISCENTERED)
+
+
+(define SDL_WINDOWPOS_UNDEFINED_MASK
+  (foreign-value "SDL_WINDOWPOS_UNDEFINED_MASK" unsigned-int32))
+(define SDL_WINDOWPOS_UNDEFINED
+  (foreign-value "SDL_WINDOWPOS_UNDEFINED" unsigned-int32))
+
+(define-function-binding* SDL_WINDOWPOS_UNDEFINED_DISPLAY
+  return: (unsigned-int32 value)
+  args: ((unsigned-int32 displayNum))
+  body: "C_return(SDL_WINDOWPOS_UNDEFINED_DISPLAY(displayNum));")
+
+(define-function-binding* SDL_WINDOWPOS_ISUNDEFINED
+  return: (bool is-undefined?)
+  args: ((unsigned-int32 value))
+  body: "C_return(SDL_WINDOWPOS_ISUNDEFINED(value));")
+
+
+(define SDL_WINDOWPOS_CENTERED_MASK
+  (foreign-value "SDL_WINDOWPOS_CENTERED_MASK" unsigned-int32))
+(define SDL_WINDOWPOS_CENTERED
+  (foreign-value "SDL_WINDOWPOS_CENTERED" unsigned-int32))
+
+(define-function-binding* SDL_WINDOWPOS_CENTERED_DISPLAY
+  return: (unsigned-int32 value)
+  args: ((unsigned-int32 displayNum))
+  body: "C_return(SDL_WINDOWPOS_CENTERED_DISPLAY(displayNum));")
+
+(define-function-binding* SDL_WINDOWPOS_ISCENTERED
+  return: (bool is-undefined?)
+  args: ((unsigned-int32 value))
+  body: "C_return(SDL_WINDOWPOS_ISCENTERED(value));")
+
+
 (define-and-export-enum SDL_WindowFlags
   SDL_WINDOW_FULLSCREEN
   SDL_WINDOW_FULLSCREEN_DESKTOP
