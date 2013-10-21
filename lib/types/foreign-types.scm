@@ -56,6 +56,13 @@
 (define-foreign-type SDL_WindowFlags int)
 (define-foreign-type SDL_WindowEventID int)
 
+(define-foreign-type SDL_PixelFormatEnum int)
+(define-foreign-type SDL_PixelTypeEnum int)
+(define-foreign-type SDL_BitmapOrderEnum int)
+(define-foreign-type SDL_PackedOrderEnum int)
+(define-foreign-type SDL_ArrayOrderEnum int)
+(define-foreign-type SDL_PackedLayoutEnum int)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; STRUCTS
