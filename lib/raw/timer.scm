@@ -30,29 +30,27 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-;;; This module contains raw bindings to a subset of SDL2. These are
-;;; not really meant to be used directly. Instead they should be
-;;; wrapped in a nicer, more idiomatic interface in the sdl2 module.
+(export SDL_Delay
+        SDL_GetTicks
+        SDL_GetPerformanceCounter
+        SDL_GetPerformanceFrequency
+        ;; TODO: SDL_AddTimer
+        ;; TODO: SDL_RemoveTimer
+        )
 
-(module sdl2-raw ()
 
-(import scheme chicken foreign)
-(require-extension sdl2-types)
+(define-function-binding SDL_Delay
+  args: ((unsigned-int32 ms)))
 
-(foreign-declare "#include \"SDL.h\"")
-(foreign-declare "#include \"SDL_syswm.h\"")
+(define-function-binding SDL_GetTicks
+  return: (unsigned-int32 ms))
 
-(include "lib/helpers.scm")
+(define-function-binding SDL_GetPerformanceCounter
+  return: (unsigned-integer64 counter-value))
 
-;;; Foreign type definitions aren't exported from modules, so we need
-;;; to define the same foreign types in each module that uses them.
-(include "lib/types/foreign-types.scm")
+(define-function-binding SDL_GetPerformanceFrequency
+  return: (unsigned-integer64 frequency))
 
-(include "lib/raw/general.scm")
-(include "lib/raw/events.scm")
-(include "lib/raw/gl.scm")
-(include "lib/raw/timer.scm")
-(include "lib/raw/video-display-mode.scm")
-(include "lib/raw/window.scm")
+;; TODO: SDL_AddTimer
 
-)
+;; TODO: SDL_RemoveTimer
