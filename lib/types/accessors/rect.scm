@@ -30,6 +30,9 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; RECT
+
 (export make-sdl-rect
         sdl-rect-x sdl-rect-x-set!
         sdl-rect-y sdl-rect-y-set!
@@ -59,3 +62,31 @@
 
 (define (sdl-rect->list c)
   (s32vector->list (%sdl-rect-data c)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; POINT
+
+(export make-sdl-point
+        sdl-point-x sdl-point-x-set!
+        sdl-point-y sdl-point-y-set!
+        sdl-point-set!
+        sdl-point->list)
+
+(define-record-printer (sdl-point c out)
+  (%displayify out "#<sdl-point " (sdl-point->list c) ">"))
+
+(define (make-sdl-point x y)
+  (%wrap-sdl-point (s32vector x y)))
+
+(define-foreign-struct SDL_Point*
+  (int x sdl-point-x sdl-point-x-set!)
+  (int y sdl-point-y sdl-point-y-set!))
+
+(define (sdl-point-set! p #!key x y)
+  (assert (sdl-point? p))
+  (when x (sdl-point-x-set! p x))
+  (when y (sdl-point-y-set! p y)))
+
+(define (sdl-point->list c)
+  (s32vector->list (%sdl-point-data c)))

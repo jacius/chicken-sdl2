@@ -62,7 +62,7 @@
 (include "lib/types/record-types/pixel-format.scm")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; RECT
+;;; RECT / POINT
 
 (include "lib/types/record-types/rect.scm")
 

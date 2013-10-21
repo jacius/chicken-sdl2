@@ -30,6 +30,9 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; RECT
+
 (export sdl-rect?
         %wrap-sdl-rect
         %sdl-rect-data
@@ -53,3 +56,31 @@
                       "*((SDL_Rect*)data) = *r;")
      ptr (%sdl-rect-data new-rect))
     new-rect))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; POINT
+
+(export sdl-point?
+        %wrap-sdl-point
+        %sdl-point-data
+        %sdl-point-data-set!
+        %sdl-point->SDL_Point*
+        %SDL_Point*->sdl-point)
+
+(define-record-type sdl-point
+  (%wrap-sdl-point data)
+  sdl-point?
+  (data %sdl-point-data %sdl-point-data-set!))
+
+(define (%sdl-point->SDL_Point* point)
+  ((foreign-lambda* (c-pointer "SDL_Point") ((s32vector data))
+                    "C_return((SDL_Point*)data);")
+   (%sdl-point-data point)))
+
+(define (%SDL_Point*->sdl-point ptr)
+  (let ((new-point (%wrap-sdl-point (make-s32vector 2))))
+    ((foreign-lambda* void (((c-pointer "SDL_Point") p) (s32vector data))
+                      "*((SDL_Point*)data) = *p;")
+     ptr (%sdl-point-data new-point))
+    new-point))

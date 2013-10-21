@@ -30,31 +30,52 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-;;; This module contains raw bindings to a subset of SDL2. These are
-;;; not really meant to be used directly. Instead they should be
-;;; wrapped in a nicer, more idiomatic interface in the sdl2 module.
+(export SDL_RectEmpty
+        SDL_RectEquals
+        SDL_EnclosePoints
+        SDL_IntersectRectAndLine
+        SDL_HasIntersection
+        SDL_IntersectRect
+        SDL_UnionRect)
 
-(module sdl2-raw ()
 
-(import scheme chicken foreign)
-(require-extension sdl2-types)
+(define-function-binding SDL_RectEmpty
+  return: (bool rect-empty?)
+  args: (((const SDL_Rect*) r)))
 
-(foreign-declare "#include \"SDL.h\"")
-(foreign-declare "#include \"SDL_syswm.h\"")
+(define-function-binding SDL_RectEquals
+  return: (bool rect-equals?)
+  args: (((const SDL_Rect*) a)
+         ((const SDL_Rect*) b)))
 
-(include "lib/helpers.scm")
+(define-function-binding SDL_EnclosePoints
+  return: (bool success?)
+  args: (((const SDL_Point*) points)
+         (int count)
+         ((const SDL_Rect*) clip-or-null)
+         (SDL_Rect* result-out)))
 
-;;; Foreign type definitions aren't exported from modules, so we need
-;;; to define the same foreign types in each module that uses them.
-(include "lib/types/foreign-types.scm")
+(define-function-binding SDL_HasIntersection
+  return: (bool intersects?)
+  args: (((const SDL_Rect*) a)
+         ((const SDL_Rect*) b)))
 
-(include "lib/raw/general.scm")
-(include "lib/raw/events.scm")
-(include "lib/raw/gl.scm")
-(include "lib/raw/pixel-format.scm")
-(include "lib/raw/rect.scm")
-(include "lib/raw/timer.scm")
-(include "lib/raw/video-display-mode.scm")
-(include "lib/raw/window.scm")
+(define-function-binding SDL_IntersectRect
+  return: (bool intersects?)
+  args: (((const SDL_Rect*) a)
+         ((const SDL_Rect*) b)
+         (SDL_Rect* result-out)))
 
-)
+(define-function-binding SDL_IntersectRectAndLine
+  return: (bool intersects?)
+  args: (((const SDL_Rect*) rect)
+         ((c-pointer int) x1-in-out)
+         ((c-pointer int) y1-in-out)
+         ((c-pointer int) x2-in-out)
+         ((c-pointer int) y2-in-out)))
+
+(define-function-binding SDL_UnionRect
+  args: (((const SDL_Rect*) a)
+         ((const SDL_Rect*) b)
+         (SDL_Rect* result-out)))
+

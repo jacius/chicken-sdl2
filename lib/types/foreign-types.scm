@@ -96,6 +96,11 @@
   %sdl-rect->SDL_Rect*
   %SDL_Rect*->sdl-rect)
 
+(define-foreign-type SDL_Point*
+  (c-pointer "SDL_Point")
+  %sdl-point->SDL_Point*
+  %SDL_Point*->sdl-point)
+
 (define-foreign-type SDL_Surface*
   (c-pointer "SDL_Surface")
   %sdl-surface-pointer %wrap-sdl-surface)

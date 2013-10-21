@@ -61,7 +61,7 @@
 (include "lib/types/accessors/pixel-format.scm")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; RECT
+;;; RECT / POINT
 
 (include "lib/types/accessors/rect.scm")
 
