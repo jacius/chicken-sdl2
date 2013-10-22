@@ -47,6 +47,7 @@
 (define-foreign-type SDL_GLattr int)
 (define-foreign-type SDL_GLprofile int)
 (define-foreign-type SDL_GLcontextFlag int)
+(define-foreign-type SDL_JoystickHatPosition int)
 (define-foreign-type SDL_Keycode int)
 (define-foreign-type SDL_Keymod int)
 (define-foreign-type SDL_MouseButton int)
@@ -62,6 +63,11 @@
 (define-foreign-type SDL_PackedOrderEnum int)
 (define-foreign-type SDL_ArrayOrderEnum int)
 (define-foreign-type SDL_PackedLayoutEnum int)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; MISC
+
+(define-foreign-type SDL_JoystickID int32)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -86,6 +92,15 @@
 (define-foreign-type SDL_GLContext*
   (c-pointer void)
   %sdl-gl-context-pointer %wrap-sdl-gl-context)
+
+(define-foreign-type SDL_Joystick*
+  (c-pointer "SDL_Joystick")
+  %sdl-joystick-pointer %wrap-sdl-joystick)
+
+(define-foreign-type SDL_JoystickGUID*
+  (c-pointer "SDL_JoystickGUID")
+  %sdl-joystick-guid->SDL_JoystickGUID*
+  %SDL_JoystickGUID*->sdl-joystick-guid)
 
 (define-foreign-type SDL_Palette*
   (c-pointer "SDL_Palette")

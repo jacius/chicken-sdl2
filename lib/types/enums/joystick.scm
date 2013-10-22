@@ -30,12 +30,15 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-(include "lib/types/enums/general.scm")
-(include "lib/types/enums/events.scm")
-(include "lib/types/enums/gl.scm")
-(include "lib/types/enums/joystick.scm")
-(include "lib/types/enums/keycode.scm")
-(include "lib/types/enums/mouse.scm")
-(include "lib/types/enums/pixel-format.scm")
-(include "lib/types/enums/scancode.scm")
-(include "lib/types/enums/window.scm")
+;;; Technically not an enum, but close enough.
+(define-and-export-enum SDL_JoystickHatPosition
+  SDL_HAT_CENTERED
+  SDL_HAT_UP
+  SDL_HAT_RIGHT
+  SDL_HAT_DOWN
+  SDL_HAT_LEFT
+  SDL_HAT_RIGHTUP
+  SDL_HAT_RIGHTDOWN
+  SDL_HAT_LEFTUP
+  SDL_HAT_LEFTDOWN)
+

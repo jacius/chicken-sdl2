@@ -31,6 +31,20 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; GENERAL
+
+(export SDL_ENABLE
+        SDL_DISABLE
+        SDL_QUERY
+        SDL_IGNORE)
+
+(define SDL_ENABLE  (foreign-value "SDL_ENABLE"  int))
+(define SDL_DISABLE (foreign-value "SDL_DISABLE" int))
+(define SDL_QUERY   (foreign-value "SDL_QUERY"   int))
+(define SDL_IGNORE  (foreign-value "SDL_IGNORE"  int))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; INIT / SUBSYSTEMS
 
 (export SDL_INIT_AUDIO

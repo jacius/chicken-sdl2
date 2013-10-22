@@ -45,6 +45,52 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; JOYSTICK
+
+(export sdl-joystick?
+        %wrap-sdl-joystick
+        %sdl-joystick-pointer
+        %sdl-joystick-pointer-set!)
+
+(define-record-type sdl-joystick
+  (%wrap-sdl-joystick pointer)
+  sdl-joystick?
+  (pointer %sdl-joystick-pointer %sdl-joystick-pointer-set!))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; JOYSTICK GUID
+
+(export sdl-joystick-guid?
+        %wrap-sdl-joystick-guid
+        %sdl-joystick-guid-data
+        %sdl-joystick-guid-data-set!
+        %alloc-sdl-joystick-guid
+        %sdl-joystick-guid->SDL_JoystickGUID*
+        %SDL_JoystickGUID*->sdl-joystick-guid)
+
+(define-record-type sdl-joystick-guid
+  (%wrap-sdl-joystick-guid data)
+  sdl-joystick-guid?
+  (data %sdl-joystick-guid-data %sdl-joystick-guid-data-set!))
+
+(define (%alloc-sdl-joystick-guid)
+  (%wrap-sdl-joystick-guid (make-u8vector 16)))
+
+(define (%sdl-joystick-guid->SDL_JoystickGUID* joystick-guid)
+  ((foreign-lambda* (c-pointer "SDL_JoystickGUID") ((u8vector data))
+                    "C_return((SDL_JoystickGUID*)data);")
+   (%sdl-joystick-guid-data joystick-guid)))
+
+(define (%SDL_JoystickGUID*->sdl-joystick-guid ptr)
+  (let ((new-joystick-guid (%alloc-sdl-joystick-guid)))
+    ((foreign-lambda* void (((c-pointer "SDL_JoystickGUID") g) (u8vector data))
+                      "*((SDL_JoystickGUID*)data) = *g;")
+     ptr (%sdl-joystick-guid-data new-joystick-guid))
+    new-joystick-guid))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; KEYSYM
 
 (export sdl-keysym?

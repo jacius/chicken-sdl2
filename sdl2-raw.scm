@@ -51,6 +51,7 @@
 (include "lib/raw/general.scm")
 (include "lib/raw/events.scm")
 (include "lib/raw/gl.scm")
+(include "lib/raw/joystick.scm")
 (include "lib/raw/keyboard.scm")
 (include "lib/raw/mouse.scm")
 (include "lib/raw/pixel-format.scm")
