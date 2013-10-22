@@ -72,6 +72,10 @@
   %sdl-color->SDL_Color*
   %SDL_Color*->sdl-color)
 
+(define-foreign-type SDL_Cursor*
+  (c-pointer "SDL_Cursor")
+  %sdl-cursor-pointer %wrap-sdl-cursor)
+
 (define-foreign-type SDL_DisplayMode*
   (c-pointer "SDL_DisplayMode")
   %sdl-display-mode-pointer %wrap-sdl-display-mode)

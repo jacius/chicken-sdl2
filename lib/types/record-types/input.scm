@@ -30,6 +30,23 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; CURSOR
+
+(export sdl-cursor?
+        %wrap-sdl-cursor
+        %sdl-cursor-pointer
+        %sdl-cursor-pointer-set!)
+
+(define-record-type sdl-cursor
+  (%wrap-sdl-cursor pointer)
+  sdl-cursor?
+  (pointer %sdl-cursor-pointer %sdl-cursor-pointer-set!))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; KEYSYM
+
 (export sdl-keysym?
         %wrap-sdl-keysym
         %sdl-keysym-pointer
