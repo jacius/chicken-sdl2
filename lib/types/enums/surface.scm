@@ -30,13 +30,8 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-(include "lib/types/enums/general.scm")
-(include "lib/types/enums/events.scm")
-(include "lib/types/enums/gl.scm")
-(include "lib/types/enums/joystick.scm")
-(include "lib/types/enums/keycode.scm")
-(include "lib/types/enums/mouse.scm")
-(include "lib/types/enums/pixel-format.scm")
-(include "lib/types/enums/scancode.scm")
-(include "lib/types/enums/surface.scm")
-(include "lib/types/enums/window.scm")
+(define-and-export-enum SDL_BlendMode
+  SDL_BLENDMODE_NONE
+  SDL_BLENDMODE_BLEND
+  SDL_BLENDMODE_ADD
+  SDL_BLENDMODE_MOD)

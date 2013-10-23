@@ -42,6 +42,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ENUMS
 
+(define-foreign-type SDL_BlendMode int)
 (define-foreign-type SDL_EventType int)
 (define-foreign-type SDL_eventaction int)
 (define-foreign-type SDL_GLattr int)

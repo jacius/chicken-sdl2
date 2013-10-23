@@ -56,6 +56,7 @@
 (include "lib/raw/mouse.scm")
 (include "lib/raw/pixel-format.scm")
 (include "lib/raw/rect.scm")
+(include "lib/raw/surface.scm")
 (include "lib/raw/timer.scm")
 (include "lib/raw/video-display-mode.scm")
 (include "lib/raw/window.scm")
