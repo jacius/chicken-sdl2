@@ -1,0 +1,66 @@
+
+* chicken-sdl2
+
+Bindings to [[http://libsdl.org/][SDL]] 2 (Simple DirectMedia Layer 2).
+
+- Version :: 0.1
+- Date :: N/A
+- Author :: John Croisant <john+chicken@croisant.net>
+- Project :: [[http://github.com/jacius/chicken-sdl2/]]
+- License :: [[http://opensource.org/licenses/BSD-2-Clause][BSD 2-Clause]]
+
+* Installation and Usage
+
+You will need SDL version 2.0.0 or higher. These bindings will *not*
+work with earlier versions of SDL!
+
+To install chicken-sdl2, clone the repository or download the source
+from the project page, then run =chicken-install= from within the
+project's directory.
+
+(Eventually chicken-sdl2 will be submitted to the egg repository so
+you can install with =chicken-install sdl2=.)
+
+* Contributing
+
+chicken-sdl2 is being developed based on the needs of its users and
+contributors. If you don't see bindings for an SDL 2 feature you need,
+[[https://github.com/jacius/chicken-sdl2/issues][file an issue]] or [[https://github.com/jacius/chicken-sdl2/pulls][submit a pull request]]!
+
+* License
+
+chicken-sdl2 is made available under the following terms (the
+[[http://opensource.org/licenses/BSD-2-Clause][BSD 2-Clause License]]):
+
+#+BEGIN_QUOTE
+chicken-sdl2: Bindings to SDL 2 (Simple DirectMedia Layer 2)
+
+Copyright © 2013  John Croisant.
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+- Redistributions of source code must retain the above copyright
+  notice, this list of conditions and the following disclaimer.
+
+- Redistributions in binary form must reproduce the above copyright
+  notice, this list of conditions and the following disclaimer in the
+  documentation and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#+END_QUOTE
+
+
+#+STARTUP: showall
