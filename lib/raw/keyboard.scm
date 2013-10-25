@@ -51,7 +51,7 @@
 
 (define-function-binding SDL_GetKeyFromName
   return: (SDL_Keycode key)
-  args: (((const c-string) name)))
+  args: ((c-string name)))
 
 (define-function-binding SDL_GetKeyFromScancode
   return: (SDL_Keycode key)
@@ -68,7 +68,7 @@
 
 (define-function-binding SDL_GetScancodeFromName
   return: (SDL_Scancode scancode)
-  args: (((const c-string) name)))
+  args: ((c-string name)))
 
 (define-function-binding SDL_GetScancodeName
   return: (c-string name)
@@ -79,7 +79,7 @@
   return: (SDL_Window* window-with-focus))
 
 (define-function-binding SDL_GetKeyboardState
-  return: ((const (c-pointer unsigned-int8)) key-states-array)
+  return: ((c-pointer unsigned-int8) key-states-array)
   args: (((c-pointer int) numkeys-out)))
 
 

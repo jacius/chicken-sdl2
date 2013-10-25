@@ -48,8 +48,8 @@
 
 (define-function-binding SDL_CreateCursor
   return: (SDL_Cursor* cursor)
-  args: (((const (c-pointer unsigned-int8)) data)
-         ((const (c-pointer unsigned-int8)) mask)
+  args: (((c-pointer unsigned-int8) data)
+         ((c-pointer unsigned-int8) mask)
          (int w)
          (int h)
          (int hot-x)

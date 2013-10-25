@@ -83,7 +83,7 @@
 
 (define-function-binding SDL_CreateWindow
   return: (SDL_Window* new-window)
-  args: (((const c-string) title)
+  args: ((c-string title)
          (int x) (int y)
          (int w) (int h)
          (unsigned-int32 flags)))
@@ -105,7 +105,7 @@
 (define-function-binding SDL_UpdateWindowSurfaceRects
   return: (int zero-if-success)
   args: ((SDL_Window* window)
-         ((const c-pointer) rects)
+         (c-pointer rects)
          (int numrects)))
 
 
@@ -141,7 +141,7 @@
 (define-function-binding SDL_GetWindowData
   return: (c-pointer data-value)
   args: ((SDL_Window* window)
-         ((const c-string) data-key)))
+         (c-string data-key)))
 
 (define-function-binding SDL_GetWindowDisplayIndex
   return: (int display-index)
@@ -204,7 +204,7 @@
   args: ((SDL_Window* window)))
 
 (define-function-binding SDL_GetWindowTitle
-  return: ((const c-string) title)
+  return: (c-string title)
   args: ((SDL_Window* window)))
 
 (define-function-binding SDL_GetWindowWMInfo
@@ -224,13 +224,13 @@
 (define-function-binding SDL_SetWindowData
   return: (c-pointer previous-data-value)
   args: ((SDL_Window* window)
-         ((const c-string) data-key)
+         (c-string data-key)
          (c-pointer data-value)))
 
 (define-function-binding SDL_SetWindowDisplayMode
   return: (int zero-if-success)
   args: ((SDL_Window* window)
-         ((const SDL_DisplayMode*) mode)))
+         (SDL_DisplayMode* mode)))
 
 (define-function-binding SDL_SetWindowFullscreen
   return: (int zero-if-success)
@@ -240,9 +240,9 @@
 (define-function-binding SDL_SetWindowGammaRamp
   return: (int zero-if-success)
   args: ((SDL_Window* window)
-         ((const (c-pointer unsigned-int16)) red-array)
-         ((const (c-pointer unsigned-int16)) green-array)
-         ((const (c-pointer unsigned-int16)) blue-array)))
+         ((c-pointer unsigned-int16) red-array)
+         ((c-pointer unsigned-int16) green-array)
+         ((c-pointer unsigned-int16) blue-array)))
 
 (define-function-binding SDL_SetWindowGrab
   args: ((SDL_Window* window)
@@ -274,4 +274,4 @@
 
 (define-function-binding SDL_SetWindowTitle
   args: ((SDL_Window* window)
-         ((const c-string) title)))
+         (c-string title)))

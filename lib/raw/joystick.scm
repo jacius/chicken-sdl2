@@ -123,11 +123,11 @@
   args: ((SDL_Joystick* joystick)))
 
 (define-function-binding SDL_JoystickName
-  return: ((const c-string) name)
+  return: (c-string name)
   args: ((SDL_Joystick* joystick)))
 
 (define-function-binding SDL_JoystickNameForIndex
-  return: ((const c-string) name)
+  return: (c-string name)
   args: ((int device-index)))
 
 
@@ -154,7 +154,7 @@
 (define (SDL_JoystickGetGUIDFromString pch-guid)
   (let ((guid-out (%alloc-sdl-joystick-guid)))
     ((foreign-lambda*
-      void (((const c-string) pch_guid) (SDL_JoystickGUID* guid_out))
+      void ((c-string pch_guid) (SDL_JoystickGUID* guid_out))
       "*guid_out = SDL_JoystickGetGUIDFromString(pch_guid);")
      pch-guid guid-out)
     guid-out))

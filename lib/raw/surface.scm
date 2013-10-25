@@ -115,7 +115,7 @@
   args: ((int width)
          (int height)
          (SDL_PixelFormatEnum src-format)
-         ((const c-pointer) src)
+         (c-pointer src)
          (int src-pitch)
          (SDL_PixelFormatEnum dst-format)
          (c-pointer dst-out)
@@ -124,7 +124,7 @@
 
 (define-function-binding SDL_LoadBMP
   return: (SDL_Surface* surface)
-  args: (((const c-string) filepath)))
+  args: ((c-string filepath)))
 
 ;;; TODO:
 ;; (define-function-binding SDL_LoadBMP_RW
@@ -135,7 +135,7 @@
 (define-function-binding SDL_SaveBMP
   return: (int zero-if-success)
   args: ((SDL_Surface* surface)
-         ((const c-string) filepath)))
+         (c-string filepath)))
 
 ;;; TODO:
 ;; (define-function-binding SDL_SaveBMP_RW
@@ -160,14 +160,14 @@
 (define-function-binding SDL_BlitSurface
   return: (int zero-if-success)
   args: ((SDL_Surface* src)
-         ((const SDL_Rect*) srcrect)
+         (SDL_Rect* srcrect)
          (SDL_Surface* dst)
          (SDL_Rect* dstrect-in-out)))
 
 (define-function-binding SDL_BlitScaled
   return: (int zero-if-success)
   args: ((SDL_Surface* src)
-         ((const SDL_Rect*) srcrect)
+         (SDL_Rect* srcrect)
          (SDL_Surface* dst)
          (SDL_Rect* dstrect-in-out)))
 
@@ -189,13 +189,13 @@
 (define-function-binding SDL_FillRect
   return: (int zero-if-success)
   args: ((SDL_Surface* dst)
-         ((const SDL_Rect*) rect)
+         (SDL_Rect* rect)
          (unsigned-int32 mapped-color)))
 
 (define-function-binding SDL_FillRects
   return: (int zero-if-success)
   args: ((SDL_Surface* dst)
-         ((const SDL_Rect*) rects)
+         (SDL_Rect* rects)
          (int count)
          (unsigned-int32 mapped-color)))
 
@@ -230,7 +230,7 @@
 (define-function-binding SDL_SetClipRect
   return: (bool intersects?)
   args: ((SDL_Surface* surface)
-         ((const SDL_Rect*) rect)))
+         (SDL_Rect* rect)))
 
 (define-function-binding SDL_SetColorKey
   return: (int zero-on-success)

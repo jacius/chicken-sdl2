@@ -41,41 +41,41 @@
 
 (define-function-binding SDL_RectEmpty
   return: (bool rect-empty?)
-  args: (((const SDL_Rect*) r)))
+  args: ((SDL_Rect* r)))
 
 (define-function-binding SDL_RectEquals
   return: (bool rect-equals?)
-  args: (((const SDL_Rect*) a)
-         ((const SDL_Rect*) b)))
+  args: ((SDL_Rect* a)
+         (SDL_Rect* b)))
 
 (define-function-binding SDL_EnclosePoints
   return: (bool success?)
-  args: (((const SDL_Point*) points)
+  args: ((SDL_Point* points)
          (int count)
-         ((const SDL_Rect*) clip-or-null)
+         (SDL_Rect* clip-or-null)
          (SDL_Rect* result-out)))
 
 (define-function-binding SDL_HasIntersection
   return: (bool intersects?)
-  args: (((const SDL_Rect*) a)
-         ((const SDL_Rect*) b)))
+  args: ((SDL_Rect* a)
+         (SDL_Rect* b)))
 
 (define-function-binding SDL_IntersectRect
   return: (bool intersects?)
-  args: (((const SDL_Rect*) a)
-         ((const SDL_Rect*) b)
+  args: ((SDL_Rect* a)
+         (SDL_Rect* b)
          (SDL_Rect* result-out)))
 
 (define-function-binding SDL_IntersectRectAndLine
   return: (bool intersects?)
-  args: (((const SDL_Rect*) rect)
+  args: ((SDL_Rect* rect)
          ((c-pointer int) x1-in-out)
          ((c-pointer int) y1-in-out)
          ((c-pointer int) x2-in-out)
          ((c-pointer int) y2-in-out)))
 
 (define-function-binding SDL_UnionRect
-  args: (((const SDL_Rect*) a)
-         ((const SDL_Rect*) b)
+  args: ((SDL_Rect* a)
+         (SDL_Rect* b)
          (SDL_Rect* result-out)))
 

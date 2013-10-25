@@ -51,7 +51,7 @@
 
 
 (define-function-binding SDL_GetPixelFormatName
-  return: ((const c-string) name)
+  return: (c-string name)
   args: ((SDL_PixelFormatEnum format)))
 
 (define-function-binding SDL_PixelFormatEnumToMasks
@@ -95,21 +95,21 @@
 (define-function-binding SDL_SetPaletteColors
   return: (int zero-if-success)
   args: ((SDL_Palette* palette)
-         ((const SDL_Color*) colors)
+         (SDL_Color* colors)
          (int firstcolor)
          (int ncolors)))
 
 
 (define-function-binding SDL_MapRGB
   return: (unsigned-int32 color)
-  args: (((const SDL_PixelFormat*) format)
+  args: ((SDL_PixelFormat* format)
          (unsigned-int8 r)
          (unsigned-int8 g)
          (unsigned-int8 b)))
 
 (define-function-binding SDL_MapRGBA
   return: (unsigned-int32 color)
-  args: (((const SDL_PixelFormat*) format)
+  args: ((SDL_PixelFormat* format)
          (unsigned-int8 r)
          (unsigned-int8 g)
          (unsigned-int8 b)
@@ -117,14 +117,14 @@
 
 (define-function-binding SDL_GetRGB
   args: ((unsigned-int32 pixel)
-         ((const SDL_PixelFormat*) format)
+         (SDL_PixelFormat* format)
          ((c-pointer unsigned-int8) r-out)
          ((c-pointer unsigned-int8) g-out)
          ((c-pointer unsigned-int8) b-out)))
 
 (define-function-binding SDL_GetRGBA
   args: ((unsigned-int32 pixel)
-         ((const SDL_PixelFormat*) format)
+         (SDL_PixelFormat* format)
          ((c-pointer unsigned-int8) r-out)
          ((c-pointer unsigned-int8) g-out)
          ((c-pointer unsigned-int8) b-out)

@@ -65,7 +65,7 @@
 (define-function-binding SDL_GetClosestDisplayMode
   return: (SDL_DisplayMode* closest)
   args: ((int display-index)
-         ((const SDL_DisplayMode*) mode)
+         (SDL_DisplayMode* mode)
          (SDL_DisplayMode* closest-out)))
 
 (define-function-binding SDL_GetCurrentDisplayMode
@@ -100,5 +100,5 @@
   return: (int num-drivers))
 
 (define-function-binding SDL_GetVideoDriver
-  return: ((const c-string) driver-name)
+  return: (c-string driver-name)
   args: ((int index)))
