@@ -48,7 +48,7 @@
    (%sdl-color-data color)))
 
 (define (%SDL_Color*->sdl-color ptr)
-  (let ((new-color (%wrap-sdl-color (make-u8vector 4))))
+  (let ((new-color (%wrap-sdl-color (make-u8vector 4 255))))
     ((foreign-lambda* void (((c-pointer "SDL_Color") c) (u8vector data))
                       "*((SDL_Color*)data) = *c;")
      ptr (%sdl-color-data new-color))

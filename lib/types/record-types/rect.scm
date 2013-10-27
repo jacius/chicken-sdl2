@@ -51,7 +51,7 @@
    (%sdl-rect-data rect)))
 
 (define (%SDL_Rect*->sdl-rect ptr)
-  (let ((new-rect (%wrap-sdl-rect (make-s32vector 4))))
+  (let ((new-rect (%wrap-sdl-rect (make-s32vector 4 0))))
     ((foreign-lambda* void (((c-pointer "SDL_Rect") r) (s32vector data))
                       "*((SDL_Rect*)data) = *r;")
      ptr (%sdl-rect-data new-rect))
@@ -79,7 +79,7 @@
    (%sdl-point-data point)))
 
 (define (%SDL_Point*->sdl-point ptr)
-  (let ((new-point (%wrap-sdl-point (make-s32vector 2))))
+  (let ((new-point (%wrap-sdl-rect (make-s32vector 2 0))))
     ((foreign-lambda* void (((c-pointer "SDL_Point") p) (s32vector data))
                       "*((SDL_Point*)data) = *p;")
      ptr (%sdl-point-data new-point))

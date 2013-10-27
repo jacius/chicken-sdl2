@@ -204,3 +204,45 @@
                ,(inject field-type)
                ((,(inject struct-type) ,(inject obj)))
                ,(sprintf "C_return(~S->~S);" obj field-name))))))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; UNIFORM STRUCT
+
+(define-syntax define-uniform-struct-accessors
+  (syntax-rules (procs: fields: using: index: default: guard: get: set:)
+    ((define-uniform-struct-accessors
+       procs: (make-struct struct->list struct-set!)
+       fields: ((field-name index: index
+                            default: default-value
+                            guard: value-guard
+                            get: getter
+                            set: setter)
+                ...)
+       using: (record-type predicate
+               wrapper unwrapper
+               vector-constructor vector-ref vector->list))
+     (begin
+       (define-record-printer (record-type struct out)
+         (%displayify out "#<" 'record-type " " (struct->list struct) ">"))
+       (define (make-struct #!optional (field-name default-value) ...)
+         (wrapper (vector-constructor field-name ...)))
+       (define (struct->list struct)
+         (vector->list (unwrapper struct)))
+       (define (struct-set! struct #!key field-name ...)
+         (assert (predicate struct))
+         (when field-name
+           (value-guard field-name)
+           (setter struct field-name))
+         ...)
+       (begin
+         (define (setter struct value)
+           (assert (predicate struct))
+           (set! (vector-ref (unwrapper struct) index) value))
+         (define getter
+           (getter-with-setter
+            (lambda (struct)
+              (assert (predicate struct))
+              (vector-ref (unwrapper struct) index))
+            setter)))
+       ...))))

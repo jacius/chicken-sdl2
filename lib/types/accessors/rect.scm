@@ -34,59 +34,43 @@
 ;;; RECT
 
 (export make-sdl-rect
-        sdl-rect-x sdl-rect-x-set!
-        sdl-rect-y sdl-rect-y-set!
-        sdl-rect-w sdl-rect-w-set!
-        sdl-rect-h sdl-rect-h-set!
+        sdl-rect->list
         sdl-rect-set!
-        sdl-rect->list)
+        sdl-rect-x  sdl-rect-x-set!
+        sdl-rect-y  sdl-rect-y-set!
+        sdl-rect-w  sdl-rect-w-set!
+        sdl-rect-h  sdl-rect-h-set!)
 
-(define-record-printer (sdl-rect c out)
-  (%displayify out "#<sdl-rect " (sdl-rect->list c) ">"))
-
-(define (make-sdl-rect x y w h)
-  (%wrap-sdl-rect (s32vector x y w h)))
-
-(define-foreign-struct SDL_Rect*
-  (int x sdl-rect-x sdl-rect-x-set!)
-  (int y sdl-rect-y sdl-rect-y-set!)
-  (int w sdl-rect-w sdl-rect-w-set!)
-  (int h sdl-rect-h sdl-rect-h-set!))
-
-(define (sdl-rect-set! r #!key x y w h)
-  (assert (sdl-rect? r))
-  (when x (sdl-rect-x-set! r x))
-  (when y (sdl-rect-y-set! r y))
-  (when w (sdl-rect-w-set! r w))
-  (when h (sdl-rect-h-set! r h)))
-
-(define (sdl-rect->list c)
-  (s32vector->list (%sdl-rect-data c)))
+(define-uniform-struct-accessors
+  procs: (make-sdl-rect sdl-rect->list sdl-rect-set!)
+  fields: ((x index: 0 default: 0 guard: void
+              get: sdl-rect-x set: sdl-rect-x-set!)
+           (y index: 1 default: 0 guard: void
+              get: sdl-rect-y set: sdl-rect-y-set!)
+           (w index: 2 default: 0 guard: void
+              get: sdl-rect-w set: sdl-rect-w-set!)
+           (h index: 3 default: 0 guard: void
+              get: sdl-rect-h set: sdl-rect-h-set!))
+  using: (sdl-rect sdl-rect?
+          %wrap-sdl-rect %sdl-rect-data
+          s32vector s32vector-ref s32vector->list))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; POINT
 
 (export make-sdl-point
-        sdl-point-x sdl-point-x-set!
-        sdl-point-y sdl-point-y-set!
+        sdl-point->list
         sdl-point-set!
-        sdl-point->list)
+        sdl-point-x  sdl-point-x-set!
+        sdl-point-y  sdl-point-y-set!)
 
-(define-record-printer (sdl-point c out)
-  (%displayify out "#<sdl-point " (sdl-point->list c) ">"))
-
-(define (make-sdl-point x y)
-  (%wrap-sdl-point (s32vector x y)))
-
-(define-foreign-struct SDL_Point*
-  (int x sdl-point-x sdl-point-x-set!)
-  (int y sdl-point-y sdl-point-y-set!))
-
-(define (sdl-point-set! p #!key x y)
-  (assert (sdl-point? p))
-  (when x (sdl-point-x-set! p x))
-  (when y (sdl-point-y-set! p y)))
-
-(define (sdl-point->list c)
-  (s32vector->list (%sdl-point-data c)))
+(define-uniform-struct-accessors
+  procs: (make-sdl-point sdl-point->list sdl-point-set!)
+  fields: ((x index: 0 default: 0 guard: void
+              get: sdl-point-x set: sdl-point-x-set!)
+           (y index: 1 default: 0 guard: void
+              get: sdl-point-y set: sdl-point-y-set!))
+  using: (sdl-point sdl-point?
+          %wrap-sdl-point %sdl-point-data
+          s32vector s32vector-ref s32vector->list))

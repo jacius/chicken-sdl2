@@ -31,24 +31,20 @@
 
 
 (export make-sdl-version
-        sdl-version-major
-        sdl-version-minor
-        sdl-version-patch
-        sdl-version->list)
+        sdl-version->list
+        sdl-version-set!
+        sdl-version-major  sdl-version-major-set!
+        sdl-version-minor  sdl-version-minor-set!
+        sdl-version-patch  sdl-version-patch-set!)
 
-(define-record-printer (sdl-version v out)
-  (%displayify out "#<sdl-version " (sdl-version->list v) ">"))
-
-(define (make-sdl-version #!optional (major 0) (minor 0) (patch 0))
-  (assert (<= 0 major 255))
-  (assert (<= 0 minor 255))
-  (assert (<= 0 patch 255))
-  (%wrap-sdl-version (u8vector major minor patch)))
-
-(define-foreign-struct SDL_version*
-  (unsigned-int8 major sdl-version-major)
-  (unsigned-int8 minor sdl-version-minor)
-  (unsigned-int8 patch sdl-version-patch))
-
-(define (sdl-version->list v)
-  (u8vector->list (%sdl-version-data v)))
+(define-uniform-struct-accessors
+  procs: (make-sdl-version sdl-version->list sdl-version-set!)
+  fields: ((major index: 0 default: 0 guard: void
+                  get: sdl-version-major set: sdl-version-major-set!)
+           (minor index: 1 default: 0 guard: void
+                  get: sdl-version-minor set: sdl-version-minor-set!)
+           (patch index: 2 default: 0 guard: void
+                  get: sdl-version-patch set: sdl-version-patch-set!))
+  using: (sdl-version sdl-version?
+          %wrap-sdl-version %sdl-version-data
+          u8vector u8vector-ref u8vector->list))
