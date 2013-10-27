@@ -34,7 +34,7 @@
         sdl-keysym-sym
         sdl-keysym-mod)
 
-(define-foreign-struct SDL_Keysym*
+(define-nonuniform-struct-accessors SDL_Keysym*
   (SDL_Scancode scancode sdl-keysym-scancode)
   (SDL_Keycode sym sdl-keysym-sym)
   (Uint16 mod sdl-keysym-mod))

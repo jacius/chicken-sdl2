@@ -43,7 +43,7 @@
 
 ;;; TODO: make-sdl-palette that takes a vector of sdl-color instances.
 
-(define-foreign-struct SDL_Palette*
+(define-nonuniform-struct-accessors SDL_Palette*
   (int ncolors %sdl-palette-ncolors %sdl-palette-ncolors-set!)
   (c-pointer colors %sdl-palette-colors %sdl-palette-colors-set!)
   (Uint32 version sdl-palette-version)

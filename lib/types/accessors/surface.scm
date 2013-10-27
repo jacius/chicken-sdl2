@@ -40,7 +40,7 @@
         sdl-surface-locked
         %sdl-surface-lock-data)
 
-(define-foreign-struct SDL_Surface*
+(define-nonuniform-struct-accessors SDL_Surface*
   (Uint32 flags sdl-surface-flags)  ; read-only
   (SDL_PixelFormat* format sdl-surface-format)  ; read-only
   (int w sdl-surface-w)                     ; read-only

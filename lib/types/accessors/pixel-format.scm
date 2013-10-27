@@ -50,7 +50,7 @@
         sdl-pixel-format-refcount
         sdl-pixel-format-next)
 
-(define-foreign-struct SDL_PixelFormat*
+(define-nonuniform-struct-accessors SDL_PixelFormat*
   (Uint32 format sdl-pixel-format-format)
   (SDL_Palette* palette sdl-pixel-format-palette)
   (Uint8 BitsPerPixel sdl-pixel-format-bits-per-pixel)

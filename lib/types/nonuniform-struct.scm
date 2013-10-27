@@ -30,22 +30,22 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-(define-syntax define-foreign-struct
+(define-syntax define-nonuniform-struct-accessors
   (syntax-rules ()
-    ((define-foreign-struct struct-type
+    ((define-nonuniform-struct-accessors struct-type
        (field-args ...)
        ...)
      (begin
-       (%define-foreign-struct-field struct-type field-args ...)
+       (%define-nonuniform-struct-field struct-type field-args ...)
        ...))))
 
 ;;; I sure wish syntax-rules could easily use strings generated at
 ;;; macro expansion time. Then I could do this:
 
-;; (define-syntax %define-foreign-struct-field
+;; (define-syntax %define-nonuniform-struct-field
 ;;   (syntax-rules ()
 ;;     ;; getter and setter
-;;     ((%define-foreign-struct-field
+;;     ((%define-nonuniform-struct-field
 ;;       struct-type field-type field-name
 ;;       getter-name setter-name)
 ;;      (begin
@@ -62,7 +62,7 @@
 ;;            ,(sprintf "C_return(~S->~S);" obj field-name))
 ;;           setter-name))))
 ;;     ;; no setter
-;;     ((%define-foreign-struct-field
+;;     ((%define-nonuniform-struct-field
 ;;       struct-type field-type field-name
 ;;       getter-name)
 ;;      (define getter-name
@@ -73,7 +73,7 @@
 
 ;;; ... instead of this:
 
-(define-syntax %define-foreign-struct-field
+(define-syntax %define-nonuniform-struct-field
   (ir-macro-transformer
    (lambda (form inject compare?)
      (let ((obj 'obj)

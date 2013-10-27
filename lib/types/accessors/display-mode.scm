@@ -36,7 +36,7 @@
         sdl-display-mode-refresh-rate
         %sdl-display-mode-driverdata)
 
-(define-foreign-struct SDL_DisplayMode*
+(define-nonuniform-struct-accessors SDL_DisplayMode*
   (Uint32 format sdl-display-mode-format)
   (int w sdl-display-mode-w)
   (int h sdl-display-mode-h)
