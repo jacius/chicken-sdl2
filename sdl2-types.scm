@@ -38,9 +38,12 @@
 (foreign-declare "#include \"SDL.h\"")
 (foreign-declare "#include \"SDL_syswm.h\"")
 
-(include "lib/helpers.scm")
+(include "lib/util.scm")
+(include "lib/function-binding.scm")
 
 (include "lib/types/guards.scm")
+(include "lib/types/nonuniform-struct.scm")
+(include "lib/types/uniform-struct.scm")
 
 ;;; NOTE: The ordering of these includes is important!
 

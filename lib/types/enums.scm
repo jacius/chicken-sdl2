@@ -30,6 +30,21 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
+(define-syntax define-enum
+  (syntax-rules ()
+    ((define-enum enum-name value-name ...)
+     (begin
+       (define value-name (foreign-value value-name enum-name))
+       ...))))
+
+(define-syntax define-and-export-enum
+  (syntax-rules ()
+    ((define-and-export-enum enum-name value-name ...)
+     (begin
+       (export value-name ...)
+       (define-enum enum-name value-name ...)))))
+
+
 (include "lib/types/enums/general.scm")
 (include "lib/types/enums/events.scm")
 (include "lib/types/enums/gl.scm")
