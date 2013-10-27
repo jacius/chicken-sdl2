@@ -33,7 +33,7 @@
 (module sdl2-types ()
 
 (import scheme chicken foreign)
-(use srfi-4)
+(use srfi-4 lolevel)
 
 (foreign-declare "#include \"SDL.h\"")
 (foreign-declare "#include \"SDL_syswm.h\"")

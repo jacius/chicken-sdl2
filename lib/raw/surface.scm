@@ -160,16 +160,16 @@
 (define-function-binding SDL_BlitSurface
   return: (int zero-if-success)
   args: ((SDL_Surface* src)
-         (SDL_Rect* srcrect)
+         (SDL_Rect*-or-null srcrect)
          (SDL_Surface* dst)
-         (SDL_Rect* dstrect-in-out)))
+         (SDL_Rect*-or-null dstrect-in-out)))
 
 (define-function-binding SDL_BlitScaled
   return: (int zero-if-success)
   args: ((SDL_Surface* src)
-         (SDL_Rect* srcrect)
+         (SDL_Rect*-or-null srcrect)
          (SDL_Surface* dst)
-         (SDL_Rect* dstrect-in-out)))
+         (SDL_Rect*-or-null dstrect-in-out)))
 
 (define-function-binding SDL_LowerBlit
   return: (int zero-if-success)
@@ -189,7 +189,7 @@
 (define-function-binding SDL_FillRect
   return: (int zero-if-success)
   args: ((SDL_Surface* dst)
-         (SDL_Rect* rect)
+         (SDL_Rect*-or-null rect)
          (Uint32 mapped-color)))
 
 (define-function-binding SDL_FillRects
@@ -230,7 +230,7 @@
 (define-function-binding SDL_SetClipRect
   return: (bool intersects?)
   args: ((SDL_Surface* surface)
-         (SDL_Rect* rect)))
+         (SDL_Rect*-or-null rect)))
 
 (define-function-binding SDL_SetColorKey
   return: (int zero-on-success)

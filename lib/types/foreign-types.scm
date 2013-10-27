@@ -123,15 +123,28 @@
   (c-pointer "SDL_PixelFormat")
   %sdl-pixel-format-pointer %wrap-sdl-pixel-format)
 
+
 (define-foreign-type SDL_Rect*
-  (c-pointer "SDL_Rect")
+  (nonnull-c-pointer "SDL_Rect")
   %sdl-rect->SDL_Rect*
   %SDL_Rect*->sdl-rect)
 
+(define-foreign-type SDL_Rect*-or-null
+  (c-pointer "SDL_Rect")
+  %->SDL_Rect*
+  %SDL_Rect*->sdl-rect)
+
+
 (define-foreign-type SDL_Point*
-  (c-pointer "SDL_Point")
+  (nonnull-c-pointer "SDL_Point")
   %sdl-point->SDL_Point*
   %SDL_Point*->sdl-point)
+
+(define-foreign-type SDL_Point*-or-null
+  (c-pointer "SDL_Point")
+  %->SDL_Point*
+  %SDL_Point*->sdl-point)
+
 
 (define-foreign-type SDL_Surface*
   (c-pointer "SDL_Surface")
