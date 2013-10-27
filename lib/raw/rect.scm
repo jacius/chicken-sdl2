@@ -69,10 +69,10 @@
 (define-function-binding SDL_IntersectRectAndLine
   return: (bool intersects?)
   args: ((SDL_Rect* rect)
-         ((c-pointer int) x1-in-out)
-         ((c-pointer int) y1-in-out)
-         ((c-pointer int) x2-in-out)
-         ((c-pointer int) y2-in-out)))
+         (int* x1-in-out)
+         (int* y1-in-out)
+         (int* x2-in-out)
+         (int* y2-in-out)))
 
 (define-function-binding SDL_UnionRect
   args: ((SDL_Rect* a)

@@ -79,8 +79,8 @@
   return: (SDL_Window* window-with-focus))
 
 (define-function-binding SDL_GetKeyboardState
-  return: ((c-pointer unsigned-int8) key-states-array)
-  args: (((c-pointer int) numkeys-out)))
+  return: (Uint8* key-states-array)
+  args: ((int* numkeys-out)))
 
 
 (define-function-binding SDL_GetModState

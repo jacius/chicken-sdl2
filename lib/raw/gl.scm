@@ -65,7 +65,7 @@
 (define-function-binding SDL_GL_GetAttribute
   return: (int zero-if-success)
   args: ((SDL_GLattr attr_id)
-         ((c-pointer int) value)))
+         (int* value)))
 
 (define-function-binding SDL_GL_SetAttribute
   return: (int zero-if-success)

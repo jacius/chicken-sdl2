@@ -40,7 +40,7 @@
   body: "C_return(((SDL_CommonEvent*)event)->type);")
 
 (define-function-binding* sdl-event-timestamp
-  return: (unsigned-int32 timestamp)
+  return: (Uint32 timestamp)
   args: ((c-pointer event))
   body: "C_return(((SDL_CommonEvent*)event)->timestamp);")
 
@@ -112,16 +112,16 @@
         )
 
 (define-foreign-struct SDL_KeyboardEvent*
-  (unsigned-int32 windowID sdl-keyboard-event-window-id)
-  (unsigned-int8 state sdl-keyboard-event-state)
-  (unsigned-int8 repeat sdl-keyboard-event-repeat)
+  (Uint32 windowID sdl-keyboard-event-window-id)
+  (Uint8 state sdl-keyboard-event-state)
+  (Uint8 repeat sdl-keyboard-event-repeat)
   ;; (SDL_Keysym* keysym sdl-keyboard-event-keysym)
   )
 
 ; #define SDL_TEXTEDITINGEVENT_TEXT_SIZE (32)
 
 (define-foreign-struct SDL_TextEditingEvent*
-  (unsigned-int32 windowID sdl-text-editing-event-window-id)
+  (Uint32 windowID sdl-text-editing-event-window-id)
   ;; (c-string text sdl-text-editing-event-text)
   (int32 start sdl-text-editing-event-start)
   ;; (int32 length sdl-text-editing-event-length)
@@ -129,7 +129,7 @@
 
 ; #define SDL_TEXTINPUTEVENT_TEXT_SIZE (32)
 (define-foreign-struct SDL_TextInputEvent*
-  (unsigned-int32 windowID sdl-text-input-event-window-id)
+  (Uint32 windowID sdl-text-input-event-window-id)
   ;; (c-string text sdl-text-input-event-text)
   )
 
@@ -171,39 +171,39 @@
         sdl-mouse-wheel-event-y)
 
 (define-foreign-struct SDL_MouseButtonEvent*
-  (unsigned-int32 windowID sdl-mouse-button-event-window-id)
-  (unsigned-int32 which sdl-mouse-button-event-which)
-  (unsigned-int8 button sdl-mouse-button-event-button)
-  (unsigned-int8 state sdl-mouse-button-event-state)
+  (Uint32 windowID sdl-mouse-button-event-window-id)
+  (Uint32 which sdl-mouse-button-event-which)
+  (Uint8 button sdl-mouse-button-event-button)
+  (Uint8 state sdl-mouse-button-event-state)
   (int32 x sdl-mouse-button-event-x)
   (int32 y sdl-mouse-button-event-y))
 
 (define-foreign-struct SDL_MouseWheelEvent*
-  (unsigned-int32 windowID sdl-mouse-wheel-event-window-id)
-  (unsigned-int32 which sdl-mouse-wheel-event-which)
+  (Uint32 windowID sdl-mouse-wheel-event-window-id)
+  (Uint32 which sdl-mouse-wheel-event-which)
   (int32 x sdl-mouse-wheel-event-x)
   (int32 y sdl-mouse-wheel-event-y))
 
 (define-foreign-struct SDL_MouseMotionEvent*
-  (unsigned-int32 windowID sdl-mouse-motion-event-window-id)
-  (unsigned-int32 which sdl-mouse-motion-event-which)
-  (unsigned-int32 state sdl-mouse-motion-event-state)
+  (Uint32 windowID sdl-mouse-motion-event-window-id)
+  (Uint32 which sdl-mouse-motion-event-which)
+  (Uint32 state sdl-mouse-motion-event-state)
   (int32 x sdl-mouse-motion-event-x)
   (int32 y sdl-mouse-motion-event-y)
   (int32 xrel sdl-mouse-motion-event-xrel)
   (int32 yrel sdl-mouse-motion-event-yrel))
 
 (define-foreign-struct SDL_MouseButtonEvent*
-  (unsigned-int32 windowID sdl-mouse-button-event-window-id)
-  (unsigned-int32 which sdl-mouse-button-event-which)
-  (unsigned-int8 button sdl-mouse-button-event-button)
-  (unsigned-int8 state sdl-mouse-button-event-state)
+  (Uint32 windowID sdl-mouse-button-event-window-id)
+  (Uint32 which sdl-mouse-button-event-which)
+  (Uint8 button sdl-mouse-button-event-button)
+  (Uint8 state sdl-mouse-button-event-state)
   (int32 x sdl-mouse-button-event-x)
   (int32 y sdl-mouse-button-event-y))
 
 (define-foreign-struct SDL_MouseWheelEvent*
-  (unsigned-int32 windowID sdl-mouse-wheel-event-window-id)
-  (unsigned-int32 which sdl-mouse-wheel-event-which)
+  (Uint32 windowID sdl-mouse-wheel-event-window-id)
+  (Uint32 which sdl-mouse-wheel-event-which)
   (int32 x sdl-mouse-wheel-event-x)
   (int32 y sdl-mouse-wheel-event-y))
 
@@ -233,24 +233,24 @@
 
 (define-foreign-struct SDL_JoyAxisEvent*
   (SDL_JoystickID which sdl-joy-axis-event-which)
-  (unsigned-int8 axis sdl-joy-axis-event-axis)
-  (int16 value sdl-joy-axis-event-value))
+  (Uint8 axis sdl-joy-axis-event-axis)
+  (Sint16 value sdl-joy-axis-event-value))
 
 (define-foreign-struct SDL_JoyBallEvent*
   (SDL_JoystickID which sdl-joy-ball-event-which)
-  (unsigned-int8 ball sdl-joy-ball-event-ball)
-  (int16 xrel sdl-joy-ball-event-xrel)
-  (int16 yrel sdl-joy-ball-event-yrel))
+  (Uint8 ball sdl-joy-ball-event-ball)
+  (Sint16 xrel sdl-joy-ball-event-xrel)
+  (Sint16 yrel sdl-joy-ball-event-yrel))
 
 (define-foreign-struct SDL_JoyHatEvent*
   (SDL_JoystickID which sdl-joy-hat-event-which)
-  (unsigned-int8 hat sdl-joy-hat-event-hat)
-  (unsigned-int8 value sdl-joy-hat-event-value))
+  (Uint8 hat sdl-joy-hat-event-hat)
+  (Uint8 value sdl-joy-hat-event-value))
 
 (define-foreign-struct SDL_JoyButtonEvent*
   (SDL_JoystickID which sdl-joy-button-event-which)
-  (unsigned-int8 button sdl-joy-button-event-button)
-  (unsigned-int8 state sdl-joy-button-event-state))
+  (Uint8 button sdl-joy-button-event-button)
+  (Uint8 state sdl-joy-button-event-state))
 
 ;; (define-foreign-struct SDL_JoyDeviceEvent*
 ;;   (int32 which sdl-joy-device-event-which))
@@ -272,13 +272,13 @@
 
 ;; (define-foreign-struct SDL_ControllerAxisEvent*
 ;;   (SDL_JoystickID which sdl-controller-axis-event-which)
-;;   (unsigned-int8 axis sdl-controller-axis-event-axis)
-;;   (int16 value sdl-controller-axis-event-value))
+;;   (Uint8 axis sdl-controller-axis-event-axis)
+;;   (Sint16 value sdl-controller-axis-event-value))
 
 ;; (define-foreign-struct SDL_ControllerButtonEvent*
 ;;   (SDL_JoystickID which sdl-controller-button-event-which)
-;;   (unsigned-int8 button sdl-controller-button-event-button)
-;;   (unsigned-int8 state sdl-controller-button-event-state))
+;;   (Uint8 button sdl-controller-button-event-button)
+;;   (Uint8 state sdl-controller-button-event-state))
 
 ;; (define-foreign-struct SDL_ControllerDeviceEvent*
 ;;   (int32 which sdl-controller-device-event-which))
@@ -324,12 +324,12 @@
 ;;   (float dDist sdl-multi-gesture-event-ddist)
 ;;   (float x sdl-multi-gesture-event-x)
 ;;   (float y sdl-multi-gesture-event-y)
-;;   (unsigned-int16 numFingers sdl-multi-gesture-event-num-fingers))
+;;   (Uint16 numFingers sdl-multi-gesture-event-num-fingers))
 
 ;; (define-foreign-struct SDL_DollarGestureEvent*
 ;;   (SDL_TouchID touchId sdl-dollar-gesture-event-touch-id)
 ;;   (SDL_GestureID gestureId sdl-dollar-gesture-event-gesture-id)
-;;   (unsigned-int32 numFingers sdl-dollar-gesture-event-num-fingers)
+;;   (Uint32 numFingers sdl-dollar-gesture-event-num-fingers)
 ;;   (float error sdl-dollar-gesture-event-error)
 ;;   (float x sdl-dollar-gesture-event-x)
 ;;   (float y sdl-dollar-gesture-event-y))
@@ -353,10 +353,10 @@
         sdl-sys-wm-event-msg)
 
 (define-foreign-struct SDL_WindowEvent*
-  (unsigned-int32 windowID sdl-window-event-window-id)
-  (unsigned-int8 event sdl-window-event-event)
-  (int32 data1 sdl-window-event-data1)
-  (int32 data2 sdl-window-event-data2))
+  (Uint32 windowID sdl-window-event-window-id)
+  (Uint8 event sdl-window-event-event)
+  (Sint32 data1 sdl-window-event-data1)
+  (Sint32 data2 sdl-window-event-data2))
 
 (define-foreign-struct SDL_DropEvent*
   (c-string file sdl-drop-event-file))
@@ -366,8 +366,8 @@
 (define-foreign-struct SDL_OSEvent*)
 
 (define-foreign-struct SDL_UserEvent*
-  (unsigned-int32 windowID sdl-user-event-window-id)
-  (int32 code sdl-user-event-code)
+  (Uint32 windowID sdl-user-event-window-id)
+  (Sint32 code sdl-user-event-code)
   (c-pointer data1 sdl-user-event-data1)
   (c-pointer data2 sdl-user-event-data2))
 

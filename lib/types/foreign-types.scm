@@ -33,10 +33,27 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; GENERIC
 
-(define-foreign-type int8 byte)
-(define-foreign-type int16 short)
-(define-foreign-type unsigned-int8 unsigned-byte)
-(define-foreign-type unsigned-int16 unsigned-short)
+(define-foreign-type int*    (c-pointer int))
+
+(define-foreign-type Sint8   byte)
+(define-foreign-type Sint16  short)
+(define-foreign-type Sint32  integer32)
+(define-foreign-type Sint64  integer64)
+
+(define-foreign-type Sint8*  (c-pointer Sint8))
+(define-foreign-type Sint16* (c-pointer Sint16))
+(define-foreign-type Sint32* (c-pointer Sint32))
+(define-foreign-type Sint32* (c-pointer Sint32))
+
+(define-foreign-type Uint8   unsigned-byte)
+(define-foreign-type Uint16  unsigned-short)
+(define-foreign-type Uint32  unsigned-integer32)
+(define-foreign-type Uint64  unsigned-integer64)
+
+(define-foreign-type Uint8*  (c-pointer Uint8))
+(define-foreign-type Uint16* (c-pointer Uint16))
+(define-foreign-type Uint32* (c-pointer Uint32))
+(define-foreign-type Uint64* (c-pointer Uint64))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -64,11 +81,6 @@
 (define-foreign-type SDL_PackedOrderEnum int)
 (define-foreign-type SDL_ArrayOrderEnum int)
 (define-foreign-type SDL_PackedLayoutEnum int)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; MISC
-
-(define-foreign-type SDL_JoystickID int32)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -226,11 +238,12 @@
   (c-pointer "SDL_SysWMEvent")
   %sdl-sys-wm-event-pointer %wrap-sdl-sys-wm-event)
 
+
 ;;; EVENT-RELATED TYPES
 
-(define-foreign-type SDL_JoystickID integer32)
-;; (define-foreign-type SDL_TouchID integer32)
-;; (define-foreign-type SDL_FingerID integer32)
+(define-foreign-type SDL_JoystickID Sint32)
+(define-foreign-type SDL_TouchID Sint32)
+(define-foreign-type SDL_FingerID Sint32)
 
 (define-foreign-type SDL_EventFilter
   (function int (c-pointer SDL_Event*)))

@@ -41,20 +41,20 @@
 
 (define-function-binding SDL_Init
   return: (int zero-if-success)
-  args: ((unsigned-int32 flags)))
+  args: ((Uint32 flags)))
 
 (define-function-binding SDL_InitSubSystem
   return: (int zero-if-success)
-  args: ((unsigned-int32 flags)))
+  args: ((Uint32 flags)))
 
 (define-function-binding SDL_Quit)
 
 (define-function-binding SDL_QuitSubSystem
-  args: ((unsigned-int32 flags)))
+  args: ((Uint32 flags)))
 
 (define-function-binding SDL_WasInit
-  return: (unsigned-int32 initialized-subsystems-mask)
-  args: ((unsigned-int32 flags)))
+  return: (Uint32 initialized-subsystems-mask)
+  args: ((Uint32 flags)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

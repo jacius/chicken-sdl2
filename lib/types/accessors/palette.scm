@@ -46,7 +46,7 @@
 (define-foreign-struct SDL_Palette*
   (int ncolors %sdl-palette-ncolors %sdl-palette-ncolors-set!)
   (c-pointer colors %sdl-palette-colors %sdl-palette-colors-set!)
-  (unsigned-int32 version sdl-palette-version)
+  (Uint32 version sdl-palette-version)
   (int refcount sdl-palette-refcount))
 
 ;;; TODO: sdl-palette-colors and sdl-palette-colors-set! that

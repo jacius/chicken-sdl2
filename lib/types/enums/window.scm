@@ -42,34 +42,34 @@
 
 
 (define SDL_WINDOWPOS_UNDEFINED_MASK
-  (foreign-value "SDL_WINDOWPOS_UNDEFINED_MASK" unsigned-int32))
+  (foreign-value "SDL_WINDOWPOS_UNDEFINED_MASK" Uint32))
 (define SDL_WINDOWPOS_UNDEFINED
-  (foreign-value "SDL_WINDOWPOS_UNDEFINED" unsigned-int32))
+  (foreign-value "SDL_WINDOWPOS_UNDEFINED" Uint32))
 
 (define-function-binding* SDL_WINDOWPOS_UNDEFINED_DISPLAY
-  return: (unsigned-int32 value)
-  args: ((unsigned-int32 displayNum))
+  return: (Uint32 value)
+  args: ((Uint32 displayNum))
   body: "C_return(SDL_WINDOWPOS_UNDEFINED_DISPLAY(displayNum));")
 
 (define-function-binding* SDL_WINDOWPOS_ISUNDEFINED
   return: (bool is-undefined?)
-  args: ((unsigned-int32 value))
+  args: ((Uint32 value))
   body: "C_return(SDL_WINDOWPOS_ISUNDEFINED(value));")
 
 
 (define SDL_WINDOWPOS_CENTERED_MASK
-  (foreign-value "SDL_WINDOWPOS_CENTERED_MASK" unsigned-int32))
+  (foreign-value "SDL_WINDOWPOS_CENTERED_MASK" Uint32))
 (define SDL_WINDOWPOS_CENTERED
-  (foreign-value "SDL_WINDOWPOS_CENTERED" unsigned-int32))
+  (foreign-value "SDL_WINDOWPOS_CENTERED" Uint32))
 
 (define-function-binding* SDL_WINDOWPOS_CENTERED_DISPLAY
-  return: (unsigned-int32 value)
-  args: ((unsigned-int32 displayNum))
+  return: (Uint32 value)
+  args: ((Uint32 displayNum))
   body: "C_return(SDL_WINDOWPOS_CENTERED_DISPLAY(displayNum));")
 
 (define-function-binding* SDL_WINDOWPOS_ISCENTERED
   return: (bool is-undefined?)
-  args: ((unsigned-int32 value))
+  args: ((Uint32 value))
   body: "C_return(SDL_WINDOWPOS_ISCENTERED(value));")
 
 

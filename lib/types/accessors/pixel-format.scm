@@ -51,30 +51,30 @@
         sdl-pixel-format-next)
 
 (define-foreign-struct SDL_PixelFormat*
-  (unsigned-int32 format sdl-pixel-format-format)
+  (Uint32 format sdl-pixel-format-format)
   (SDL_Palette* palette sdl-pixel-format-palette)
-  (unsigned-int8 BitsPerPixel sdl-pixel-format-bits-per-pixel)
-  (unsigned-int8 BytesPerPixel sdl-pixel-format-bytes-per-pixel)
-  ;;(unsigned-int8 padding[2]) ; see below
-  (unsigned-int32 Rmask sdl-pixel-format-rmask)
-  (unsigned-int32 Gmask sdl-pixel-format-gmask)
-  (unsigned-int32 Bmask sdl-pixel-format-bmask)
-  (unsigned-int32 Amask sdl-pixel-format-amask)
-  (unsigned-int8 Rloss  sdl-pixel-format-rloss)
-  (unsigned-int8 Gloss  sdl-pixel-format-gloss)
-  (unsigned-int8 Bloss  sdl-pixel-format-bloss)
-  (unsigned-int8 Aloss  sdl-pixel-format-aloss)
-  (unsigned-int8 Rshift sdl-pixel-format-rshift)
-  (unsigned-int8 Gshift sdl-pixel-format-gshift)
-  (unsigned-int8 Bshift sdl-pixel-format-bshift)
-  (unsigned-int8 Ashift sdl-pixel-format-ashift)
+  (Uint8 BitsPerPixel sdl-pixel-format-bits-per-pixel)
+  (Uint8 BytesPerPixel sdl-pixel-format-bytes-per-pixel)
+  ;;(Uint8 padding[2]) ; see below
+  (Uint32 Rmask sdl-pixel-format-rmask)
+  (Uint32 Gmask sdl-pixel-format-gmask)
+  (Uint32 Bmask sdl-pixel-format-bmask)
+  (Uint32 Amask sdl-pixel-format-amask)
+  (Uint8 Rloss  sdl-pixel-format-rloss)
+  (Uint8 Gloss  sdl-pixel-format-gloss)
+  (Uint8 Bloss  sdl-pixel-format-bloss)
+  (Uint8 Aloss  sdl-pixel-format-aloss)
+  (Uint8 Rshift sdl-pixel-format-rshift)
+  (Uint8 Gshift sdl-pixel-format-gshift)
+  (Uint8 Bshift sdl-pixel-format-bshift)
+  (Uint8 Ashift sdl-pixel-format-ashift)
   (int refcount sdl-pixel-format-refcount)
   (SDL_PixelFormat* next sdl-pixel-format-next))
 
 (define sdl-pixel-format-padding
   (let ((get-padding
          (foreign-lambda*
-          unsigned-int8 ((SDL_PixelFormat* pf) (unsigned-byte i))
+          Uint8 ((SDL_PixelFormat* pf) (unsigned-byte i))
           "C_return(pf->padding[i]);")))
     (lambda (pixel-format)
       (list (get-padding pixel-format 0) (get-padding pixel-format 1)))))

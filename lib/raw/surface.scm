@@ -73,14 +73,14 @@
 
 (define-function-binding SDL_CreateRGBSurface
   return: (SDL_Surface* surface)
-  args: ((unsigned-int32 flags)
+  args: ((Uint32 flags)
          (int width)
          (int height)
          (int depth)
-         (unsigned-int32 Rmask)
-         (unsigned-int32 Gmask)
-         (unsigned-int32 Bmask)
-         (unsigned-int32 Amask)))
+         (Uint32 Rmask)
+         (Uint32 Gmask)
+         (Uint32 Bmask)
+         (Uint32 Amask)))
 
 (define-function-binding SDL_CreateRGBSurfaceFrom
   return: (SDL_Surface* surface)
@@ -89,10 +89,10 @@
          (int height)
          (int depth)
          (int pitch)
-         (unsigned-int32 Rmask)
-         (unsigned-int32 Gmask)
-         (unsigned-int32 Bmask)
-         (unsigned-int32 Amask)))
+         (Uint32 Rmask)
+         (Uint32 Gmask)
+         (Uint32 Bmask)
+         (Uint32 Amask)))
 
 (define-function-binding SDL_FreeSurface
   args: ((SDL_Surface* surface)))
@@ -102,13 +102,13 @@
   return: (SDL_Surface* surface)
   args: ((SDL_Surface* src)
          (SDL_PixelFormat* fmt)
-         (unsigned-int32 flags)))
+         (Uint32 flags)))
 
 (define-function-binding SDL_ConvertSurfaceFormat
   return: (SDL_Surface* surface)
   args: ((SDL_Surface* src)
          (SDL_PixelFormatEnum pixel_format)
-         (unsigned-int32 flags)))
+         (Uint32 flags)))
 
 (define-function-binding SDL_ConvertPixels
   return: (int zero-if-success)
@@ -190,14 +190,14 @@
   return: (int zero-if-success)
   args: ((SDL_Surface* dst)
          (SDL_Rect* rect)
-         (unsigned-int32 mapped-color)))
+         (Uint32 mapped-color)))
 
 (define-function-binding SDL_FillRects
   return: (int zero-if-success)
   args: ((SDL_Surface* dst)
          (SDL_Rect* rects)
          (int count)
-         (unsigned-int32 mapped-color)))
+         (Uint32 mapped-color)))
 
 
 (define-function-binding SDL_GetClipRect
@@ -207,12 +207,12 @@
 (define-function-binding SDL_GetColorKey
   return: (int zero-if-success)
   args: ((SDL_Surface* surface)
-         ((c-pointer unsigned-int32) key-out)))
+         (Uint32* key-out)))
 
 (define-function-binding SDL_GetSurfaceAlphaMod
   return: (int zero-if-success)
   args: ((SDL_Surface* surface)
-         ((c-pointer unsigned-int8) alpha-out)))
+         (Uint8* alpha-out)))
 
 (define-function-binding SDL_GetSurfaceBlendMode
   return: (int zero-if-success)
@@ -222,9 +222,9 @@
 (define-function-binding SDL_GetSurfaceColorMod
   return: (int zero-if-success)
   args: ((SDL_Surface* surface)
-         ((c-pointer unsigned-int8) r-out)
-         ((c-pointer unsigned-int8) g-out)
-         ((c-pointer unsigned-int8) b-out)))
+         (Uint8* r-out)
+         (Uint8* g-out)
+         (Uint8* b-out)))
 
 
 (define-function-binding SDL_SetClipRect
@@ -236,12 +236,12 @@
   return: (int zero-on-success)
   args: ((SDL_Surface* surface)
          (bool enable-or-disable?)
-         (unsigned-int32 key)))
+         (Uint32 key)))
 
 (define-function-binding SDL_SetSurfaceAlphaMod
   return: (int zero-on-success)
   args: ((SDL_Surface* surface)
-         (unsigned-int8 alpha)))
+         (Uint8 alpha)))
 
 (define-function-binding SDL_SetSurfaceBlendMode
   return: (int zero-on-success)
@@ -251,9 +251,9 @@
 (define-function-binding SDL_SetSurfaceColorMod
   return: (int zero-on-success)
   args: ((SDL_Surface* surface)
-         (unsigned-int8 r)
-         (unsigned-int8 g)
-         (unsigned-int8 b)))
+         (Uint8 r)
+         (Uint8 g)
+         (Uint8 b)))
 
 
 (define-function-binding SDL_SetSurfacePalette

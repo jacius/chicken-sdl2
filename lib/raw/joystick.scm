@@ -96,7 +96,7 @@
 
 
 (define-function-binding SDL_JoystickGetAxis
-  return: (int16 position)
+  return: (Sint16 position)
   args: ((SDL_Joystick* joystick)
          (int axis)))
 
@@ -104,8 +104,8 @@
   return: (int zero-if-success)
   args: ((SDL_Joystick* joystick)
          (int ball)
-         ((c-pointer int) dx)
-         ((c-pointer int) dy)))
+         (int* dx)
+         (int* dy)))
 
 (define-function-binding SDL_JoystickGetButton
   return: (bool pressed?)

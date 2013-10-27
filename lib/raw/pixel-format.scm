@@ -57,19 +57,19 @@
 (define-function-binding SDL_PixelFormatEnumToMasks
   return: (bool success?)
   args: ((SDL_PixelFormatEnum format)
-         ((c-pointer int) bpp)
-         ((c-pointer unsigned-int32) rmask-out)
-         ((c-pointer unsigned-int32) gmask-out)
-         ((c-pointer unsigned-int32) bmask-out)
-         ((c-pointer unsigned-int32) amask-out)))
+         (int* bpp)
+         (Uint32* rmask-out)
+         (Uint32* gmask-out)
+         (Uint32* bmask-out)
+         (Uint32* amask-out)))
 
 (define-function-binding SDL_MasksToPixelFormatEnum
   return: (SDL_PixelFormatEnum format)
   args: ((int bpp)
-         (unsigned-int32 rmask)
-         (unsigned-int32 gmask)
-         (unsigned-int32 bmask)
-         (unsigned-int32 amask)))
+         (Uint32 rmask)
+         (Uint32 gmask)
+         (Uint32 bmask)
+         (Uint32 amask)))
 
 
 (define-function-binding SDL_AllocFormat
@@ -101,36 +101,36 @@
 
 
 (define-function-binding SDL_MapRGB
-  return: (unsigned-int32 color)
+  return: (Uint32 color)
   args: ((SDL_PixelFormat* format)
-         (unsigned-int8 r)
-         (unsigned-int8 g)
-         (unsigned-int8 b)))
+         (Uint8 r)
+         (Uint8 g)
+         (Uint8 b)))
 
 (define-function-binding SDL_MapRGBA
-  return: (unsigned-int32 color)
+  return: (Uint32 color)
   args: ((SDL_PixelFormat* format)
-         (unsigned-int8 r)
-         (unsigned-int8 g)
-         (unsigned-int8 b)
-         (unsigned-int8 a)))
+         (Uint8 r)
+         (Uint8 g)
+         (Uint8 b)
+         (Uint8 a)))
 
 (define-function-binding SDL_GetRGB
-  args: ((unsigned-int32 pixel)
+  args: ((Uint32 pixel)
          (SDL_PixelFormat* format)
-         ((c-pointer unsigned-int8) r-out)
-         ((c-pointer unsigned-int8) g-out)
-         ((c-pointer unsigned-int8) b-out)))
+         (Uint8* r-out)
+         (Uint8* g-out)
+         (Uint8* b-out)))
 
 (define-function-binding SDL_GetRGBA
-  args: ((unsigned-int32 pixel)
+  args: ((Uint32 pixel)
          (SDL_PixelFormat* format)
-         ((c-pointer unsigned-int8) r-out)
-         ((c-pointer unsigned-int8) g-out)
-         ((c-pointer unsigned-int8) b-out)
-         ((c-pointer unsigned-int8) a-out)))
+         (Uint8* r-out)
+         (Uint8* g-out)
+         (Uint8* b-out)
+         (Uint8* a-out)))
 
 
 (define-function-binding SDL_CalculateGammaRamp
   args: ((float gamma)
-         ((c-pointer unsigned-int16) ramp-out)))
+         (Uint16* ramp-out)))

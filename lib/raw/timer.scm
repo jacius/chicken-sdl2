@@ -40,16 +40,16 @@
 
 
 (define-function-binding SDL_Delay
-  args: ((unsigned-int32 ms)))
+  args: ((Uint32 ms)))
 
 (define-function-binding SDL_GetTicks
-  return: (unsigned-int32 ms))
+  return: (Uint32 ms))
 
 (define-function-binding SDL_GetPerformanceCounter
-  return: (unsigned-integer64 counter-value))
+  return: (Uint64 counter-value))
 
 (define-function-binding SDL_GetPerformanceFrequency
-  return: (unsigned-integer64 frequency))
+  return: (Uint64 frequency))
 
 ;; TODO: SDL_AddTimer
 

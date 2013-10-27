@@ -48,8 +48,8 @@
 
 (define-function-binding SDL_CreateCursor
   return: (SDL_Cursor* cursor)
-  args: (((c-pointer unsigned-int8) data)
-         ((c-pointer unsigned-int8) mask)
+  args: ((Uint8* data)
+         (Uint8* mask)
          (int w)
          (int h)
          (int hot-x)
@@ -83,14 +83,14 @@
   return: (SDL_Window* window-with-focus))
 
 (define-function-binding SDL_GetMouseState
-  return: (unsigned-int32 buttons-mask)
-  args: (((c-pointer int) x-out)
-         ((c-pointer int) y-out)))
+  return: (Uint32 buttons-mask)
+  args: ((int* x-out)
+         (int* y-out)))
 
 (define-function-binding SDL_GetRelativeMouseState
-  return: (unsigned-int32 buttons-mask)
-  args: (((c-pointer int) x-out)
-         ((c-pointer int) y-out)))
+  return: (Uint32 buttons-mask)
+  args: ((int* x-out)
+         (int* y-out)))
 
 (define-function-binding SDL_GetRelativeMouseMode
   return: (bool relative-mode?))

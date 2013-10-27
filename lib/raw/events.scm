@@ -59,7 +59,7 @@
   args: ((SDL_EventFilter filter) (c-pointer userdata)))
 
 (define-function-binding SDL_EventState
-  return: (unsigned-int8 previous-state)
+  return: (Uint8 previous-state)
   args: ((SDL_EventType type) (int state)))
 
 (define-function-binding SDL_FilterEvents
@@ -107,7 +107,7 @@
   return: (bool quit-queued?))
 
 (define-function-binding SDL_RegisterEvents
-  return: (unsigned-int32 beginning-event-number)
+  return: (Uint32 beginning-event-number)
   args: ((int numevents)))
 
 ;; TODO: SDL_RecordGesture
