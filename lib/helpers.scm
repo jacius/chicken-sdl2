@@ -31,12 +31,15 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; HELPERS
+;;; GENERAL HELPERS
 
 (define (%displayify out . things)
   (for-each (lambda (thing) (display thing out))
             things))
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; DEFINE-FUNCTION-BINDING
 
 ;;; Convenience and descriptiveness wrapper around foreign-lambda.
 ;;; Usage (stuff in square brackets can be omitted):
@@ -226,19 +229,19 @@
        (define-record-printer (record-type struct out)
          (%displayify out "#<" 'record-type " " (struct->list struct) ">"))
        (define (make-struct #!optional (field-name default-value) ...)
-         (wrapper (vector-constructor field-name ...)))
+         (wrapper (vector-constructor (value-guard field-name) ...)))
        (define (struct->list struct)
+         (assert (predicate struct))
          (vector->list (unwrapper struct)))
        (define (struct-set! struct #!key field-name ...)
          (assert (predicate struct))
          (when field-name
-           (value-guard field-name)
-           (setter struct field-name))
+           (setter struct (value-guard field-name)))
          ...)
        (begin
          (define (setter struct value)
            (assert (predicate struct))
-           (set! (vector-ref (unwrapper struct) index) value))
+           (set! (vector-ref (unwrapper struct) index) (value-guard value)))
          (define getter
            (getter-with-setter
             (lambda (struct)

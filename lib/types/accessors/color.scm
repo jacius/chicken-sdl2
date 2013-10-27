@@ -47,18 +47,19 @@
         sdl-colour-b sdl-colour-b-set!
         sdl-colour-a sdl-colour-a-set!)
 
-(define (%color-component-guard component)
-  (assert (<= 0 component 255)))
-
 (define-uniform-struct-accessors
   procs: (make-sdl-color sdl-color->list sdl-color-set!)
-  fields: ((r index: 0 default: 255 guard: %color-component-guard
+  fields: ((r index: 0 default: 255
+              guard: (Uint8-guard "sdl-color field r")
               get: sdl-color-r set: sdl-color-r-set!)
-           (g index: 1 default: 255 guard: %color-component-guard
+           (g index: 1 default: 255
+              guard: (Uint8-guard "sdl-color field g")
               get: sdl-color-g set: sdl-color-g-set!)
-           (b index: 2 default: 255 guard: %color-component-guard
+           (b index: 2 default: 255
+              guard: (Uint8-guard "sdl-color field b")
               get: sdl-color-b set: sdl-color-b-set!)
-           (a index: 3 default: 255 guard: %color-component-guard
+           (a index: 3 default: 255
+              guard: (Uint8-guard "sdl-color field a")
               get: sdl-color-a set: sdl-color-a-set!))
   using: (sdl-color  sdl-color?
           %wrap-sdl-color  %sdl-color-data

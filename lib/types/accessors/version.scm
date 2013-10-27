@@ -39,11 +39,14 @@
 
 (define-uniform-struct-accessors
   procs: (make-sdl-version sdl-version->list sdl-version-set!)
-  fields: ((major index: 0 default: 0 guard: void
+  fields: ((major index: 0 default: 0
+                  guard: (Uint8-guard "sdl-version field major")
                   get: sdl-version-major set: sdl-version-major-set!)
-           (minor index: 1 default: 0 guard: void
+           (minor index: 1 default: 0
+                  guard: (Uint8-guard "sdl-version field minor")
                   get: sdl-version-minor set: sdl-version-minor-set!)
-           (patch index: 2 default: 0 guard: void
+           (patch index: 2 default: 0
+                  guard: (Uint8-guard "sdl-version field patch")
                   get: sdl-version-patch set: sdl-version-patch-set!))
   using: (sdl-version sdl-version?
           %wrap-sdl-version %sdl-version-data

@@ -40,6 +40,8 @@
 
 (include "lib/helpers.scm")
 
+(include "lib/types/guards.scm")
+
 ;;; NOTE: The ordering of these includes is important!
 
 ;;; 1. We declare the record types so that we have the pointer

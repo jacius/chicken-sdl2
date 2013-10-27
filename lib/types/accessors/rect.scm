@@ -43,13 +43,17 @@
 
 (define-uniform-struct-accessors
   procs: (make-sdl-rect sdl-rect->list sdl-rect-set!)
-  fields: ((x index: 0 default: 0 guard: void
+  fields: ((x index: 0 default: 0
+              guard: (Sint32-guard "sdl-rect field x")
               get: sdl-rect-x set: sdl-rect-x-set!)
-           (y index: 1 default: 0 guard: void
+           (y index: 1 default: 0
+              guard: (Sint32-guard "sdl-rect field y")
               get: sdl-rect-y set: sdl-rect-y-set!)
-           (w index: 2 default: 0 guard: void
+           (w index: 2 default: 0
+              guard: (Sint32-guard "sdl-rect field w")
               get: sdl-rect-w set: sdl-rect-w-set!)
-           (h index: 3 default: 0 guard: void
+           (h index: 3 default: 0
+              guard: (Sint32-guard "sdl-rect field h")
               get: sdl-rect-h set: sdl-rect-h-set!))
   using: (sdl-rect sdl-rect?
           %wrap-sdl-rect %sdl-rect-data
@@ -67,9 +71,11 @@
 
 (define-uniform-struct-accessors
   procs: (make-sdl-point sdl-point->list sdl-point-set!)
-  fields: ((x index: 0 default: 0 guard: void
+  fields: ((x index: 0 default: 0
+              guard: (Sint32-guard "sdl-point field x")
               get: sdl-point-x set: sdl-point-x-set!)
-           (y index: 1 default: 0 guard: void
+           (y index: 1 default: 0
+              guard: (Sint32-guard "sdl-point field y")
               get: sdl-point-y set: sdl-point-y-set!))
   using: (sdl-point sdl-point?
           %wrap-sdl-point %sdl-point-data
