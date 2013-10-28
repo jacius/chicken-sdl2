@@ -43,11 +43,18 @@
 
 ;;; TODO: make-sdl-palette that takes a vector of sdl-color instances.
 
-(define-nonuniform-struct-accessors SDL_Palette*
-  (int ncolors %sdl-palette-ncolors %sdl-palette-ncolors-set!)
-  (c-pointer colors %sdl-palette-colors %sdl-palette-colors-set!)
-  (Uint32 version sdl-palette-version)
-  (int refcount sdl-palette-refcount))
+(define-nonuniform-struct-accessors
+  type: SDL_Palette*
+  fields: (((int ncolors)
+            get: %sdl-palette-ncolors
+            set: %sdl-palette-ncolors-set!)
+           ((c-pointer colors)
+            get: %sdl-palette-colors
+            set: %sdl-palette-colors-set!)
+           ((Uint32 version)
+            get: sdl-palette-version)
+           ((int refcount)
+            get: sdl-palette-refcount)))
 
 ;;; TODO: sdl-palette-colors and sdl-palette-colors-set! that
 ;;; return/take a vector of sdl-color instances.

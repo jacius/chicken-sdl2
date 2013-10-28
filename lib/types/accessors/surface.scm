@@ -40,17 +40,18 @@
         sdl-surface-locked
         %sdl-surface-lock-data)
 
-(define-nonuniform-struct-accessors SDL_Surface*
-  (Uint32 flags sdl-surface-flags)  ; read-only
-  (SDL_PixelFormat* format sdl-surface-format)  ; read-only
-  (int w sdl-surface-w)                     ; read-only
-  (int h sdl-surface-h)                     ; read-only
-  (int pitch sdl-surface-pitch)             ; read-only
-  (c-pointer pixels %sdl-surface-pixels         ; read-write
-             %sdl-surface-pixels-set!)
-  (c-pointer userdata %sdl-surface-userdata     ; read-write
-             %sdl-surface-userdata-set!)
-  (int locked sdl-surface-locked)           ; read-only
-  (c-pointer lock_data %sdl-surface-lock-data)) ; read-only
+(define-nonuniform-struct-accessors
+  type: SDL_Surface*
+  fields: (((Uint32 flags)            get: sdl-surface-flags)
+           ((SDL_PixelFormat* format) get: sdl-surface-format)
+           ((int w)                   get: sdl-surface-w)
+           ((int h)                   get: sdl-surface-h)
+           ((int pitch)               get: sdl-surface-pitch)
+           ((c-pointer pixels)        get: %sdl-surface-pixels
+                                      set: %sdl-surface-pixels-set!)
+           ((c-pointer userdata)      get: %sdl-surface-userdata
+                                      set: %sdl-surface-userdata-set!)
+           ((int locked)              get: sdl-surface-locked)
+           ((c-pointer lock_data)     get: %sdl-surface-lock-data)))
 
 ;;; TODO: nice accessors for pixels and userdata?

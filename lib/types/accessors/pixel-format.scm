@@ -50,26 +50,27 @@
         sdl-pixel-format-refcount
         sdl-pixel-format-next)
 
-(define-nonuniform-struct-accessors SDL_PixelFormat*
-  (Uint32 format sdl-pixel-format-format)
-  (SDL_Palette* palette sdl-pixel-format-palette)
-  (Uint8 BitsPerPixel sdl-pixel-format-bits-per-pixel)
-  (Uint8 BytesPerPixel sdl-pixel-format-bytes-per-pixel)
-  ;;(Uint8 padding[2]) ; see below
-  (Uint32 Rmask sdl-pixel-format-rmask)
-  (Uint32 Gmask sdl-pixel-format-gmask)
-  (Uint32 Bmask sdl-pixel-format-bmask)
-  (Uint32 Amask sdl-pixel-format-amask)
-  (Uint8 Rloss  sdl-pixel-format-rloss)
-  (Uint8 Gloss  sdl-pixel-format-gloss)
-  (Uint8 Bloss  sdl-pixel-format-bloss)
-  (Uint8 Aloss  sdl-pixel-format-aloss)
-  (Uint8 Rshift sdl-pixel-format-rshift)
-  (Uint8 Gshift sdl-pixel-format-gshift)
-  (Uint8 Bshift sdl-pixel-format-bshift)
-  (Uint8 Ashift sdl-pixel-format-ashift)
-  (int refcount sdl-pixel-format-refcount)
-  (SDL_PixelFormat* next sdl-pixel-format-next))
+(define-nonuniform-struct-accessors
+  type: SDL_PixelFormat*
+  fields: (((Uint32 format)         get: sdl-pixel-format-format)
+           ((SDL_Palette* palette)  get: sdl-pixel-format-palette)
+           ((Uint8 BitsPerPixel)    get: sdl-pixel-format-bits-per-pixel)
+           ((Uint8 BytesPerPixel)   get: sdl-pixel-format-bytes-per-pixel)
+           ;; Uint8 padding[2]      ; see below
+           ((Uint32 Rmask)          get: sdl-pixel-format-rmask)
+           ((Uint32 Gmask)          get: sdl-pixel-format-gmask)
+           ((Uint32 Bmask)          get: sdl-pixel-format-bmask)
+           ((Uint32 Amask)          get: sdl-pixel-format-amask)
+           ((Uint8 Rloss)           get: sdl-pixel-format-rloss)
+           ((Uint8 Gloss)           get: sdl-pixel-format-gloss)
+           ((Uint8 Bloss)           get: sdl-pixel-format-bloss)
+           ((Uint8 Aloss)           get: sdl-pixel-format-aloss)
+           ((Uint8 Rshift)          get: sdl-pixel-format-rshift)
+           ((Uint8 Gshift)          get: sdl-pixel-format-gshift)
+           ((Uint8 Bshift)          get: sdl-pixel-format-bshift)
+           ((Uint8 Ashift)          get: sdl-pixel-format-ashift)
+           ((int refcount)          get: sdl-pixel-format-refcount)
+           ((SDL_PixelFormat* next) get: sdl-pixel-format-next)))
 
 (define sdl-pixel-format-padding
   (let ((get-padding

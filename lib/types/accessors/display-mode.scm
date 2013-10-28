@@ -36,9 +36,10 @@
         sdl-display-mode-refresh-rate
         %sdl-display-mode-driverdata)
 
-(define-nonuniform-struct-accessors SDL_DisplayMode*
-  (Uint32 format sdl-display-mode-format)
-  (int w sdl-display-mode-w)
-  (int h sdl-display-mode-h)
-  (int refresh_rate sdl-display-mode-refresh-rate)
-  (c-pointer driverdata %sdl-display-mode-driverdata))
+(define-nonuniform-struct-accessors
+  type: SDL_DisplayMode*
+  fields: (((Uint32 format)        get: sdl-display-mode-format)
+           ((int w)                get: sdl-display-mode-w)
+           ((int h)                get: sdl-display-mode-h)
+           ((int refresh_rate)     get: sdl-display-mode-refresh-rate)
+           ((c-pointer driverdata) get: %sdl-display-mode-driverdata)))

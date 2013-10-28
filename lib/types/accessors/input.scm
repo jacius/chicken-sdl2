@@ -34,7 +34,8 @@
         sdl-keysym-sym
         sdl-keysym-mod)
 
-(define-nonuniform-struct-accessors SDL_Keysym*
-  (SDL_Scancode scancode sdl-keysym-scancode)
-  (SDL_Keycode sym sdl-keysym-sym)
-  (Uint16 mod sdl-keysym-mod))
+(define-nonuniform-struct-accessors
+  type: SDL_Keysym*
+  fields: (((SDL_Scancode scancode) get: sdl-keysym-scancode)
+           ((SDL_Keycode sym)       get: sdl-keysym-sym)
+           ((Uint16 mod)            get: sdl-keysym-mod)))

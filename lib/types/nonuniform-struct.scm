@@ -31,49 +31,47 @@
 
 
 (define-syntax define-nonuniform-struct-accessors
-  (syntax-rules ()
-    ((define-nonuniform-struct-accessors struct-type
-       (field-args ...)
-       ...)
+  (syntax-rules (type: fields:)
+    ((define-nonuniform-struct-accessors
+       type: struct-type
+       fields: ((field-args ...)
+                ...))
      (begin
        (%define-nonuniform-struct-field struct-type field-args ...)
        ...))))
 
-;;; I sure wish syntax-rules could easily use strings generated at
-;;; macro expansion time. Then I could do this:
-
-;; (define-syntax %define-nonuniform-struct-field
-;;   (syntax-rules ()
-;;     ;; getter and setter
-;;     ((%define-nonuniform-struct-field
-;;       struct-type field-type field-name
-;;       getter-name setter-name)
-;;      (begin
-;;        (define setter-name
-;;          (foreign-lambda*
-;;           void
-;;           ((struct-type obj) (field-type val))
-;;           ,(sprintf "~S->~S = ~S;" obj field-name val)))
-;;        (define getter-name
-;;          (getter-with-setter
-;;           (foreign-lambda*
-;;            field-type
-;;            ((struct-type obj))
-;;            ,(sprintf "C_return(~S->~S);" obj field-name))
-;;           setter-name))))
-;;     ;; no setter
-;;     ((%define-nonuniform-struct-field
-;;       struct-type field-type field-name
-;;       getter-name)
-;;      (define getter-name
-;;        (foreign-lambda*
-;;         field-type
-;;         ((struct-type obj))
-;;         ,(sprintf "C_return(~S->~S);" obj field-name))))))
-
-;;; ... instead of this:
 
 (define-syntax %define-nonuniform-struct-field
+  (syntax-rules (get: set:)
+    ;; getter and setter
+    ((%define-nonuniform-struct-field
+      struct-type (field-type field-name) get: getter-name set: setter-name)
+     (%define-nonuniform-struct-field-getter-and-setter
+      struct-type field-type field-name getter-name setter-name))
+    ;; only getter
+    ((%define-nonuniform-struct-field
+      struct-type (field-type field-name) get: getter-name)
+     (%define-nonuniform-struct-field-only-getter
+      struct-type field-type field-name getter-name))))
+
+
+(define-syntax %define-nonuniform-struct-field-only-getter
+  (ir-macro-transformer
+   (lambda (form inject compare?)
+     (let ((obj 'obj)
+           (val 'val)
+           (struct-type (inject (list-ref form 1)))
+           (field-type  (inject (list-ref form 2)))
+           (field-name  (inject (list-ref form 3)))
+           (getter-name (inject (list-ref form 4))))
+       `(define ,(inject getter-name)
+          (foreign-lambda*
+           ,(inject field-type)
+           ((,(inject struct-type) ,(inject obj)))
+           ,(sprintf "C_return(~S->~S);" obj field-name)))))))
+
+
+(define-syntax %define-nonuniform-struct-field-getter-and-setter
   (ir-macro-transformer
    (lambda (form inject compare?)
      (let ((obj 'obj)
@@ -82,27 +80,18 @@
            (field-type  (inject (list-ref form 2)))
            (field-name  (inject (list-ref form 3)))
            (getter-name (inject (list-ref form 4)))
-           (setter-name (and (> (length form) 5)
-                             (inject (list-ref form 5)))))
-       (if setter-name
-           ;; getter and setter
-           `(begin
-              (define ,(inject setter-name)
-                (foreign-lambda*
-                 void
-                 ((,(inject struct-type) ,(inject obj))
-                  (,(inject field-type) ,(inject val)))
-                 ,(sprintf "~S->~S = ~S;" obj field-name val)))
-              (define ,(inject getter-name)
-                (getter-with-setter
-                 (foreign-lambda*
-                  ,(inject field-type)
-                  ((,(inject struct-type) ,(inject obj)))
-                  ,(sprintf "C_return(~S->~S);" obj field-name))
-                 ,(inject setter-name))))
-           ;; no setter
-           `(define ,(inject getter-name)
-              (foreign-lambda*
-               ,(inject field-type)
-               ((,(inject struct-type) ,(inject obj)))
-               ,(sprintf "C_return(~S->~S);" obj field-name))))))))
+           (setter-name (inject (list-ref form 5))))
+       `(begin
+          (define ,(inject setter-name)
+            (foreign-lambda*
+             void
+             ((,(inject struct-type) ,(inject obj))
+              (,(inject field-type) ,(inject val)))
+             ,(sprintf "~S->~S = ~S;" obj field-name val)))
+          (define ,(inject getter-name)
+            (getter-with-setter
+             (foreign-lambda*
+              ,(inject field-type)
+              ((,(inject struct-type) ,(inject obj)))
+              ,(sprintf "C_return(~S->~S);" obj field-name))
+             ,(inject setter-name))))))))
