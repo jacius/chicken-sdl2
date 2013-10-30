@@ -30,6 +30,54 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; RECORD TYPE / CONVERTERS / ETC.
+
+
+(define-syntax define-nonuniform-struct-constructors
+  (syntax-rules (type: pointer: data: alloc: converters:)
+    ((define-nonuniform-struct-constructors
+       for: (pointer-type
+             record-type  predicate?  wrapper
+             get-pointer  set-pointer
+             get-data     set-data)
+       allocate: allocater
+       converters: (pointer->record
+                    record->pointer
+                    ->pointer))
+
+     (begin
+       (define (allocater)
+         (wrapper #f (make-blob (foreign-type-size pointer-type))))
+
+       (define (pointer->record pointer)
+         (wrapper pointer #f))
+
+       (define (record->pointer record)
+         (if (get-data record)
+             ((foreign-lambda*-with-dynamic-body
+               pointer-type ((blob data))
+               ("C_return((~S)data);" pointer-type))
+              (get-data record))))
+
+       (define (->pointer thing)
+         (cond
+          ((predicate? thing)
+           (record->pointer thing))
+          ((pointer? thing)
+           ((foreign-lambda*-with-dynamic-body
+             pointer-type ((c-pointer pointer))
+             ("C_return((~S)pointer);" pointer-type))
+            thing))
+          ((eq? #f thing)
+           ((foreign-lambda*-with-dynamic-body
+             pointer-type ()
+             ("C_return((~S)NULL);" pointer-type))))))))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ACCESSORS
+
 (define-syntax define-nonuniform-struct-accessors
   (syntax-rules (type: fields:)
     ((define-nonuniform-struct-accessors

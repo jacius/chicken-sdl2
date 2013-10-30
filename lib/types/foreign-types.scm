@@ -117,11 +117,13 @@
 
 (define-foreign-type SDL_Palette*
   (c-pointer "SDL_Palette")
-  %sdl-palette-pointer %wrap-sdl-palette)
+  %->SDL_Palette*
+  %SDL_Palette*->sdl-palette)
 
 (define-foreign-type SDL_PixelFormat*
   (c-pointer "SDL_PixelFormat")
-  %sdl-pixel-format-pointer %wrap-sdl-pixel-format)
+  %->SDL_PixelFormat*
+  %SDL_PixelFormat*->sdl-pixel-format)
 
 
 (define-foreign-type SDL_Rect*
@@ -148,7 +150,8 @@
 
 (define-foreign-type SDL_Surface*
   (c-pointer "SDL_Surface")
-  %sdl-surface-pointer %wrap-sdl-surface)
+  %->SDL_Surface*
+  %SDL_Surface*->sdl-surface)
 
 (define-foreign-type SDL_SysWMinfo*
   (c-pointer "SDL_SysWMinfo")
@@ -176,8 +179,8 @@
 
 (define-foreign-type SDL_Event*
   (c-pointer "SDL_Event")
-  %sdl-event-pointer %wrap-sdl-event)
-
+  %->SDL_Event*
+  %SDL_Event*->sdl-event)
 
 (define-foreign-type SDL_KeyboardEvent*
   (c-pointer "SDL_KeyboardEvent")

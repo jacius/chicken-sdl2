@@ -30,9 +30,25 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-(export sdl-event-type
+(export allocate-sdl-event
+        %SDL_Event*->sdl-event
+        %sdl-event->SDL_Event*
+        %->SDL_Event*
+
+        sdl-event-type
         sdl-event-timestamp
         sdl-event-unwrap)
+
+(define-nonuniform-struct-constructors
+  for: (SDL_Event*
+        sdl-event  %sdl-event?  %wrap-sdl-event
+        %sdl-event-pointer  %sdl-event-pointer-set!
+        %sdl-event-data     %sdl-event-data-set!)
+  allocate: allocate-sdl-event
+  converters: (%SDL_Event*->sdl-event
+               %sdl-event->SDL_Event*
+               %->SDL_Event*))
+
 
 (define-function-binding* sdl-event-type
   return: (SDL_EventType type)
@@ -43,6 +59,7 @@
   return: (Uint32 timestamp)
   args: ((c-pointer event))
   body: "C_return(((SDL_CommonEvent*)event)->timestamp);")
+
 
 (define (sdl-event-unwrap event)
   (let ((pointer (%sdl-event-pointer event)))

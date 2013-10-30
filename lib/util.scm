@@ -33,3 +33,18 @@
 (define (%displayify out . things)
   (for-each (lambda (thing) (display thing out))
             things))
+
+
+(define-syntax foreign-lambda*-with-dynamic-body
+  (ir-macro-transformer
+   (lambda (form inject compare?)
+     (let ((return-type (list-ref form 1))
+           (args        (list-ref form 2))
+           (body        (list-ref form 3)))
+       `(foreign-lambda*
+         ,return-type
+         ,(map (lambda (arg-pair)
+                 (list (car arg-pair)
+                       (inject (cadr arg-pair))))
+               args)
+         ,(apply sprintf (map inject body)))))))

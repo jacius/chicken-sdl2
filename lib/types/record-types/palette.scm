@@ -30,13 +30,15 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-(export ;; TODO: make-sdl-palette
-        sdl-palette?
+(export sdl-palette?
         %wrap-sdl-palette
         %sdl-palette-pointer
-        %sdl-palette-pointer-set!)
+        %sdl-palette-pointer-set!
+        %sdl-palette-data
+        %sdl-palette-data-set!)
 
 (define-record-type sdl-palette
-  (%wrap-sdl-palette pointer)
+  (%wrap-sdl-palette pointer data)
   sdl-palette?
-  (pointer %sdl-palette-pointer %sdl-palette-pointer-set!))
+  (pointer %sdl-palette-pointer %sdl-palette-pointer-set!)
+  (data %sdl-palette-data %sdl-palette-data-set!))

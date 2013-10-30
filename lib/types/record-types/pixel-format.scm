@@ -33,9 +33,12 @@
 (export sdl-pixel-format?
         %wrap-sdl-pixel-format
         %sdl-pixel-format-pointer
-        %sdl-pixel-format-pointer-set!)
+        %sdl-pixel-format-pointer-set!
+        %sdl-pixel-format-data
+        %sdl-pixel-format-data-set!)
 
 (define-record-type sdl-pixel-format
-  (%wrap-sdl-pixel-format pointer)
+  (%wrap-sdl-pixel-format pointer data)
   sdl-pixel-format?
-  (pointer %sdl-pixel-format-pointer %sdl-pixel-format-pointer-set!))
+  (pointer %sdl-pixel-format-pointer %sdl-pixel-format-pointer-set!)
+  (data %sdl-pixel-format-data %sdl-pixel-format-data-set!))

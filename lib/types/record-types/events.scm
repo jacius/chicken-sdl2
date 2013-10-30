@@ -33,12 +33,15 @@
 (export %sdl-event?
         %wrap-sdl-event
         %sdl-event-pointer
-        %sdl-event-pointer-set!)
+        %sdl-event-pointer-set!
+        %sdl-event-data
+        %sdl-event-data-set!)
 
 (define-record-type sdl-event
-  (%wrap-sdl-event pointer)
+  (%wrap-sdl-event pointer data)
   %sdl-event?
-  (pointer %sdl-event-pointer %sdl-event-pointer-set!))
+  (pointer %sdl-event-pointer %sdl-event-pointer-set!)
+  (data %sdl-event-data %sdl-event-data-set!))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

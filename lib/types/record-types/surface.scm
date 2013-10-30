@@ -33,9 +33,12 @@
 (export sdl-surface?
         %wrap-sdl-surface
         %sdl-surface-pointer
-        %sdl-surface-pointer-set!)
+        %sdl-surface-pointer-set!
+        %sdl-surface-data
+        %sdl-surface-data-set!)
 
 (define-record-type sdl-surface
-  (%wrap-sdl-surface pointer)
+  (%wrap-sdl-surface pointer data)
   sdl-surface?
-  (pointer %sdl-surface-pointer %sdl-surface-pointer-set!))
+  (pointer %sdl-surface-pointer %sdl-surface-pointer-set!)
+  (data %sdl-surface-data %sdl-surface-data-set!))
