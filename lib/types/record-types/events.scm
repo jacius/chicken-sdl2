@@ -35,7 +35,12 @@
         %sdl-event-pointer
         %sdl-event-pointer-set!
         %sdl-event-data
-        %sdl-event-data-set!)
+        %sdl-event-data-set!
+
+        allocate-sdl-event
+        %SDL_Event*->sdl-event
+        %sdl-event->SDL_Event*
+        %->SDL_Event*)
 
 (define-record-type sdl-event
   (%wrap-sdl-event pointer data)
@@ -43,6 +48,15 @@
   (pointer %sdl-event-pointer %sdl-event-pointer-set!)
   (data %sdl-event-data %sdl-event-data-set!))
 
+(define-nonuniform-struct-constructors
+  for: ("SDL_Event"
+        sdl-event  %sdl-event?  %wrap-sdl-event
+        %sdl-event-pointer  %sdl-event-pointer-set!
+        %sdl-event-data     %sdl-event-data-set!)
+  allocate: allocate-sdl-event
+  converters: (%SDL_Event*->sdl-event
+               %sdl-event->SDL_Event*
+               %->SDL_Event*))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; KEYBOARD / TEXT

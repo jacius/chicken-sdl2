@@ -35,10 +35,25 @@
         %sdl-palette-pointer
         %sdl-palette-pointer-set!
         %sdl-palette-data
-        %sdl-palette-data-set!)
+        %sdl-palette-data-set!
+
+        allocate-sdl-palette
+        %SDL_Palette*->sdl-palette
+        %sdl-palette->SDL_Palette*
+        %->SDL_Palette*)
 
 (define-record-type sdl-palette
   (%wrap-sdl-palette pointer data)
   sdl-palette?
   (pointer %sdl-palette-pointer %sdl-palette-pointer-set!)
   (data %sdl-palette-data %sdl-palette-data-set!))
+
+(define-nonuniform-struct-constructors
+  for: ("SDL_Palette"
+        sdl-palette  sdl-palette?  %wrap-sdl-palette
+        %sdl-palette-pointer  %sdl-palette-pointer-set!
+        %sdl-palette-data     %sdl-palette-data-set!)
+  allocate: allocate-sdl-palette
+  converters: (%SDL_Palette*->sdl-palette
+               %sdl-palette->SDL_Palette*
+               %->SDL_Palette*))

@@ -115,6 +115,7 @@
   %sdl-joystick-guid->SDL_JoystickGUID*
   %SDL_JoystickGUID*->sdl-joystick-guid)
 
+
 (define-foreign-type SDL_Palette*
   (c-pointer "SDL_Palette")
   %->SDL_Palette*

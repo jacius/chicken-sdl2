@@ -35,10 +35,25 @@
         %sdl-pixel-format-pointer
         %sdl-pixel-format-pointer-set!
         %sdl-pixel-format-data
-        %sdl-pixel-format-data-set!)
+        %sdl-pixel-format-data-set!
+
+        allocate-sdl-pixel-format
+        %SDL_PixelFormat*->sdl-pixel-format
+        %sdl-pixel-format->SDL_PixelFormat*
+        %->SDL_PixelFormat*)
 
 (define-record-type sdl-pixel-format
   (%wrap-sdl-pixel-format pointer data)
   sdl-pixel-format?
   (pointer %sdl-pixel-format-pointer %sdl-pixel-format-pointer-set!)
   (data %sdl-pixel-format-data %sdl-pixel-format-data-set!))
+
+(define-nonuniform-struct-constructors
+  for: ("SDL_PixelFormat"
+        sdl-pixel-format  sdl-pixel-format?  %wrap-sdl-pixel-format
+        %sdl-pixel-format-pointer  %sdl-pixel-format-pointer-set!
+        %sdl-pixel-format-data     %sdl-pixel-format-data-set!)
+  allocate: allocate-sdl-pixel-format
+  converters: (%SDL_PixelFormat*->sdl-pixel-format
+               %sdl-pixel-format->SDL_PixelFormat*
+               %->SDL_PixelFormat*))

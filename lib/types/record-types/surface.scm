@@ -35,10 +35,25 @@
         %sdl-surface-pointer
         %sdl-surface-pointer-set!
         %sdl-surface-data
-        %sdl-surface-data-set!)
+        %sdl-surface-data-set!
+
+        allocate-sdl-surface
+        %SDL_Surface*->sdl-surface
+        %sdl-surface->SDL_Surface*
+        %->SDL_Surface*)
 
 (define-record-type sdl-surface
   (%wrap-sdl-surface pointer data)
   sdl-surface?
   (pointer %sdl-surface-pointer %sdl-surface-pointer-set!)
   (data %sdl-surface-data %sdl-surface-data-set!))
+
+(define-nonuniform-struct-constructors
+  for: ("SDL_Surface"
+        sdl-surface  sdl-surface?  %wrap-sdl-surface
+        %sdl-surface-pointer  %sdl-surface-pointer-set!
+        %sdl-surface-data     %sdl-surface-data-set!)
+  allocate: allocate-sdl-surface
+  converters: (%SDL_Surface*->sdl-surface
+               %sdl-surface->SDL_Surface*
+               %->SDL_Surface*))

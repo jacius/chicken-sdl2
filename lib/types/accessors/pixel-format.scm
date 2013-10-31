@@ -30,12 +30,7 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-(export allocate-sdl-pixel-format
-        %SDL_PixelFormat*->sdl-pixel-format
-        %sdl-pixel-format->SDL_PixelFormat*
-        %->SDL_PixelFormat*
-
-        sdl-pixel-format-format
+(export sdl-pixel-format-format
         sdl-pixel-format-palette
         sdl-pixel-format-bits-per-pixel
         sdl-pixel-format-bytes-per-pixel
@@ -54,16 +49,6 @@
         sdl-pixel-format-ashift
         sdl-pixel-format-refcount
         sdl-pixel-format-next)
-
-(define-nonuniform-struct-constructors
-  for: (SDL_PixelFormat*
-        sdl-pixel-format  sdl-pixel-format?  %wrap-sdl-pixel-format
-        %sdl-pixel-format-pointer  %sdl-pixel-format-pointer-set!
-        %sdl-pixel-format-data     %sdl-pixel-format-data-set!)
-  allocate: allocate-sdl-pixel-format
-  converters: (%SDL_PixelFormat*->sdl-pixel-format
-               %sdl-pixel-format->SDL_PixelFormat*
-               %->SDL_PixelFormat*))
 
 (define-nonuniform-struct-accessors
   type: SDL_PixelFormat*

@@ -32,11 +32,6 @@
 
 (export ;; TODO: make-sdl-palette
 
-        allocate-sdl-palette
-        %SDL_Palette*->sdl-palette
-        %sdl-palette->SDL_Palette*
-        %->SDL_Palette*
-
         %sdl-palette-ncolors %sdl-palette-ncolors-set!
         %sdl-palette-colors %sdl-palette-colors-set!
         sdl-palette-version
@@ -48,16 +43,6 @@
         )
 
 ;;; TODO: make-sdl-palette that takes a vector of sdl-color instances.
-
-(define-nonuniform-struct-constructors
-  for: (SDL_Palette*
-        sdl-palette  sdl-palette?  %wrap-sdl-palette
-        %sdl-palette-pointer  %sdl-palette-pointer-set!
-        %sdl-palette-data     %sdl-palette-data-set!)
-  allocate: allocate-sdl-palette
-  converters: (%SDL_Palette*->sdl-palette
-               %sdl-palette->SDL_Palette*
-               %->SDL_Palette*))
 
 (define-nonuniform-struct-accessors
   type: SDL_Palette*

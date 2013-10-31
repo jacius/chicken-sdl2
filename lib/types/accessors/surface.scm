@@ -30,12 +30,7 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-(export allocate-sdl-surface
-        %SDL_Surface*->sdl-surface
-        %sdl-surface->SDL_Surface*
-        %->SDL_Surface*
-
-        sdl-surface-flags
+(export sdl-surface-flags
         sdl-surface-format
         sdl-surface-w
         sdl-surface-h
@@ -45,15 +40,6 @@
         sdl-surface-locked
         %sdl-surface-lock-data)
 
-(define-nonuniform-struct-constructors
-  for: (SDL_Surface*
-        sdl-surface  sdl-surface?  %wrap-sdl-surface
-        %sdl-surface-pointer  %sdl-surface-pointer-set!
-        %sdl-surface-data     %sdl-surface-data-set!)
-  allocate: allocate-sdl-surface
-  converters: (%SDL_Surface*->sdl-surface
-               %sdl-surface->SDL_Surface*
-               %->SDL_Surface*))
 
 (define-nonuniform-struct-accessors
   type: SDL_Surface*

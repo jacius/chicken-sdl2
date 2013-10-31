@@ -37,7 +37,7 @@
 (define-syntax define-nonuniform-struct-constructors
   (syntax-rules (type: pointer: data: alloc: converters:)
     ((define-nonuniform-struct-constructors
-       for: (pointer-type
+       for: (struct-name
              record-type  predicate?  wrapper
              get-pointer  set-pointer
              get-data     set-data)
@@ -48,7 +48,7 @@
 
      (begin
        (define (allocater)
-         (wrapper #f (make-blob (foreign-type-size pointer-type))))
+         (wrapper #f (make-blob (foreign-type-size struct-name))))
 
        (define (pointer->record pointer)
          (wrapper pointer #f))
@@ -56,9 +56,10 @@
        (define (record->pointer record)
          (if (get-data record)
              ((foreign-lambda*-with-dynamic-body
-               pointer-type ((blob data))
-               ("C_return((~S)data);" pointer-type))
-              (get-data record))))
+               (c-pointer struct-name) ((blob data))
+               ("C_return((~A*)data);" struct-name))
+              (get-data record))
+             (get-pointer record)))
 
        (define (->pointer thing)
          (cond
@@ -66,13 +67,16 @@
            (record->pointer thing))
           ((pointer? thing)
            ((foreign-lambda*-with-dynamic-body
-             pointer-type ((c-pointer pointer))
-             ("C_return((~S)pointer);" pointer-type))
+             (c-pointer struct-name) ((c-pointer pointer))
+             ("C_return((~A*)pointer);" struct-name))
             thing))
           ((eq? #f thing)
            ((foreign-lambda*-with-dynamic-body
-             pointer-type ()
-             ("C_return((~S)NULL);" pointer-type))))))))))
+             (c-pointer struct-name) ()
+             ("C_return((~A*)NULL);" struct-name))))
+          (else
+           (error (format "~S cannot convert ~S to ~A pointer"
+                          '->pointer thing struct-name)))))))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
