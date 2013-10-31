@@ -42,9 +42,5 @@
            (args        (list-ref form 2))
            (body        (list-ref form 3)))
        `(foreign-lambda*
-         ,return-type
-         ,(map (lambda (arg-pair)
-                 (list (car arg-pair)
-                       (inject (cadr arg-pair))))
-               args)
+         ,return-type ,args
          ,(apply sprintf (map inject body)))))))

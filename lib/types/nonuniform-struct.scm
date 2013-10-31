@@ -98,52 +98,23 @@
     ;; getter and setter
     ((%define-nonuniform-struct-field
       struct-type (field-type field-name) get: getter-name set: setter-name)
-     (%define-nonuniform-struct-field-getter-and-setter
-      struct-type field-type field-name getter-name setter-name))
+     (begin
+       (define setter-name
+         (foreign-lambda*-with-dynamic-body
+          void ((struct-type obj) (field-type val))
+          ("obj->~A = val;" field-name)))
+       (define getter-name
+         (getter-with-setter
+          (foreign-lambda*-with-dynamic-body
+           field-type ((struct-type obj))
+           ("C_return(obj->~A);" field-name))
+          setter-name))))
     ;; only getter
     ((%define-nonuniform-struct-field
       struct-type (field-type field-name) get: getter-name)
-     (%define-nonuniform-struct-field-only-getter
-      struct-type field-type field-name getter-name))))
+     (define getter-name
+       (foreign-lambda*-with-dynamic-body
+        field-type ((struct-type obj))
+        ("C_return(obj->~A);" field-name))))))
 
 
-(define-syntax %define-nonuniform-struct-field-only-getter
-  (ir-macro-transformer
-   (lambda (form inject compare?)
-     (let ((obj 'obj)
-           (val 'val)
-           (struct-type (inject (list-ref form 1)))
-           (field-type  (inject (list-ref form 2)))
-           (field-name  (inject (list-ref form 3)))
-           (getter-name (inject (list-ref form 4))))
-       `(define ,(inject getter-name)
-          (foreign-lambda*
-           ,(inject field-type)
-           ((,(inject struct-type) ,(inject obj)))
-           ,(sprintf "C_return(~S->~S);" obj field-name)))))))
-
-
-(define-syntax %define-nonuniform-struct-field-getter-and-setter
-  (ir-macro-transformer
-   (lambda (form inject compare?)
-     (let ((obj 'obj)
-           (val 'val)
-           (struct-type (inject (list-ref form 1)))
-           (field-type  (inject (list-ref form 2)))
-           (field-name  (inject (list-ref form 3)))
-           (getter-name (inject (list-ref form 4)))
-           (setter-name (inject (list-ref form 5))))
-       `(begin
-          (define ,(inject setter-name)
-            (foreign-lambda*
-             void
-             ((,(inject struct-type) ,(inject obj))
-              (,(inject field-type) ,(inject val)))
-             ,(sprintf "~S->~S = ~S;" obj field-name val)))
-          (define ,(inject getter-name)
-            (getter-with-setter
-             (foreign-lambda*
-              ,(inject field-type)
-              ((,(inject struct-type) ,(inject obj)))
-              ,(sprintf "C_return(~S->~S);" obj field-name))
-             ,(inject setter-name))))))))
