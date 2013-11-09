@@ -44,16 +44,3 @@
        `(foreign-lambda*
          ,return-type ,args
          ,(apply sprintf (map inject body)))))))
-
-
-(define-syntax %switch
-  (syntax-rules ()
-    ((%switch (object)
-      ((clause ...)
-       body ...)
-      ...)
-     (let ((o object))
-       (cond
-        ((or (equal? o clause) ...)
-         (begin body ...))
-        ...)))))
