@@ -47,7 +47,7 @@
 
 (define (sdl-event-unwrap event)
   (let ((pointer (%sdl-event-pointer event)))
-   (case (sdl-event-type event)
+    (%switch ((sdl-event-type event))
      ((SDL_QUIT)
       (%wrap-sdl-quit-event pointer))
      ((SDL_WINDOWEVENT)
