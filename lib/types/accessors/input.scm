@@ -31,11 +31,20 @@
 
 
 (export sdl-keysym-scancode
+        %sdl-keysym-scancode-set!
         sdl-keysym-sym
-        sdl-keysym-mod)
+        %sdl-keysym-sym-set!
+        sdl-keysym-mod
+        %sdl-keysym-mod-set!)
 
 (define-nonuniform-struct-accessors
   type: SDL_Keysym*
-  fields: (((SDL_Scancode scancode) get: sdl-keysym-scancode)
-           ((SDL_Keycode sym)       get: sdl-keysym-sym)
-           ((Uint16 mod)            get: sdl-keysym-mod)))
+  fields: (((SDL_Scancode scancode)
+            get: sdl-keysym-scancode
+            set: %sdl-keysym-scancode-set!)
+           ((SDL_Keycode sym)
+            get: sdl-keysym-sym
+            set: %sdl-keysym-sym-set!)
+           ((Uint16 mod)
+            get: sdl-keysym-mod
+            set: %sdl-keysym-mod-set!)))

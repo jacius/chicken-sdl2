@@ -96,9 +96,27 @@
 (export sdl-keysym?
         %wrap-sdl-keysym
         %sdl-keysym-pointer
-        %sdl-keysym-pointer-set!)
+        %sdl-keysym-pointer-set!
+        %sdl-keysym-data
+        %sdl-keysym-data-set!
+
+        %allocate-sdl-keysym
+        %SDL_Keysym*->sdl-keysym
+        %sdl-keysym->SDL_Keysym*
+        %->SDL_Keysym*)
 
 (define-record-type sdl-keysym
-  (%wrap-sdl-keysym pointer)
+  (%wrap-sdl-keysym pointer data)
   sdl-keysym?
-  (pointer %sdl-keysym-pointer %sdl-keysym-pointer-set!))
+  (pointer %sdl-keysym-pointer %sdl-keysym-pointer-set!)
+  (data %sdl-keysym-data %sdl-keysym-data-set!))
+
+(define-nonuniform-struct-constructors
+  for: ("SDL_Keysym"
+        sdl-keysym  sdl-keysym?  %wrap-sdl-keysym
+        %sdl-keysym-pointer  %sdl-keysym-pointer-set!
+        %sdl-keysym-data     %sdl-keysym-data-set!)
+  allocate: %allocate-sdl-keysym
+  converters: (%SDL_Keysym*->sdl-keysym
+               %sdl-keysym->SDL_Keysym*
+               %->SDL_Keysym*))

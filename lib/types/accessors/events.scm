@@ -65,8 +65,8 @@
         sdl-keyboard-event-state-set!
         sdl-keyboard-event-repeat
         sdl-keyboard-event-repeat-set!
-        ;; sdl-keyboard-event-keysym
-        ;; sdl-keyboard-event-keysym-set!
+        sdl-keyboard-event-keysym
+        sdl-keyboard-event-keysym-set!
 
         make-sdl-text-editing-event
         sdl-text-editing-event?
@@ -106,11 +106,30 @@
             guard: (Uint8-guard "sdl-keyboard-event field repeat")
             get: sdl-keyboard-event-repeat
             set: sdl-keyboard-event-repeat-set!)
-           ;; ((SDL_Keysym* keysym)
+           ;; ((SDL_Keysym keysym)
            ;;  guard: noop-guard
            ;;  get: sdl-keyboard-event-keysym
            ;;  set: sdl-keyboard-event-keysym-set!)
            ))
+
+(define (sdl-keyboard-event-keysym event)
+  (let ((keysym (%allocate-sdl-keysym)))
+    ((foreign-lambda*
+      void ((SDL_Event* ev) (blob data))
+      "*((SDL_Keysym*)data) = ((SDL_KeyboardEvent*)ev)->keysym;")
+     event (%sdl-keysym-data keysym))
+    keysym))
+
+(define (sdl-keyboard-event-keysym-set! event keysym)
+  (if (%sdl-keysym-data keysym)
+      ((foreign-lambda*
+        void ((SDL_Event* ev) (blob data))
+        "((SDL_KeyboardEvent*)ev)->keysym = *((SDL_Keysym*)data);")
+       event (%sdl-keysym-data keysym))
+      ((foreign-lambda*
+        void ((SDL_Event* ev) ((c-pointer "SDL_Keysym") ptr))
+        "((SDL_KeyboardEvent*)ev)->keysym = *ptr;")
+       event (%sdl-keysym-pointer keysym))))
 
 ;; #define SDL_TEXTEDITINGEVENT_TEXT_SIZE (32)
 

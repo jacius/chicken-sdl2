@@ -197,4 +197,5 @@
 
 (define-foreign-type SDL_Keysym*
   (c-pointer "SDL_Keysym")
-  %sdl-keysym-pointer %wrap-sdl-keysym)
+  %->SDL_Keysym*
+  %SDL_Keysym*->sdl-keysym)
