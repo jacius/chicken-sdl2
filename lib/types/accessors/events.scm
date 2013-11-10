@@ -30,7 +30,8 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-(export sdl-event-type
+(export sdl-event?
+        sdl-event-type
         sdl-event-timestamp
         sdl-event-unwrap)
 
@@ -44,6 +45,32 @@
   args: ((SDL_Event* event))
   body: "C_return(((SDL_CommonEvent*)event)->timestamp);")
 
+(define (sdl-event? event)
+  (any (lambda (pred?) (pred? event))
+       (list %sdl-event?
+             sdl-keyboard-event?
+             sdl-text-editing-event?
+             sdl-text-input-event?
+             sdl-mouse-motion-event?
+             sdl-mouse-button-event?
+             sdl-mouse-wheel-event?
+             sdl-joy-axis-event?
+             sdl-joy-ball-event?
+             sdl-joy-button-event?
+             sdl-joy-hat-event?
+             ;; sdl-joy-device-event?
+             ;; sdl-controller-axis-event?
+             ;; sdl-controller-button-event?
+             ;; sdl-controller-device-event?
+             ;; sdl-touch-finger-event?
+             ;; sdl-multi-gesture-event?
+             ;; sdl-dollar-gesture-event?
+             sdl-window-event?
+             sdl-drop-event?
+             sdl-quit-event?
+             sdl-os-event?
+             sdl-user-event?
+             sdl-sys-wm-event?)))
 
 (define (sdl-event-unwrap event)
   (let ((pointer (%sdl-event-pointer event)))

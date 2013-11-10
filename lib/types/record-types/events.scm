@@ -48,9 +48,10 @@
   (pointer %sdl-event-pointer %sdl-event-pointer-set!)
   (data %sdl-event-data %sdl-event-data-set!))
 
+;;; NOTE: sdl-event? is defined in lib/types/accessor/events.scm
 (define-nonuniform-struct-constructors
   for: ("SDL_Event"
-        sdl-event  %sdl-event?  %wrap-sdl-event
+        sdl-event  sdl-event?  %wrap-sdl-event
         %sdl-event-pointer  %sdl-event-pointer-set!
         %sdl-event-data     %sdl-event-data-set!)
   allocate: allocate-sdl-event
