@@ -32,17 +32,33 @@
 
 (define-syntax define-enum
   (syntax-rules ()
-    ((define-enum enum-name value-name ...)
+    ;; with string converter
+    ((define-enum (enum-type enum-name) value-name ...)
      (begin
-       (define value-name (foreign-value value-name enum-name))
+       (define (enum-name value)
+         (select value
+           ((value-name) 'value-name)
+           ...))
+       (define value-name (foreign-value value-name enum-type))
+       ...))
+    ;; without string converter
+    ((define-enum enum-type value-name ...)
+     (begin
+       (define value-name (foreign-value value-name enum-type))
        ...))))
 
 (define-syntax define-and-export-enum
   (syntax-rules ()
-    ((define-and-export-enum enum-name value-name ...)
+    ;; with string converter
+    ((define-and-export-enum (enum-type enum-name) value-name ...)
+     (begin
+       (export enum-name value-name ...)
+       (define-enum (enum-type enum-name) value-name ...)))
+    ;; without string converter
+    ((define-and-export-enum enum-type value-name ...)
      (begin
        (export value-name ...)
-       (define-enum enum-name value-name ...)))))
+       (define-enum enum-type value-name ...)))))
 
 
 (include "lib/types/enums/general.scm")

@@ -30,7 +30,7 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-(define-and-export-enum SDL_EventType
+(define-and-export-enum (SDL_EventType sdl-event-type-name)
   SDL_FIRSTEVENT
   SDL_QUIT
   SDL_APP_TERMINATING

@@ -30,7 +30,7 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-(define-and-export-enum SDL_Scancode
+(define-and-export-enum (SDL_Scancode sdl-scancode-name)
   SDL_SCANCODE_UNKNOWN
 
   SDL_SCANCODE_A

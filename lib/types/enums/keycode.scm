@@ -33,7 +33,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; KEYCODE
 
-(define-and-export-enum SDL_Keycode
+(define-and-export-enum (SDL_Keycode sdl-keycode-name)
   SDLK_UNKNOWN
 
   SDLK_RETURN
