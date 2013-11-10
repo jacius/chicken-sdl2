@@ -3,11 +3,11 @@
 
 Bindings to [[http://libsdl.org/][SDL]] 2 (Simple DirectMedia Layer 2).
 
-- Version :: 0.1
-- Date :: N/A
-- Author :: John Croisant <john+chicken@croisant.net>
-- Project :: [[http://github.com/jacius/chicken-sdl2/]]
-- License :: [[http://opensource.org/licenses/BSD-2-Clause][BSD 2-Clause]]
+- Version: 0.1
+- Date:    (Not yet released)
+- Author:  John Croisant <john+chicken@croisant.net>
+- Project: [[http://github.com/jacius/chicken-sdl2/]]
+- License: [[http://opensource.org/licenses/BSD-2-Clause][BSD 2-Clause]]
 
 * Installation and Usage
 
@@ -20,6 +20,14 @@ project's directory.
 
 (Eventually chicken-sdl2 will be submitted to the egg repository so
 you can install with =chicken-install sdl2=.)
+
+After you have installed chicken-sdl2, you can try compiling and
+running the demo applications in the "demos" directory. E.g.:
+
+#+BEGIN_EXAMPLE
+csc demos/raw/basics.scm
+demos/raw/basics
+#+END_EXAMPLE
 
 * Contributing
 
