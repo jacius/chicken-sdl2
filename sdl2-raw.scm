@@ -37,6 +37,7 @@
 (module sdl2-raw ()
 
 (import scheme chicken foreign)
+(use srfi-1)
 (require-extension sdl2-types)
 
 (foreign-declare "#include \"SDL.h\"")

@@ -288,7 +288,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; KEYMOD
 
-(define-and-export-enum SDL_Keymod
+(define-and-export-enum (SDL_Keymod sdl-keymod-name)
   KMOD_NONE
 
   KMOD_LSHIFT

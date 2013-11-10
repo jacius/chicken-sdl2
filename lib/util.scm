@@ -111,3 +111,18 @@
        `(foreign-lambda*
          ,return-type ,args
          ,(apply sprintf (map strip-syntax body)))))))
+
+;;; Compare the value to a list of masks, and return a list of the
+;;; matching masks. Example:
+;;;
+;;;   (masks->list (bitwise-ior KMOD_LSHIFT KMOD_RCTRL)
+;;;                (list KMOD_LSHIFT
+;;;                      KMOD_RSHIFT
+;;;                      KMOD_LCTRL
+;;;                      KMOD_RCTRL
+;;;                      ...))
+;;;   ;; => (list KMOD_LSHIFT KMOD_RCTRL)
+;;;
+(define (masks->list value masks)
+  (filter (lambda (mask) (> (bitwise-and value mask) 0))
+          masks))

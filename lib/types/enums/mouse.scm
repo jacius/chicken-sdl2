@@ -31,7 +31,7 @@
 
 
 ;;; Technically not an enum, but close enough.
-(define-and-export-enum SDL_MouseButton
+(define-and-export-enum (SDL_MouseButton sdl-mouse-button-name)
   SDL_BUTTON_LEFT
   SDL_BUTTON_MIDDLE
   SDL_BUTTON_RIGHT
@@ -39,7 +39,7 @@
   SDL_BUTTON_X2)
 
 ;;; Technically not an enum, but close enough.
-(define-and-export-enum SDL_MouseButtonMask
+(define-and-export-enum (SDL_MouseButtonMask sdl-mouse-button-mask-name)
   SDL_BUTTON_LMASK
   SDL_BUTTON_MMASK
   SDL_BUTTON_RMASK
@@ -60,3 +60,23 @@
   SDL_SYSTEM_CURSOR_NO
   SDL_SYSTEM_CURSOR_HAND
   SDL_NUM_SYSTEM_CURSORS)
+
+
+(export sdl-mouse-masks->list
+        sdl-mouse-mask->button)
+
+(define (sdl-mouse-masks->list state)
+  (masks->list state
+               (list SDL_BUTTON_LMASK
+                     SDL_BUTTON_MMASK
+                     SDL_BUTTON_RMASK
+                     SDL_BUTTON_X1MASK
+                     SDL_BUTTON_X2MASK)))
+
+(define (sdl-mouse-mask->button mask)
+  (select mask
+    ((SDL_BUTTON_LMASK)  SDL_BUTTON_LEFT)
+    ((SDL_BUTTON_MMASK)  SDL_BUTTON_MIDDLE)
+    ((SDL_BUTTON_RMASK)  SDL_BUTTON_RIGHT)
+    ((SDL_BUTTON_X1MASK) SDL_BUTTON_X1)
+    ((SDL_BUTTON_X2MASK) SDL_BUTTON_X2)))

@@ -249,7 +249,9 @@
           SDL_MOUSEBUTTONUP)
   make: make-sdl-mouse-button-event
   predicate: sdl-mouse-button-event?
-  print-fields: ((button sdl-mouse-button-event-button)
+  print-fields: ((button (lambda (e)
+                           (sdl-mouse-button-name
+                            (sdl-mouse-button-event-button e))))
                  (x sdl-mouse-button-event-x)
                  (y sdl-mouse-button-event-y))
   fields: (((Uint32 windowID)
@@ -281,7 +283,10 @@
   types: (SDL_MOUSEMOTION)
   make: make-sdl-mouse-motion-event
   predicate: sdl-mouse-motion-event?
-  print-fields: ((state sdl-mouse-motion-event-state)
+  print-fields: ((state (lambda (e)
+                          (map sdl-mouse-button-mask-name
+                               (sdl-mouse-masks->list
+                                (sdl-mouse-motion-event-state e)))))
                  (x sdl-mouse-motion-event-x)
                  (y sdl-mouse-motion-event-y)
                  (xrel sdl-mouse-motion-event-xrel)

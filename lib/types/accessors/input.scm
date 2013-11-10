@@ -35,7 +35,8 @@
         sdl-keysym-sym
         %sdl-keysym-sym-set!
         sdl-keysym-mod
-        %sdl-keysym-mod-set!)
+        %sdl-keysym-mod-set!
+        sdl-keysym-mod->list)
 
 (define-nonuniform-struct-accessors
   type: SDL_Keysym*
@@ -49,10 +50,18 @@
             get: sdl-keysym-mod
             set: %sdl-keysym-mod-set!)))
 
+(define (sdl-keysym-mod->list keysym)
+  (masks->list (sdl-keysym-mod keysym)
+               (list KMOD_SHIFT  KMOD_LSHIFT  KMOD_RSHIFT
+                     KMOD_CTRL   KMOD_LCTRL   KMOD_RCTRL
+                     KMOD_ALT    KMOD_LALT    KMOD_RALT
+                     KMOD_GUI    KMOD_LGUI    KMOD_RGUI
+                     KMOD_NUM    KMOD_CAPS    KMOD_MODE)))
+
 (define-record-printer (sdl-keysym keysym out)
   (%displayify out
                "#<sdl-keysym "
                "scancode: " (sdl-scancode-name (sdl-keysym-scancode keysym))
                " sym: " (sdl-keycode-name (sdl-keysym-sym keysym))
-               " mod: " (sdl-keysym-mod keysym)
+               " mod: " (map sdl-keymod-name (sdl-keysym-mod->list keysym))
                ">"))
