@@ -12,7 +12,6 @@
         "sdl2-types.scm"
 
         "lib/util.scm"
-        "lib/function-binding.scm"
 
         "lib/raw/audio.scm"
         "lib/raw/events.scm"

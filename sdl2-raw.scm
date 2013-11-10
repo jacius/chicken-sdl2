@@ -43,7 +43,6 @@
 (foreign-declare "#include \"SDL_syswm.h\"")
 
 (include "lib/util.scm")
-(include "lib/function-binding.scm")
 
 ;;; Foreign type definitions aren't exported from modules, so we need
 ;;; to define the same foreign types in each module that uses them.

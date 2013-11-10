@@ -39,7 +39,6 @@
 (foreign-declare "#include \"SDL_syswm.h\"")
 
 (include "lib/util.scm")
-(include "lib/function-binding.scm")
 
 (include "lib/types/guards.scm")
 (include "lib/types/nonuniform-struct.scm")
