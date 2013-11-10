@@ -30,10 +30,12 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-(export int-guard
+(export noop-guard
+        int-guard
         Uint-guard  Uint8-guard  Uint16-guard  Uint32-guard  Uint64-guard
         Sint-guard  Sint8-guard  Sint16-guard  Sint32-guard  Sint64-guard)
 
+(define (noop-guard value) value)
 
 (define (int-guard description #!key min max)
   (cond

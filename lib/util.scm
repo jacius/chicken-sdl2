@@ -43,4 +43,4 @@
            (body        (list-ref form 3)))
        `(foreign-lambda*
          ,return-type ,args
-         ,(apply sprintf (map inject body)))))))
+         ,(apply sprintf (map strip-syntax body)))))))

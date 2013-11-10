@@ -183,84 +183,11 @@
   %->SDL_Event*
   %SDL_Event*->sdl-event)
 
-(define-foreign-type SDL_KeyboardEvent*
-  (c-pointer "SDL_KeyboardEvent")
-  %sdl-keyboard-event-pointer %wrap-sdl-keyboard-event)
-
-(define-foreign-type SDL_TextEditingEvent*
-  (c-pointer "SDL_TextEditingEvent")
-  %sdl-text-editing-event-pointer %wrap-sdl-text-editing-event)
-
-(define-foreign-type SDL_TextInputEvent*
-  (c-pointer "SDL_TextInputEvent")
-  %sdl-text-input-event-pointer %wrap-sdl-text-input-event)
-
-(define-foreign-type SDL_MouseMotionEvent*
-  (c-pointer "SDL_MouseMotionEvent")
-  %sdl-mouse-motion-event-pointer %wrap-sdl-mouse-motion-event)
-
-(define-foreign-type SDL_MouseButtonEvent*
-  (c-pointer "SDL_MouseButtonEvent")
-  %sdl-mouse-button-event-pointer %wrap-sdl-mouse-button-event)
-
-(define-foreign-type SDL_MouseWheelEvent*
-  (c-pointer "SDL_MouseWheelEvent")
-  %sdl-mouse-wheel-event-pointer %wrap-sdl-mouse-wheel-event)
-
-(define-foreign-type SDL_JoyAxisEvent*
-  (c-pointer "SDL_JoyAxisEvent")
-  %sdl-joy-axis-event-pointer %wrap-sdl-joy-axis-event)
-
-(define-foreign-type SDL_JoyBallEvent*
-  (c-pointer "SDL_JoyBallEvent")
-  %sdl-joy-ball-event-pointer %wrap-sdl-joy-ball-event)
-
-(define-foreign-type SDL_JoyButtonEvent*
-  (c-pointer "SDL_JoyButtonEvent")
-  %sdl-joy-button-event-pointer %wrap-sdl-joy-button-event)
-
-(define-foreign-type SDL_JoyHatEvent*
-  (c-pointer "SDL_JoyHatEvent")
-  %sdl-joy-hat-event-pointer %wrap-sdl-joy-hat-event)
-
-;; (define-foreign-type SDL_MultiGestureEvent*
-;;   (c-pointer "SDL_MultiGestureEvent")
-;;   %sdl-multi-gesture-event-pointer %wrap-sdl-multi-gesture-event)
-
-;; (define-foreign-type SDL_DollarGestureEvent*
-;;   (c-pointer "SDL_DollarGestureEvent")
-;;   %sdl-dollar-gesture-event-pointer %wrap-sdl-dollar-gesture-event)
-
-;; (define-foreign-type SDL_TouchFingerEvent*
-;;   (c-pointer "SDL_TouchFingerEvent")
-;;   %sdl-touch-finger-event-pointer %wrap-sdl-touch-finger-event)
-
-(define-foreign-type SDL_WindowEvent*
-  (c-pointer "SDL_WindowEvent")
-  %sdl-window-event-pointer %wrap-sdl-window-event)
-
-(define-foreign-type SDL_DropEvent*
-  (c-pointer "SDL_DropEvent")
-  %sdl-drop-event-pointer %wrap-sdl-drop-event)
-
-(define-foreign-type SDL_QuitEvent*
-  (c-pointer "SDL_QuitEvent")
-  %sdl-quit-event-pointer %wrap-sdl-quit-event)
-
-(define-foreign-type SDL_UserEvent*
-  (c-pointer "SDL_UserEvent")
-  %sdl-user-event-pointer %wrap-sdl-user-event)
-
-(define-foreign-type SDL_SysWMEvent*
-  (c-pointer "SDL_SysWMEvent")
-  %sdl-sys-wm-event-pointer %wrap-sdl-sys-wm-event)
-
-
-;;; EVENT-RELATED TYPES
-
 (define-foreign-type SDL_JoystickID Sint32)
-(define-foreign-type SDL_TouchID Sint32)
-(define-foreign-type SDL_FingerID Sint32)
+
+(define-foreign-type SDL_FingerID Sint64)
+(define-foreign-type SDL_GestureID Sint64)
+(define-foreign-type SDL_TouchID Sint64)
 
 (define-foreign-type SDL_EventFilter
   (function int (c-pointer SDL_Event*)))

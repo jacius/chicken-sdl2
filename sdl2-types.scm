@@ -44,6 +44,7 @@
 (include "lib/types/guards.scm")
 (include "lib/types/nonuniform-struct.scm")
 (include "lib/types/uniform-struct.scm")
+(include "lib/types/event-helpers.scm")
 
 ;;; NOTE: The ordering of these includes is important!
 
