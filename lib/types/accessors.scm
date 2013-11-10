@@ -30,59 +30,29 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; COLOR
+(include "lib/types/accessors/audio.scm")
 
 (include "lib/types/accessors/color.scm")
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; EVENTS / INPUT
 
 (include "lib/types/accessors/input.scm")
 (include "lib/types/accessors/events.scm")
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; DISPLAY-MODE
-
 (include "lib/types/accessors/display-mode.scm")
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; GL-CONTEXT
-;;; is an opaque pointer, so there's nothing else to define here.
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; PALETTE
+;;; GL-CONTEXT is an opaque pointer, so there's nothing else to define here.
 
 (include "lib/types/accessors/palette.scm")
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; PIXEL-FORMAT
-
 (include "lib/types/accessors/pixel-format.scm")
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; RECT / POINT
 
 (include "lib/types/accessors/rect.scm")
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; SURFACE
-
 (include "lib/types/accessors/surface.scm")
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; SYS-WM-INFO
-;;; is weird and I don't feel like dealing with it.
+;;; SYS-WM-INFO is weird and I don't feel like dealing with it.
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; TEXTURE
-;;; is an opaque pointer, so there's nothing else to define here.
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; VERSION
+;;; TEXTURE is an opaque pointer, so there's nothing else to define here.
 
 (include "lib/types/accessors/version.scm")
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; WINDOW
-;;; is an opaque pointer, so there's nothing else to define here.
+;;; WINDOW is an opaque pointer, so there's nothing else to define here.

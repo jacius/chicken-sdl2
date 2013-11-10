@@ -59,21 +59,30 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ENUMS
 
+(define-foreign-type SDL_AudioDeviceID Uint32)
+(define-foreign-type SDL_AudioFormat Uint16)
+(define-foreign-type SDL_AudioFormatEnum int)
+(define-foreign-type SDL_AudioStatus int)
+
 (define-foreign-type SDL_BlendMode int)
 (define-foreign-type SDL_EventType int)
-(define-foreign-type SDL_eventaction int)
+(define-foreign-type SDL_FingerID Sint64)
 (define-foreign-type SDL_GLattr int)
-(define-foreign-type SDL_GLprofile int)
 (define-foreign-type SDL_GLcontextFlag int)
+(define-foreign-type SDL_GLprofile int)
+(define-foreign-type SDL_GestureID Sint64)
 (define-foreign-type SDL_JoystickHatPosition int)
+(define-foreign-type SDL_JoystickID Sint32)
 (define-foreign-type SDL_Keycode int)
 (define-foreign-type SDL_Keymod int)
 (define-foreign-type SDL_MouseButton int)
 (define-foreign-type SDL_MouseButtonMask int)
-(define-foreign-type SDL_SystemCursor int)
 (define-foreign-type SDL_Scancode int)
-(define-foreign-type SDL_WindowFlags int)
+(define-foreign-type SDL_SystemCursor int)
+(define-foreign-type SDL_TouchID Sint64)
 (define-foreign-type SDL_WindowEventID int)
+(define-foreign-type SDL_WindowFlags int)
+(define-foreign-type SDL_eventaction int)
 
 (define-foreign-type SDL_PixelFormatEnum int)
 (define-foreign-type SDL_PixelTypeEnum int)
@@ -85,6 +94,25 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; STRUCTS
+
+
+(define-foreign-type SDL_AudioCVT*
+  (c-pointer "SDL_AudioCVT")
+  %sdl-audio-cvt-pointer %wrap-sdl-audio-cvt)
+
+(define-foreign-type SDL_AudioSpec*
+  (c-pointer "SDL_AudioSpec")
+  %sdl-audio-spec-pointer %wrap-sdl-audio-spec)
+
+(define-foreign-type SDL_AudioCallback
+  (function void ((c-pointer userdata)
+                  (Uint8* stream)
+                  (int len))))
+
+(define-foreign-type SDL_AudioFilter
+  (function void ((SDL_AudioCVT* cvt)
+                  (SDL_AudioFormat format))))
+
 
 (define-foreign-type SDL_Color*
   (c-pointer "SDL_Color")
@@ -182,12 +210,6 @@
   (c-pointer "SDL_Event")
   %->SDL_Event*
   %SDL_Event*->sdl-event)
-
-(define-foreign-type SDL_JoystickID Sint32)
-
-(define-foreign-type SDL_FingerID Sint64)
-(define-foreign-type SDL_GestureID Sint64)
-(define-foreign-type SDL_TouchID Sint64)
 
 (define-foreign-type SDL_EventFilter
   (function int (c-pointer SDL_Event*)))

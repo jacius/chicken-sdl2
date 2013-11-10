@@ -50,6 +50,7 @@
 (include "lib/types/foreign-types.scm")
 
 (include "lib/raw/general.scm")
+(include "lib/raw/audio.scm")
 (include "lib/raw/events.scm")
 (include "lib/raw/gl.scm")
 (include "lib/raw/joystick.scm")

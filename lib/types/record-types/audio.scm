@@ -30,29 +30,22 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-(include "lib/types/record-types/audio.scm")
+(export sdl-audio-cvt?
+        %wrap-sdl-audio-cvt
+        %sdl-audio-cvt-pointer
+        %sdl-audio-cvt-pointer-set!
 
-(include "lib/types/record-types/color.scm")
+        sdl-audio-spec?
+        %wrap-sdl-audio-spec
+        %sdl-audio-spec-pointer
+        %sdl-audio-spec-pointer-set!)
 
-(include "lib/types/record-types/display-mode.scm")
+(define-record-type sdl-audio-cvt
+  (%wrap-sdl-audio-cvt pointer)
+  sdl-audio-cvt?
+  (pointer %sdl-audio-cvt-pointer %sdl-audio-cvt-pointer-set!))
 
-(include "lib/types/record-types/input.scm")
-(include "lib/types/record-types/events.scm")
-
-(include "lib/types/record-types/gl-context.scm")
-
-(include "lib/types/record-types/palette.scm")
-
-(include "lib/types/record-types/pixel-format.scm")
-
-(include "lib/types/record-types/rect.scm")
-
-(include "lib/types/record-types/surface.scm")
-
-(include "lib/types/record-types/sys-wm-info.scm")
-
-(include "lib/types/record-types/texture.scm")
-
-(include "lib/types/record-types/version.scm")
-
-(include "lib/types/record-types/window.scm")
+(define-record-type sdl-audio-spec
+  (%wrap-sdl-audio-spec pointer)
+  sdl-audio-spec?
+  (pointer %sdl-audio-spec-pointer %sdl-audio-spec-pointer-set!))

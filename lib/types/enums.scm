@@ -46,6 +46,7 @@
 
 
 (include "lib/types/enums/general.scm")
+(include "lib/types/enums/audio.scm")
 (include "lib/types/enums/events.scm")
 (include "lib/types/enums/gl.scm")
 (include "lib/types/enums/joystick.scm")
