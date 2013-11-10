@@ -48,3 +48,11 @@
            ((Uint16 mod)
             get: sdl-keysym-mod
             set: %sdl-keysym-mod-set!)))
+
+(define-record-printer (sdl-keysym keysym out)
+  (%displayify out
+               "#<sdl-keysym "
+               "scancode: " (sdl-scancode-name (sdl-keysym-scancode keysym))
+               " sym: " (sdl-keycode-name (sdl-keysym-sym keysym))
+               " mod: " (sdl-keysym-mod keysym)
+               ">"))

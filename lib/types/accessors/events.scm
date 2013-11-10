@@ -55,6 +55,32 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; RECORD PRINTER
+
+(define (%sdl-event-record-printer event out fields)
+  (%displayify out "#<sdl-event "
+               (sdl-event-type-name (sdl-event-type event)))
+  (for-each (lambda (field)
+              (%displayify out " " (car field) ": " (cadr field)))
+            fields)
+  (%displayify out ">"))
+
+(define (%sdl-event-default-record-printer event out)
+  (%sdl-event-record-printer event out '()))
+
+(define %sdl-event-record-printers
+  (make-hash-table
+   test: = hash: number-hash size: 40))
+
+(define-record-printer (sdl-event event out)
+  ((hash-table-ref/default
+    %sdl-event-record-printers
+    (sdl-event-type event)
+    %sdl-event-default-record-printer)
+   event out))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; KEYBOARD / TEXT
 
 (export make-sdl-keyboard-event
@@ -94,6 +120,7 @@
           SDL_KEYUP)
   make: make-sdl-keyboard-event
   predicate: sdl-keyboard-event?
+  print-fields: ((keysym sdl-keyboard-event-keysym))
   fields: (((Uint32 windowID)
             guard: (Uint32-guard "sdl-keyboard-event field windowID")
             get: sdl-keyboard-event-window-id
@@ -222,6 +249,9 @@
           SDL_MOUSEBUTTONUP)
   make: make-sdl-mouse-button-event
   predicate: sdl-mouse-button-event?
+  print-fields: ((button sdl-mouse-button-event-button)
+                 (x sdl-mouse-button-event-x)
+                 (y sdl-mouse-button-event-y))
   fields: (((Uint32 windowID)
             guard: (Uint32-guard "sdl-mouse-button-event field windowID")
             get: sdl-mouse-button-event-window-id
@@ -251,6 +281,11 @@
   types: (SDL_MOUSEMOTION)
   make: make-sdl-mouse-motion-event
   predicate: sdl-mouse-motion-event?
+  print-fields: ((state sdl-mouse-motion-event-state)
+                 (x sdl-mouse-motion-event-x)
+                 (y sdl-mouse-motion-event-y)
+                 (xrel sdl-mouse-motion-event-xrel)
+                 (yrel sdl-mouse-motion-event-yrel))
   fields: (((Uint32 windowID)
             guard: (Uint32-guard "sdl-mouse-motion-event field windowID")
             get: sdl-mouse-motion-event-window-id
@@ -284,6 +319,8 @@
   types: (SDL_MOUSEWHEEL)
   make: make-sdl-mouse-wheel-event
   predicate: sdl-mouse-wheel-event?
+  print-fields: ((x sdl-mouse-wheel-event-x)
+                 (y sdl-mouse-wheel-event-y))
   fields: (((Uint32 windowID)
             guard: (Uint32-guard "sdl-mouse-wheel-event field windowID")
             get: sdl-mouse-wheel-event-window-id
@@ -352,6 +389,9 @@
   types: (SDL_JOYAXISMOTION)
   make: make-sdl-joy-axis-event
   predicate: sdl-joy-axis-event?
+  print-fields: ((which sdl-joy-axis-event-which)
+                 (axis sdl-joy-axis-event-axis)
+                 (value sdl-joy-axis-event-value))
   fields: (((SDL_JoystickID which)
             guard: noop-guard
             get: sdl-joy-axis-event-which
@@ -369,6 +409,10 @@
   types: (SDL_JOYBALLMOTION)
   make: make-sdl-joy-ball-event
   predicate: sdl-joy-ball-event?
+  print-fields: ((which sdl-joy-ball-event-which)
+                 (ball sdl-joy-ball-event-ball)
+                 (xrel sdl-joy-ball-event-xrel)
+                 (yrel sdl-joy-ball-event-yrel))
   fields: (((SDL_JoystickID which)
             guard: noop-guard
             get: sdl-joy-ball-event-which
@@ -391,6 +435,9 @@
           SDL_JOYBUTTONUP)
   make: make-sdl-joy-button-event
   predicate: sdl-joy-button-event?
+  print-fields: ((which sdl-joy-button-event-which)
+                 (button sdl-joy-button-event-button)
+                 (state sdl-joy-button-event-state))
   fields: (((SDL_JoystickID which)
             guard: noop-guard
             get: sdl-joy-button-event-which
@@ -408,6 +455,9 @@
   types: (SDL_JOYHATMOTION)
   make: make-sdl-joy-hat-event
   predicate: sdl-joy-hat-event?
+  print-fields: ((which sdl-joy-hat-event-which)
+                 (hat sdl-joy-hat-event-hat)
+                 (value sdl-joy-hat-event-value))
   fields: (((SDL_JoystickID which)
             guard: noop-guard
             get: sdl-joy-hat-event-which
@@ -426,6 +476,7 @@
           SDL_JOYDEVICEREMOVED)
   make: make-sdl-joy-device-event
   predicate: sdl-joy-device-event?
+  print-fields: ((which sdl-joy-device-event-which))
   fields: (((Sint32 which)
             guard: (Sint32-guard "sdl-joy-device-event field which")
             get: sdl-joy-device-event-which
@@ -462,6 +513,9 @@
   types: (SDL_CONTROLLERAXISMOTION)
   make: make-sdl-controller-axis-event
   predicate: sdl-controller-axis-event?
+  print-fields: ((which sdl-controller-axis-event-which)
+                 (axis sdl-controller-axis-event-axis)
+                 (value sdl-controller-axis-event-value))
   fields: (((SDL_JoystickID which)
             guard: noop-guard
             get: sdl-controller-axis-event-which
@@ -480,6 +534,9 @@
           SDL_CONTROLLERBUTTONUP)
   make: make-sdl-controller-button-event
   predicate: sdl-controller-button-event?
+  print-fields: ((which sdl-controller-button-event-which)
+                 (button sdl-controller-button-event-button)
+                 (state sdl-controller-button-event-state))
   fields: (((SDL_JoystickID which)
             guard: noop-guard
             get: sdl-controller-button-event-which
@@ -499,6 +556,7 @@
           SDL_CONTROLLERDEVICEREMAPPED)
   make: make-sdl-controller-device-event
   predicate: sdl-controller-device-event?
+  print-fields: ((which sdl-joy-device-event-which))
   fields: (((Sint32 which)
             guard: (Sint32-guard "sdl-controller-device-event field which")
             get: sdl-controller-device-event-which
@@ -561,6 +619,13 @@
           SDL_FINGERMOTION)
   make: make-sdl-touch-finger-event
   predicate: sdl-touch-finger-event?
+  print-fields: ((touch-id sdl-touch-finger-event-touch-id)
+                 (finger-id sdl-touch-finger-event-finger-id)
+                 (x sdl-touch-finger-event-x)
+                 (y sdl-touch-finger-event-y)
+                 (dx sdl-touch-finger-event-dx)
+                 (dy sdl-touch-finger-event-dy)
+                 (pressure sdl-touch-finger-event-pressure))
   fields: (((SDL_TouchID touchId)
             guard: noop-guard
             get: sdl-touch-finger-event-touch-id
@@ -594,6 +659,12 @@
   types: (SDL_MULTIGESTURE)
   make: make-sdl-multi-gesture-event
   predicate: sdl-multi-gesture-event?
+  print-fields: ((touch-id sdl-multi-gesture-event-touch-id)
+                 (dtheta sdl-multi-gesture-event-dtheta)
+                 (ddist sdl-multi-gesture-event-ddist)
+                 (x sdl-multi-gesture-event-x)
+                 (y sdl-multi-gesture-event-y)
+                 (num-fingers sdl-multi-gesture-event-num-fingers))
   fields: (((SDL_TouchID touchId)
             guard: noop-guard
             get: sdl-multi-gesture-event-touch-id
@@ -624,6 +695,12 @@
           SDL_DOLLARRECORD)
   make: make-sdl-dollar-gesture-event
   predicate: sdl-dollar-gesture-event?
+  print-fields: ((touch-id sdl-dollar-gesture-event-touch-id)
+                 (gesture-id sdl-dollar-gesture-event-gesture-id)
+                 (num-fingers sdl-dollar-gesture-event-num-fingers)
+                 (error sdl-dollar-gesture-event-error)
+                 (x sdl-dollar-gesture-event-x)
+                 (y sdl-dollar-gesture-event-y))
   fields: (((SDL_TouchID touchId)
             guard: noop-guard
             get: sdl-dollar-gesture-event-touch-id
@@ -715,6 +792,10 @@
   types: (SDL_WINDOWEVENT)
   make: make-sdl-window-event
   predicate: sdl-window-event?
+  print-fields: ((window-id sdl-window-event-window-id)
+                 (event sdl-window-event-event)
+                 (data1 sdl-window-event-data1)
+                 (data2 sdl-window-event-data2))
   fields: (((Uint32 windowID)
             guard: (Uint32-guard "sdl-window-event field windowID")
             get: sdl-window-event-window-id
@@ -736,6 +817,7 @@
   types: (SDL_DROPFILE)
   make: make-sdl-drop-event
   predicate: sdl-drop-event?
+  print-fields: ((file sdl-drop-event-file))
   fields: (((c-string file)
             guard: noop-guard
             get: sdl-drop-event-file
@@ -751,6 +833,7 @@
   types: (SDL_USEREVENT)
   make: make-sdl-user-event
   predicate: sdl-user-event?
+  print-fields: ((code sdl-user-event-code))
   fields: (((Uint32 windowID)
             guard: (Uint32-guard "sdl-user-event field windowID")
             get: sdl-user-event-window-id

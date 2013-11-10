@@ -62,6 +62,7 @@
       (ev (allocate-sdl-event)))
   (while (not done?)
     (SDL_WaitEvent ev)
+    (print ev)
     (select (sdl-event-type ev)
 
       ;; Window exposed, resized, etc.
@@ -77,20 +78,9 @@
       ((SDL_QUIT)
        (set! done? #t))
 
-      ;; Keyboard key pressed or released.
-      ((SDL_KEYDOWN SDL_KEYUP)
+      ;; Keyboard key pressed.
+      ((SDL_KEYDOWN)
        (let ((key (sdl-keysym-sym (sdl-keyboard-event-keysym ev))))
-         (printf "Key ~A: ~A (mods: ~A)~N"
-                 (if (> (sdl-keyboard-event-state ev) 0) "pressed" "released")
-                 key
-                 (sdl-keysym-mod (sdl-keyboard-event-keysym ev)))
          (select key
            ((SDLK_ESCAPE SDLK_q)
-            (set! done? #t)))))
-
-      ;; Mouse button pressed or released.
-      ((SDL_MOUSEBUTTONDOWN SDL_MOUSEBUTTONUP)
-       (printf "Mouse button ~A at (~A, ~A)~N"
-               (if (> (sdl-mouse-button-event-state ev) 0) "down" "up")
-               (sdl-mouse-button-event-x ev)
-               (sdl-mouse-button-event-y ev))))))
+            (set! done? #t))))))))

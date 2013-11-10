@@ -32,6 +32,64 @@
 
 (define-syntax define-sdl-event-type
   (syntax-rules ()
+    ;; with record printer
+    ((define-sdl-event-type struct-name
+       types: (type-id ...)
+       make: maker
+       predicate: pred?
+       print-fields: ((print-field print-field-getter) ...)
+       fields: (((field-type field-name)
+                 guard: field-guard
+                 get: field-getter
+                 set: field-setter)
+                ...))
+
+     (begin
+       (define (maker type timestamp field-name ...)
+         (let ((event (allocate-sdl-event)))
+           (sdl-event-type-set! event type)
+           (sdl-event-timestamp-set! event timestamp)
+           (field-setter event field-name)
+           ...
+           event))
+
+       (define (pred? event)
+         (and (sdl-event? event)
+              (any (lambda (t)
+                     (eq? t (sdl-event-type event)))
+                   (list type-id ...))))
+
+       (for-each
+        (lambda (type)
+          (hash-table-set!
+           %sdl-event-record-printers type
+           (lambda (event out)
+             (%sdl-event-record-printer
+              event out
+              (list (list 'print-field (print-field-getter event)) ...)))))
+        (list type-id ...))
+
+       (begin
+         (define (field-setter event value)
+           (assert (pred? event))
+           (let ((guarded-value (field-guard value)))
+             ((foreign-lambda*-with-dynamic-body
+               void ((SDL_Event* ev) (field-type val))
+               ("((~A*)ev)->~A = val;" struct-name field-name))
+              event guarded-value)))
+
+         (define field-getter
+           (getter-with-setter
+            (lambda (event)
+              (assert (pred? event))
+              ((foreign-lambda*-with-dynamic-body
+                field-type ((SDL_Event* ev))
+                ("C_return(((~A*)ev)->~A);" struct-name field-name))
+               event))
+            field-setter)))
+       ...))
+
+    ;; no record printer
     ((define-sdl-event-type struct-name
        types: (type-id ...)
        make: maker
@@ -41,7 +99,7 @@
                  get: field-getter
                  set: field-setter)
                 ...))
-     
+
      (begin
        (define (maker type timestamp field-name ...)
          (let ((event (allocate-sdl-event)))
@@ -50,7 +108,7 @@
            (field-setter event field-name)
            ...
            event))
-       
+
        (define (pred? event)
          (and (sdl-event? event)
               (any (lambda (t)
@@ -65,7 +123,7 @@
                void ((SDL_Event* ev) (field-type val))
                ("((~A*)ev)->~A = val;" struct-name field-name))
               event guarded-value)))
-         
+
          (define field-getter
            (getter-with-setter
             (lambda (event)
@@ -77,19 +135,49 @@
             field-setter)))
        ...))
 
-    ;; no fields
+    ;; no fields, with record printer
     ((define-sdl-event-type struct-name
        types: (type-id ...)
        make: maker
-       predicate: pred?)
-     
+       predicate: pred?
+       print-fields: ((print-field print-field-getter) ...))
+
      (begin
        (define (maker type timestamp)
          (let ((event (allocate-sdl-event)))
            (sdl-event-type-set! event type)
            (sdl-event-timestamp-set! event timestamp)
            event))
-       
+
+       (define (pred? event)
+         (and (%sdl-event? event)
+              (any (lambda (t)
+                     (eq? t (sdl-event-type event)))
+                   (list type-id ...))))
+
+       (for-each
+        (lambda (t)
+          (hash-table-set!
+           %sdl-event-record-printers t
+           (lambda (event out)
+             (%sdl-event-record-printer
+              event out
+              (list (list 'print-field (print-field-getter event)) ...)))))
+        (list type-id ...))))
+
+    ;; no fields
+    ((define-sdl-event-type struct-name
+       types: (type-id ...)
+       make: maker
+       predicate: pred?)
+
+     (begin
+       (define (maker type timestamp)
+         (let ((event (allocate-sdl-event)))
+           (sdl-event-type-set! event type)
+           (sdl-event-timestamp-set! event timestamp)
+           event))
+
        (define (pred? event)
          (and (%sdl-event? event)
               (any (lambda (t)
