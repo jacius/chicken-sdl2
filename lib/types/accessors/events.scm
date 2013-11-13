@@ -81,7 +81,7 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; KEYBOARD / TEXT
+;;; KEYBOARD
 
 (export make-sdl-keyboard-event
         sdl-keyboard-event?
@@ -92,28 +92,7 @@
         sdl-keyboard-event-repeat
         sdl-keyboard-event-repeat-set!
         sdl-keyboard-event-keysym
-        sdl-keyboard-event-keysym-set!
-
-        make-sdl-text-editing-event
-        sdl-text-editing-event?
-        ;; SDL_TEXTEDITINGEVENT_TEXT_SIZE
-        sdl-text-editing-event-window-id
-        sdl-text-editing-event-window-id-set!
-        ;; sdl-text-editing-event-text
-        ;; sdl-text-editing-event-text-set!
-        sdl-text-editing-event-start
-        sdl-text-editing-event-start-set!
-        sdl-text-editing-event-length
-        sdl-text-editing-event-length-set!
-
-        make-sdl-text-input-event
-        sdl-text-input-event?
-        ;; SDL_TEXTINPUTEVENT_TEXT_SIZE
-        sdl-text-input-event-window-id
-        sdl-text-input-event-window-id-set!
-        ;; sdl-text-input-event-text
-        ;; sdl-text-input-event-text-set!
-        )
+        sdl-keyboard-event-keysym-set!)
 
 (define-sdl-event-type "SDL_KeyboardEvent"
   types: (SDL_KEYDOWN
@@ -133,6 +112,7 @@
             guard: (Uint8-guard "sdl-keyboard-event field repeat")
             get: sdl-keyboard-event-repeat
             set: sdl-keyboard-event-repeat-set!)
+           ;; See below
            ;; ((SDL_Keysym keysym)
            ;;  guard: noop-guard
            ;;  get: sdl-keyboard-event-keysym
@@ -158,17 +138,40 @@
         "((SDL_KeyboardEvent*)ev)->keysym = *ptr;")
        event (%sdl-keysym-pointer keysym))))
 
-;; #define SDL_TEXTEDITINGEVENT_TEXT_SIZE (32)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; TEXT EDITING / INPUT
+
+(export make-sdl-text-editing-event
+        sdl-text-editing-event?
+        sdl-text-editing-event-window-id
+        sdl-text-editing-event-window-id-set!
+        sdl-text-editing-event-text
+        sdl-text-editing-event-text-set!
+        sdl-text-editing-event-start
+        sdl-text-editing-event-start-set!
+        sdl-text-editing-event-length
+        sdl-text-editing-event-length-set!
+
+        make-sdl-text-input-event
+        sdl-text-input-event?
+        sdl-text-input-event-window-id
+        sdl-text-input-event-window-id-set!
+        sdl-text-input-event-text
+        sdl-text-input-event-text-set!)
 
 (define-sdl-event-type "SDL_TextEditingEvent"
   types: (SDL_TEXTEDITING)
   make: make-sdl-text-editing-event
   predicate: sdl-text-editing-event?
+  print-fields: ((start sdl-text-editing-event-start)
+                 (text sdl-text-editing-event-text))
   fields: (((Uint32 windowID)
             guard: (Uint32-guard "sdl-text-editing-event field windowID")
             get: sdl-text-editing-event-window-id
             set: sdl-text-editing-event-window-id-set!)
-           ;; ((c-string text)
+           ;; See below
+           ;; ((char[SDL_TEXTEDITINGEVENT_TEXT_SIZE] text)
            ;;  guard: noop-guard
            ;;  get: sdl-text-editing-event-text
            ;;  set: sdl-text-editing-event-text-set!)
@@ -181,21 +184,46 @@
             get: sdl-text-editing-event-length
             set: sdl-text-editing-event-length-set!)))
 
-;; #define SDL_TEXTINPUTEVENT_TEXT_SIZE (32)
+(define sdl-text-editing-event-text
+  (foreign-lambda*
+   c-string ((SDL_Event* ev))
+   "C_return( &((SDL_TextEditingEvent*)ev)->text );"))
+
+(define (sdl-text-editing-event-text-set! event text)
+  (assert (< (string-length text) SDL_TEXTEDITINGEVENT_TEXT_SIZE))
+  ((foreign-lambda*
+    c-string ((SDL_Event* ev) (c-string text))
+    "strncpy(((SDL_TextEditingEvent*)ev)->text, text, SDL_TEXTEDITINGEVENT_TEXT_SIZE);")
+   event text))
+
 
 (define-sdl-event-type "SDL_TextInputEvent"
   types: (SDL_TEXTINPUT)
   make: make-sdl-text-input-event
   predicate: sdl-text-input-event?
+  print-fields: ((text sdl-text-input-event-text))
   fields: (((Uint32 windowID)
             guard: (Uint32-guard "sdl-text-input-event field windowID")
             get: sdl-text-input-event-window-id
             set: sdl-text-input-event-window-id-set!)
-           ;; ((c-string text)
+           ;; See below
+           ;; ((char[SDL_TEXTINPUTEVENT_TEXT_SIZE] text)
            ;;  guard: noop-guard
            ;;  get: sdl-text-input-event-text
            ;;  set: sdl-text-input-event-text-set!)
            ))
+
+(define sdl-text-input-event-text
+  (foreign-lambda*
+   c-string ((SDL_Event* ev))
+   "C_return( &((SDL_TextInputEvent*)ev)->text );"))
+
+(define (sdl-text-input-event-text-set! event text)
+  (assert (< (string-length text) SDL_TEXTINPUTEVENT_TEXT_SIZE))
+  ((foreign-lambda*
+    c-string ((SDL_Event* ev) (c-string text))
+    "strncpy(((SDL_TextInputEvent*)ev)->text, text, SDL_TEXTINPUTEVENT_TEXT_SIZE);")
+   event text))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

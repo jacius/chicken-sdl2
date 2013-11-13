@@ -59,6 +59,7 @@
 ;;; of structuring an event loop in a real app!
 
 (let ((done? #f)
+      (text-input? #f)
       (ev (allocate-sdl-event)))
   (while (not done?)
     (SDL_WaitEvent ev)
@@ -83,4 +84,13 @@
        (let ((key (sdl-keysym-sym (sdl-keyboard-event-keysym ev))))
          (select key
            ((SDLK_ESCAPE SDLK_q)
-            (set! done? #t))))))))
+            (set! done? #t))
+           ((SDLK_RETURN)
+            (set! text-input? (not text-input?))
+            (if text-input?
+                (begin
+                  (SDL_StartTextInput)
+                  (print "Started accepting text input events."))
+                (begin
+                  (SDL_StopTextInput)
+                  (print "Stopped accepting text input events."))))))))))
