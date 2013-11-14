@@ -40,23 +40,23 @@
 
 (include "lib/util.scm")
 
-(include "lib/types/guards.scm")
-(include "lib/types/nonuniform-struct.scm")
-(include "lib/types/uniform-struct.scm")
-(include "lib/types/event-helpers.scm")
+(include "lib/sdl2-types/guards.scm")
+(include "lib/sdl2-types/nonuniform-struct.scm")
+(include "lib/sdl2-types/uniform-struct.scm")
+(include "lib/sdl2-types/event-helpers.scm")
 
 ;;; NOTE: The ordering of these includes is important!
 
 ;;; 1. We declare the record types so that we have the pointer
 ;;; wrappers/accessors.
-(include "lib/types/record-types.scm")
+(include "lib/sdl2-types/record-types.scm")
 
 ;;; 2. We declare foreign types, which depend on the pointer wrappers.
-(include "lib/types/enums.scm")
-(include "lib/types/foreign-types.scm")
+(include "lib/sdl2-types/enums.scm")
+(include "lib/sdl2-types/foreign-types.scm")
 
 ;;; 3. We define struct field pseudo-accessors, which depend on the
 ;;; foreign type definitions.
-(include "lib/types/accessors.scm")
+(include "lib/sdl2-types/accessors.scm")
 
 )

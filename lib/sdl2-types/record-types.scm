@@ -30,45 +30,29 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-(define-syntax define-enum
-  (syntax-rules ()
-    ;; with string converter
-    ((define-enum (enum-type enum-name) value-name ...)
-     (begin
-       (define (enum-name value)
-         (select value
-           ((value-name) 'value-name)
-           ...))
-       (define value-name (foreign-value value-name enum-type))
-       ...))
-    ;; without string converter
-    ((define-enum enum-type value-name ...)
-     (begin
-       (define value-name (foreign-value value-name enum-type))
-       ...))))
+(include "lib/sdl2-types/record-types/audio.scm")
 
-(define-syntax define-and-export-enum
-  (syntax-rules ()
-    ;; with string converter
-    ((define-and-export-enum (enum-type enum-name) value-name ...)
-     (begin
-       (export enum-name value-name ...)
-       (define-enum (enum-type enum-name) value-name ...)))
-    ;; without string converter
-    ((define-and-export-enum enum-type value-name ...)
-     (begin
-       (export value-name ...)
-       (define-enum enum-type value-name ...)))))
+(include "lib/sdl2-types/record-types/color.scm")
 
+(include "lib/sdl2-types/record-types/display-mode.scm")
 
-(include "lib/types/enums/general.scm")
-(include "lib/types/enums/audio.scm")
-(include "lib/types/enums/events.scm")
-(include "lib/types/enums/gl.scm")
-(include "lib/types/enums/joystick.scm")
-(include "lib/types/enums/keycode.scm")
-(include "lib/types/enums/mouse.scm")
-(include "lib/types/enums/pixel-format.scm")
-(include "lib/types/enums/scancode.scm")
-(include "lib/types/enums/surface.scm")
-(include "lib/types/enums/window.scm")
+(include "lib/sdl2-types/record-types/input.scm")
+(include "lib/sdl2-types/record-types/events.scm")
+
+(include "lib/sdl2-types/record-types/gl-context.scm")
+
+(include "lib/sdl2-types/record-types/palette.scm")
+
+(include "lib/sdl2-types/record-types/pixel-format.scm")
+
+(include "lib/sdl2-types/record-types/rect.scm")
+
+(include "lib/sdl2-types/record-types/surface.scm")
+
+(include "lib/sdl2-types/record-types/sys-wm-info.scm")
+
+(include "lib/sdl2-types/record-types/texture.scm")
+
+(include "lib/sdl2-types/record-types/version.scm")
+
+(include "lib/sdl2-types/record-types/window.scm")

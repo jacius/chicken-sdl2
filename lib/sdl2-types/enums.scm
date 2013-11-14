@@ -30,29 +30,45 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-(include "lib/types/accessors/audio.scm")
+(define-syntax define-enum
+  (syntax-rules ()
+    ;; with string converter
+    ((define-enum (enum-type enum-name) value-name ...)
+     (begin
+       (define (enum-name value)
+         (select value
+           ((value-name) 'value-name)
+           ...))
+       (define value-name (foreign-value value-name enum-type))
+       ...))
+    ;; without string converter
+    ((define-enum enum-type value-name ...)
+     (begin
+       (define value-name (foreign-value value-name enum-type))
+       ...))))
 
-(include "lib/types/accessors/color.scm")
+(define-syntax define-and-export-enum
+  (syntax-rules ()
+    ;; with string converter
+    ((define-and-export-enum (enum-type enum-name) value-name ...)
+     (begin
+       (export enum-name value-name ...)
+       (define-enum (enum-type enum-name) value-name ...)))
+    ;; without string converter
+    ((define-and-export-enum enum-type value-name ...)
+     (begin
+       (export value-name ...)
+       (define-enum enum-type value-name ...)))))
 
-(include "lib/types/accessors/input.scm")
-(include "lib/types/accessors/events.scm")
 
-(include "lib/types/accessors/display-mode.scm")
-
-;;; GL-CONTEXT is an opaque pointer, so there's nothing else to define here.
-
-(include "lib/types/accessors/palette.scm")
-
-(include "lib/types/accessors/pixel-format.scm")
-
-(include "lib/types/accessors/rect.scm")
-
-(include "lib/types/accessors/surface.scm")
-
-;;; SYS-WM-INFO is weird and I don't feel like dealing with it.
-
-;;; TEXTURE is an opaque pointer, so there's nothing else to define here.
-
-(include "lib/types/accessors/version.scm")
-
-;;; WINDOW is an opaque pointer, so there's nothing else to define here.
+(include "lib/sdl2-types/enums/general.scm")
+(include "lib/sdl2-types/enums/audio.scm")
+(include "lib/sdl2-types/enums/events.scm")
+(include "lib/sdl2-types/enums/gl.scm")
+(include "lib/sdl2-types/enums/joystick.scm")
+(include "lib/sdl2-types/enums/keycode.scm")
+(include "lib/sdl2-types/enums/mouse.scm")
+(include "lib/sdl2-types/enums/pixel-format.scm")
+(include "lib/sdl2-types/enums/scancode.scm")
+(include "lib/sdl2-types/enums/surface.scm")
+(include "lib/sdl2-types/enums/window.scm")

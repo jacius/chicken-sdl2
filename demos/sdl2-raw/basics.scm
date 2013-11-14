@@ -34,8 +34,8 @@
 
 (when (feature? 'csi)
   (print "ERROR: sdl2 demos must be compiled, not run in the interpreter (csi).")
-  (print "Try compiling like this:  csc demos/raw/basics.scm")
-  (print "Then run it like this:    demos/raw/basics")
+  (print "Try compiling like this:  csc demos/sdl2-raw/basics.scm")
+  (print "Then run it like this:    demos/sdl2-raw/basics")
   (exit 1))
 
 (use sdl2-types sdl2-raw miscmacros)

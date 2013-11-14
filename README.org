@@ -25,8 +25,8 @@ After you have installed chicken-sdl2, you can try compiling and
 running the demo applications in the "demos" directory. E.g.:
 
 #+BEGIN_EXAMPLE
-csc demos/raw/basics.scm
-demos/raw/basics
+csc demos/sdl2-raw/basics.scm
+demos/sdl2-raw/basics
 #+END_EXAMPLE
 
 * Contributing

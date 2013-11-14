@@ -4,4 +4,4 @@
 *.o
 *.so
 
-/demos/raw/basics
+/demos/sdl2-raw/basics
