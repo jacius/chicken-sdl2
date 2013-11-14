@@ -49,13 +49,14 @@
 
 
 (define window
-  (SDL_CreateWindow
-   "SDL Basics"                         ; title
-   SDL_WINDOWPOS_CENTERED  100          ; x, y
-   800  600                             ; w, h
-   (bitwise-ior                         ; flags
-    SDL_WINDOW_SHOWN
-    SDL_WINDOW_RESIZABLE)))
+  (sdl-create-window "SDL Basics" #:centered 100 800 600 #:shown #:resizable))
+
+(printf "Window position: ~A, size: ~A, max size: ~A, min size: ~A~N"
+        (sdl-window-position window)
+        (sdl-window-size window)
+        (sdl-window-maximum-size window)
+        (sdl-window-minimum-size window))
+
 
 ;;; Hacky event loop. Please don't consider this the recommended way
 ;;; of structuring an event loop in a real app!

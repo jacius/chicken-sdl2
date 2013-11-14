@@ -34,6 +34,7 @@
 ;;; WINDOW
 
 (export SDL_CreateWindow
+        SDL_GetWindowFromID
         SDL_DestroyWindow
 
         SDL_UpdateWindowSurface
@@ -51,7 +52,6 @@
         SDL_GetWindowDisplayIndex
         SDL_GetWindowDisplayMode
         SDL_GetWindowFlags
-        SDL_GetWindowFromID
         SDL_GetWindowGammaRamp
         SDL_GetWindowGrab
         SDL_GetWindowID
@@ -90,6 +90,10 @@
 
 ;;; TODO?: SDL_CreateWindowAndRenderer
 ;;; TODO?: SDL_CreateWindowFrom
+
+(define-function-binding SDL_GetWindowFromID
+  return: (SDL_Window* window-or-null)
+  args: ((Uint32 id)))
 
 (define-function-binding SDL_DestroyWindow
   args: ((SDL_Window* window)))
@@ -155,10 +159,6 @@
 (define-function-binding SDL_GetWindowFlags
   return: (Uint32 flags)
   args: ((SDL_Window* window)))
-
-(define-function-binding SDL_GetWindowFromID
-  return: (SDL_Window* window-or-null)
-  args: ((Uint32 id)))
 
 (define-function-binding SDL_GetWindowGammaRamp
   return: (int zero-if-success)

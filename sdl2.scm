@@ -33,7 +33,7 @@
 (module sdl2 ()
 
 (import scheme chicken foreign)
-(use srfi-1 extras)
+(use srfi-1 srfi-4 extras lolevel)
 (require-extension sdl2-types sdl2-raw)
 
 (foreign-declare "#include \"SDL.h\"")
@@ -46,5 +46,6 @@
 (include "lib/sdl2-types/foreign-types.scm")
 
 (include "lib/sdl2/general.scm")
+(include "lib/sdl2/window.scm")
 
 )
