@@ -46,6 +46,7 @@
 (include "lib/sdl2-types/foreign-types.scm")
 
 (include "lib/sdl2/general.scm")
+(include "lib/sdl2/events.scm")
 (include "lib/sdl2/window.scm")
 
 )

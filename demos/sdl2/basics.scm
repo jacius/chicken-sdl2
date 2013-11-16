@@ -62,38 +62,37 @@
 ;;; of structuring an event loop in a real app!
 
 (let ((done? #f)
-      (text-input? #f)
-      (ev (allocate-sdl-event)))
+      (text-input? #f))
   (while (not done?)
-    (SDL_WaitEvent ev)
-    (print ev)
-    (select (sdl-event-type ev)
+    (let ((ev (sdl-wait-event)))
+      (print ev)
+      (select (sdl-event-type ev)
 
-      ;; Window exposed, resized, etc.
-      ((SDL_WINDOWEVENT)
-       (SDL_FillRect (SDL_GetWindowSurface window)
-                     #f                   ; NULL, i.e. fill the whole surface
-                     (SDL_MapRGB
-                      (sdl-surface-format (SDL_GetWindowSurface window))
-                      0 50 128))
-       (SDL_UpdateWindowSurface window))
+        ;; Window exposed, resized, etc.
+        ((SDL_WINDOWEVENT)
+         (SDL_FillRect (sdl-window-surface window)
+                       #f            ; NULL, i.e. fill the whole surface
+                       (SDL_MapRGB
+                        (sdl-surface-format (sdl-window-surface window))
+                        0 50 128))
+         (sdl-update-window-surface window))
 
-      ;; User requested that the app quit.
-      ((SDL_QUIT)
-       (set! done? #t))
+        ;; User requested that the app quit.
+        ((SDL_QUIT)
+         (set! done? #t))
 
-      ;; Keyboard key pressed.
-      ((SDL_KEYDOWN)
-       (let ((key (sdl-keysym-sym (sdl-keyboard-event-keysym ev))))
-         (select key
-           ((SDLK_ESCAPE SDLK_q)
-            (set! done? #t))
-           ((SDLK_RETURN)
-            (set! text-input? (not text-input?))
-            (if text-input?
-                (begin
-                  (SDL_StartTextInput)
-                  (print "Started accepting text input events."))
-                (begin
-                  (SDL_StopTextInput)
-                  (print "Stopped accepting text input events."))))))))))
+        ;; Keyboard key pressed.
+        ((SDL_KEYDOWN)
+         (let ((key (sdl-keysym-sym (sdl-keyboard-event-keysym ev))))
+           (select key
+             ((SDLK_ESCAPE SDLK_q)
+              (set! done? #t))
+             ((SDLK_RETURN)
+              (set! text-input? (not text-input?))
+              (if text-input?
+                  (begin
+                    (SDL_StartTextInput)
+                    (print "Started accepting text input events."))
+                  (begin
+                    (SDL_StopTextInput)
+                    (print "Stopped accepting text input events.")))))))))))
