@@ -38,7 +38,7 @@
         sdl-has-events
         sdl-quit-requested
 
-        ;; TODO: sdl-peep-events
+        sdl-peep-events
         sdl-poll-event
         sdl-pump-events
         sdl-push-event
@@ -53,13 +53,20 @@
         ;; TODO: sdl-get-event-filter
         ;; TODO: sdl-set-event-filter
         
-        ;; TODO: sdl-get-touch-finger
-        ;; TODO: sdl-record-gesture
-        )
+        sdl-get-num-touch-devices
+        sdl-get-num-touch-fingers
+        sdl-get-touch-device
+        sdl-get-touch-finger
+
+        sdl-record-gesture
+        sdl-save-dollar-template
+        sdl-save-all-dollar-templates
+        sdl-load-dollar-templates)
 
 
 (define (%event-type->keyword type)
   (select type
+    ((SDL_FIRSTEVENT)               #:first-event)
     ((SDL_QUIT)                     #:quit)
     ((SDL_APP_TERMINATING)          #:app-terminating)
     ((SDL_APP_LOWMEMORY)            #:app-low-memory)
@@ -99,10 +106,12 @@
     ((SDL_CLIPBOARDUPDATE)          #:clipboard-update)
     ((SDL_DROPFILE)                 #:drop-file)
     ((SDL_USEREVENT)                #:user-event)
+    ((SDL_LASTEVENT)                #:last-event)
     (else #:unknown)))
 
 (define (%keyword->event-type key)
   (case key
+    ((#:first-event)                SDL_FIRSTEVENT)
     ((#:quit)                       SDL_QUIT)
     ((#:app-terminating)            SDL_APP_TERMINATING)
     ((#:app-low-memory)             SDL_APP_LOWMEMORY)
@@ -142,6 +151,7 @@
     ((#:clipboard-update)           SDL_CLIPBOARDUPDATE)
     ((#:drop-file)                  SDL_DROPFILE)
     ((#:user-event)                 SDL_USEREVENT)
+    ((#:last-event)                 SDL_LASTEVENT)
     (else (if (integer? key)
               key
               0))))
@@ -174,8 +184,49 @@
   (SDL_QuitRequested))
 
 
-;; TODO: How do we want to slay this beast?
-;; (define (sdl-peep-events events num-events action min-type-max-type))
+;;; Three behaviors in one function. We are not amused.
+(define (sdl-peep-events events/num action #!optional
+                         (min-type #:first-event)
+                         (max-type #:last-event))
+  (let ((act (%keyword->event-action action))
+        (min (%keyword->event-type min-type))
+        (max (%keyword->event-type max-type)))
+   (select act
+     ((SDL_ADDEVENT)
+      (%sdl-peep-events/add events/num act min max))
+     ((SDL_PEEKEVENT SDL_GETEVENT)
+      (%sdl-peep-events/peek-get events/num act min max)))))
+
+(define (%keyword->event-action action)
+  (case action
+    ((#:add)  SDL_ADDEVENT)
+    ((#:peek) SDL_PEEKEVENT)
+    ((#:get)  SDL_GETEVENT)
+    (else (if (integer? action)
+              action
+              0))))
+
+(define (%sdl-peep-events/add events act min max)
+  (assert (every sdl-event? events))
+  (let ((events-vector
+         (apply pointer-vector
+           (map %sdl-event->SDL_Event* events))))
+    (SDL_PeepEvents events-vector (length events) act min max)))
+
+(define (%sdl-peep-events/peek-get num action min max)
+  (let* ((out-buf (make-locative
+                   (make-blob
+                    (* num (foreign-type-size "SDL_Event")))))
+         (result (SDL_PeepEvents out-buf num action min max)))
+    (map (lambda (index)
+           (let ((out-event (allocate-sdl-event)))
+             ((foreign-lambda*
+               void ((SDL_Event* ev) (int i) (c-pointer data))
+               "*ev = ((SDL_Event*)data)[i];")
+              out-event index out-buf)
+             out-event))
+         (iota result))))
+
 
 (define (sdl-poll-event)
   (let ((ev (allocate-sdl-event)))
@@ -217,5 +268,28 @@
 ;; TODO: sdl-get-event-filter
 ;; TODO: sdl-set-event-filter
 
-;; TODO: sdl-get-touch-finger
-;; TODO: sdl-record-gesture
+
+(define (sdl-get-num-touch-devices)
+  (SDL_GetNumTouchDevices))
+
+(define (sdl-get-num-touch-fingers touch-id)
+  (SDL_GetNumTouchFingers touch-id))
+
+(define (sdl-get-touch-device device-id)
+  (SDL_GetTouchDevice device-id))
+
+(define (sdl-get-touch-finger touch-id index)
+  (SDL_GetTouchFinger touch-id index))
+
+
+(define (sdl-record-gesture touch-id)
+  (SDL_RecordGesture touch-id))
+
+(define (sdl-save-dollar-template gesture-id dst)
+  (SDL_SaveDollarTemplate gesture-id dst))
+
+(define (sdl-save-all-dollar-templates dst)
+  (SDL_SaveAllDollarTemplates dst))
+
+(define (sdl-load-dollar-templates touch-id src)
+  (SDL_LoadDollarTemplates touch-id src))
