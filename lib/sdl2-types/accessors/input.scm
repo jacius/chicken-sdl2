@@ -30,6 +30,33 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; FINGER
+
+(export sdl-finger-id        %sdl-finger-id-set!
+        sdl-finger-x         %sdl-finger-x-set!
+        sdl-finger-y         %sdl-finger-y-set!
+        sdl-finger-pressure  %sdl-finger-pressure-set!)
+
+(define-nonuniform-struct-accessors
+  type: SDL_Finger*
+  fields: (((SDL_FingerID id)
+            get: sdl-finger-id
+            set: %sdl-finger-id-set!)
+           ((float x)
+            get: sdl-finger-x
+            set: %sdl-finger-x-set!)
+           ((float y)
+            get: sdl-finger-y
+            set: %sdl-finger-y-set!)
+           ((float pressure)
+            get: sdl-finger-pressure
+            set: %sdl-finger-pressure-set!)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; KEYSYM
+
 (export sdl-keysym-scancode
         %sdl-keysym-scancode-set!
         sdl-keysym-sym

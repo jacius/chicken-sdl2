@@ -128,6 +128,11 @@
   (c-pointer "SDL_DisplayMode")
   %sdl-display-mode-pointer %wrap-sdl-display-mode)
 
+(define-foreign-type SDL_Finger*
+  (c-pointer "SDL_Finger")
+  %sdl-finger-pointer %wrap-sdl-finger)
+
+
 ;;; NOTE: "SDL_GLContext" is a typedef alias of "void *" so properly
 ;;; this should be SDL_GLContext (no *), but I'm adding the * for
 ;;; semantic consistency. It is a pointer, after all.

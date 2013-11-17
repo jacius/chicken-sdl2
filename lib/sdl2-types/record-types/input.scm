@@ -45,6 +45,20 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; FINGER
+
+(export sdl-finger?
+        %wrap-sdl-finger
+        %sdl-finger-pointer
+        %sdl-finger-pointer-set!)
+
+(define-record-type sdl-finger
+  (%wrap-sdl-finger pointer)
+  sdl-finger?
+  (pointer %sdl-finger-pointer %sdl-finger-pointer-set!))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; JOYSTICK
 
 (export sdl-joystick?

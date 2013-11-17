@@ -30,52 +30,55 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-(export SDL_AddEventWatch
-        SDL_DelEventWatch
-        SDL_EventState
-        SDL_FilterEvents
+(export SDL_EventState
+        SDL_RegisterEvents
+
         SDL_FlushEvent
         SDL_FlushEvents
-        SDL_GetEventFilter
-        ;; TODO: SDL_GetTouchFinger
         SDL_HasEvent
         SDL_HasEvents
+        SDL_QuitRequested
+
         SDL_PeepEvents
         SDL_PollEvent
         SDL_PumpEvents
         SDL_PushEvent
-        SDL_QuitRequested
-        SDL_RegisterEvents
-        ;; TODO: SDL_RecordGesture
-        SDL_SetEventFilter
         SDL_WaitEvent
-        SDL_WaitEventTimeout)
+        SDL_WaitEventTimeout
 
+        SDL_AddEventWatch
+        SDL_DelEventWatch
+        SDL_FilterEvents
+        SDL_GetEventFilter
+        SDL_SetEventFilter
 
-(define-function-binding SDL_AddEventWatch
-  args: ((SDL_EventFilter filter) (c-pointer userdata)))
+        SDL_GetNumTouchDevices
+        SDL_GetNumTouchFingers
+        SDL_GetTouchDevice
+        SDL_GetTouchFinger
 
-(define-function-binding SDL_DelEventWatch
-  args: ((SDL_EventFilter filter) (c-pointer userdata)))
+        SDL_RecordGesture
+        SDL_SaveDollarTemplate
+        SDL_SaveAllDollarTemplates
+        SDL_LoadDollarTemplates)
+
 
 (define-function-binding SDL_EventState
   return: (Uint8 previous-state)
-  args: ((SDL_EventType type) (int state)))
+  args: ((SDL_EventType type)
+         (int state)))
 
-(define-function-binding SDL_FilterEvents
-  args: ((SDL_EventFilter filter) (c-pointer userdata)))
+(define-function-binding SDL_RegisterEvents
+  return: (Uint32 beginning-event-number)
+  args: ((int numevents)))
+
 
 (define-function-binding SDL_FlushEvent
   args: ((SDL_EventType type)))
 
 (define-function-binding SDL_FlushEvents
-  args: ((SDL_EventType minType) (SDL_EventType maxType)))
-
-(define-function-binding SDL_GetEventFilter
-  return: (bool success?)
-  args: ((SDL_EventFilter* filter-out) (c-pointer userdata-out)))
-
-;; TODO: SDL_GetTouchFinger
+  args: ((SDL_EventType minType)
+         (SDL_EventType maxType)))
 
 (define-function-binding SDL_HasEvent
   return: (bool found?)
@@ -83,7 +86,12 @@
 
 (define-function-binding SDL_HasEvents
   return: (bool found?)
-  args: ((SDL_EventType minType) (SDL_EventType maxType)))
+  args: ((SDL_EventType minType)
+         (SDL_EventType maxType)))
+
+(define-function-binding SDL_QuitRequested
+  return: (bool quit-queued?))
+
 
 (define-function-binding SDL_PeepEvents
   return: (int num-events-added)
@@ -103,17 +111,6 @@
   return: (int one-if-success)
   args: ((SDL_Event* event)))
 
-(define-function-binding SDL_QuitRequested
-  return: (bool quit-queued?))
-
-(define-function-binding SDL_RegisterEvents
-  return: (Uint32 beginning-event-number)
-  args: ((int numevents)))
-
-;; TODO: SDL_RecordGesture
-
-(define-function-binding SDL_SetEventFilter
-  args: ((SDL_EventFilter filter) (c-pointer userdata)))
 
 (define-function-binding SDL_WaitEvent
   return: (bool success?)
@@ -121,4 +118,63 @@
 
 (define-function-binding SDL_WaitEventTimeout
   return: (bool success?)
-  args: ((SDL_Event* event-out) (int timeout)))
+  args: ((SDL_Event* event-out)
+         (int timeout)))
+
+
+(define-function-binding SDL_AddEventWatch
+  args: ((SDL_EventFilter filter)
+         (c-pointer userdata)))
+
+(define-function-binding SDL_DelEventWatch
+  args: ((SDL_EventFilter filter)
+         (c-pointer userdata)))
+
+(define-function-binding SDL_FilterEvents
+  args: ((SDL_EventFilter filter)
+         (c-pointer userdata)))
+
+(define-function-binding SDL_GetEventFilter
+  return: (bool success?)
+  args: ((SDL_EventFilter* filter-out)
+         (c-pointer userdata-out)))
+
+(define-function-binding SDL_SetEventFilter
+  args: ((SDL_EventFilter filter)
+         (c-pointer userdata)))
+
+
+(define-function-binding SDL_GetNumTouchDevices
+  return: (int num-touch-devices))
+
+(define-function-binding SDL_GetNumTouchFingers
+  return: (int num-touch-devices)
+  args: ((SDL_TouchID touch-id)))
+
+(define-function-binding SDL_GetTouchDevice
+  return: (SDL_TouchID device-id)
+  args: ((int index)))
+
+(define-function-binding SDL_GetTouchFinger
+  return: (SDL_Finger* finger-or-null)
+  args: ((SDL_TouchID touch-id)
+         (int index)))
+
+
+(define-function-binding SDL_RecordGesture
+  return: (bool success?)
+  args: ((SDL_TouchID touch-id)))
+
+(define-function-binding SDL_SaveDollarTemplate
+  return: (bool success?)
+  args: ((SDL_GestureID gesture-id)
+         (SDL_RWops* dst)))
+
+(define-function-binding SDL_SaveAllDollarTemplates
+  return: (int num-templates-saved)
+  args: ((SDL_RWops* dst)))
+
+(define-function-binding SDL_LoadDollarTemplates
+  return: (int num-templates-loaded)
+  args: ((SDL_TouchID touch-id)
+         (SDL_RWops* src)))
