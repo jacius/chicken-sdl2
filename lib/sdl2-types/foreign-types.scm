@@ -77,6 +77,7 @@
 (define-foreign-type SDL_Keymod int)
 (define-foreign-type SDL_MouseButton int)
 (define-foreign-type SDL_MouseButtonMask int)
+(define-foreign-type SDL_RWopsWhenceEnum int)
 (define-foreign-type SDL_Scancode int)
 (define-foreign-type SDL_SystemCursor int)
 (define-foreign-type SDL_TouchID Sint64)
@@ -176,6 +177,10 @@
   %->SDL_Point*
   %SDL_Point*->sdl-point)
 
+
+(define-foreign-type SDL_RWops*
+  (c-pointer "SDL_RWops")
+  %sdl-rwops-pointer %wrap-sdl-rwops)
 
 (define-foreign-type SDL_Surface*
   (c-pointer "SDL_Surface")

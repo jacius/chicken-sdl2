@@ -30,31 +30,24 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-(include "lib/sdl2-types/accessors/audio.scm")
+(export SDL_RWOPS_UNKNOWN
+        SDL_RWOPS_WINFILE
+        SDL_RWOPS_STDFILE
+        SDL_RWOPS_JNIFILE
+        SDL_RWOPS_MEMORY
+        SDL_RWOPS_MEMORY_RO)
 
-(include "lib/sdl2-types/accessors/color.scm")
+(define SDL_RWOPS_UNKNOWN   (foreign-value "SDL_RWOPS_UNKNOWN"   int))
+(define SDL_RWOPS_WINFILE   (foreign-value "SDL_RWOPS_WINFILE"   int))
+(define SDL_RWOPS_STDFILE   (foreign-value "SDL_RWOPS_STDFILE"   int))
+(define SDL_RWOPS_JNIFILE   (foreign-value "SDL_RWOPS_JNIFILE"   int))
+(define SDL_RWOPS_MEMORY    (foreign-value "SDL_RWOPS_MEMORY"    int))
+(define SDL_RWOPS_MEMORY_RO (foreign-value "SDL_RWOPS_MEMORY_RO" int))
 
-(include "lib/sdl2-types/accessors/input.scm")
-(include "lib/sdl2-types/accessors/events.scm")
 
-(include "lib/sdl2-types/accessors/display-mode.scm")
+;;; Technically not an enum, but close enough.
+(define-and-export-enum SDL_RWopsWhenceEnum
+  RW_SEEK_SET
+  RW_SEEK_CUR
+  RW_SEEK_END)
 
-;;; GL-CONTEXT is an opaque pointer, so there's nothing else to define here.
-
-(include "lib/sdl2-types/accessors/palette.scm")
-
-(include "lib/sdl2-types/accessors/pixel-format.scm")
-
-(include "lib/sdl2-types/accessors/rect.scm")
-
-(include "lib/sdl2-types/accessors/rwops.scm")
-
-(include "lib/sdl2-types/accessors/surface.scm")
-
-;;; SYS-WM-INFO is weird and I don't feel like dealing with it.
-
-;;; TEXTURE is an opaque pointer, so there's nothing else to define here.
-
-(include "lib/sdl2-types/accessors/version.scm")
-
-;;; WINDOW is an opaque pointer, so there's nothing else to define here.

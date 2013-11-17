@@ -30,31 +30,12 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-(include "lib/sdl2-types/accessors/audio.scm")
+(export sdl-rwops?
+        %wrap-sdl-rwops
+        %sdl-rwops-pointer
+        %sdl-rwops-pointer-set!)
 
-(include "lib/sdl2-types/accessors/color.scm")
-
-(include "lib/sdl2-types/accessors/input.scm")
-(include "lib/sdl2-types/accessors/events.scm")
-
-(include "lib/sdl2-types/accessors/display-mode.scm")
-
-;;; GL-CONTEXT is an opaque pointer, so there's nothing else to define here.
-
-(include "lib/sdl2-types/accessors/palette.scm")
-
-(include "lib/sdl2-types/accessors/pixel-format.scm")
-
-(include "lib/sdl2-types/accessors/rect.scm")
-
-(include "lib/sdl2-types/accessors/rwops.scm")
-
-(include "lib/sdl2-types/accessors/surface.scm")
-
-;;; SYS-WM-INFO is weird and I don't feel like dealing with it.
-
-;;; TEXTURE is an opaque pointer, so there's nothing else to define here.
-
-(include "lib/sdl2-types/accessors/version.scm")
-
-;;; WINDOW is an opaque pointer, so there's nothing else to define here.
+(define-record-type sdl-rwops
+  (%wrap-sdl-rwops pointer)
+  sdl-rwops?
+  (pointer %sdl-rwops-pointer %sdl-rwops-pointer-set!))

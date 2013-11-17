@@ -47,6 +47,8 @@
 
 (include "lib/sdl2-types/record-types/rect.scm")
 
+(include "lib/sdl2-types/record-types/rwops.scm")
+
 (include "lib/sdl2-types/record-types/surface.scm")
 
 (include "lib/sdl2-types/record-types/sys-wm-info.scm")

@@ -58,6 +58,7 @@
 (include "lib/sdl2-raw/mouse.scm")
 (include "lib/sdl2-raw/pixel-format.scm")
 (include "lib/sdl2-raw/rect.scm")
+(include "lib/sdl2-raw/rwops.scm")
 (include "lib/sdl2-raw/surface.scm")
 (include "lib/sdl2-raw/timer.scm")
 (include "lib/sdl2-raw/video-display-mode.scm")
