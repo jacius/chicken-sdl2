@@ -39,6 +39,10 @@
         sdl-quit-requested
 
         sdl-peep-events
+        sdl-add-events
+        sdl-peek-events
+        sdl-get-events
+
         sdl-poll-event
         sdl-pump-events
         sdl-push-event
@@ -66,7 +70,7 @@
 
 (define (%event-type->keyword type)
   (select type
-    ((SDL_FIRSTEVENT)               #:first-event)
+    ((SDL_FIRSTEVENT)               #:first)
     ((SDL_QUIT)                     #:quit)
     ((SDL_APP_TERMINATING)          #:app-terminating)
     ((SDL_APP_LOWMEMORY)            #:app-low-memory)
@@ -106,12 +110,12 @@
     ((SDL_CLIPBOARDUPDATE)          #:clipboard-update)
     ((SDL_DROPFILE)                 #:drop-file)
     ((SDL_USEREVENT)                #:user-event)
-    ((SDL_LASTEVENT)                #:last-event)
+    ((SDL_LASTEVENT)                #:last)
     (else #:unknown)))
 
 (define (%keyword->event-type key)
   (case key
-    ((#:first-event)                SDL_FIRSTEVENT)
+    ((#:first)                      SDL_FIRSTEVENT)
     ((#:quit)                       SDL_QUIT)
     ((#:app-terminating)            SDL_APP_TERMINATING)
     ((#:app-low-memory)             SDL_APP_LOWMEMORY)
@@ -151,7 +155,7 @@
     ((#:clipboard-update)           SDL_CLIPBOARDUPDATE)
     ((#:drop-file)                  SDL_DROPFILE)
     ((#:user-event)                 SDL_USEREVENT)
-    ((#:last-event)                 SDL_LASTEVENT)
+    ((#:last)                       SDL_LASTEVENT)
     (else (if (integer? key)
               key
               0))))
@@ -186,8 +190,8 @@
 
 ;;; Three behaviors in one function. We are not amused.
 (define (sdl-peep-events events/num action #!optional
-                         (min-type #:first-event)
-                         (max-type #:last-event))
+                         (min-type #:first)
+                         (max-type #:last))
   (let ((act (%keyword->event-action action))
         (min (%keyword->event-type min-type))
         (max (%keyword->event-type max-type)))
@@ -226,6 +230,22 @@
               out-event index out-buf)
              out-event))
          (iota result))))
+
+(define (sdl-add-events events #!optional
+                        (min-type #:first)
+                        (max-type #:last))
+  (sdl-peep-events events #:add min-type max-type))
+
+(define (sdl-peek-events num #!optional
+                         (min-type #:first)
+                         (max-type #:last))
+  (sdl-peep-events num #:peek min-type max-type))
+
+(define (sdl-get-events num #!optional
+                        (min-type #:first)
+                        (max-type #:last))
+  (sdl-peep-events num #:get min-type max-type))
+
 
 
 (define (sdl-poll-event)
