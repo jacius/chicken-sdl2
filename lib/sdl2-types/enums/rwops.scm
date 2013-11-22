@@ -30,20 +30,13 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-(export SDL_RWOPS_UNKNOWN
-        SDL_RWOPS_WINFILE
-        SDL_RWOPS_STDFILE
-        SDL_RWOPS_JNIFILE
-        SDL_RWOPS_MEMORY
-        SDL_RWOPS_MEMORY_RO)
-
-(define SDL_RWOPS_UNKNOWN   (foreign-value "SDL_RWOPS_UNKNOWN"   int))
-(define SDL_RWOPS_WINFILE   (foreign-value "SDL_RWOPS_WINFILE"   int))
-(define SDL_RWOPS_STDFILE   (foreign-value "SDL_RWOPS_STDFILE"   int))
-(define SDL_RWOPS_JNIFILE   (foreign-value "SDL_RWOPS_JNIFILE"   int))
-(define SDL_RWOPS_MEMORY    (foreign-value "SDL_RWOPS_MEMORY"    int))
-(define SDL_RWOPS_MEMORY_RO (foreign-value "SDL_RWOPS_MEMORY_RO" int))
-
+(define-and-export-foreign-constants int
+  SDL_RWOPS_UNKNOWN
+  SDL_RWOPS_WINFILE
+  SDL_RWOPS_STDFILE
+  SDL_RWOPS_JNIFILE
+  SDL_RWOPS_MEMORY
+  SDL_RWOPS_MEMORY_RO)
 
 ;;; Technically not an enum, but close enough.
 (define-and-export-enum SDL_RWopsWhenceEnum

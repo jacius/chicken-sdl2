@@ -33,36 +33,22 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; GENERAL
 
-(export SDL_ENABLE
-        SDL_DISABLE
-        SDL_QUERY
-        SDL_IGNORE)
-
-(define SDL_ENABLE  (foreign-value "SDL_ENABLE"  int))
-(define SDL_DISABLE (foreign-value "SDL_DISABLE" int))
-(define SDL_QUERY   (foreign-value "SDL_QUERY"   int))
-(define SDL_IGNORE  (foreign-value "SDL_IGNORE"  int))
-
+(define-and-export-foreign-constants int
+  SDL_ENABLE
+  SDL_DISABLE
+  SDL_QUERY
+  SDL_IGNORE)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; INIT / SUBSYSTEMS
 
-(export SDL_INIT_AUDIO
-        SDL_INIT_EVENTS
-        SDL_INIT_EVERYTHING
-        SDL_INIT_GAMECONTROLLER
-        SDL_INIT_HAPTIC
-        SDL_INIT_JOYSTICK
-        SDL_INIT_NOPARACHUTE
-        SDL_INIT_TIMER
-        SDL_INIT_VIDEO)
-
-(define SDL_INIT_VIDEO          (foreign-value "SDL_INIT_VIDEO"          Uint32))
-(define SDL_INIT_AUDIO          (foreign-value "SDL_INIT_AUDIO"          Uint32))
-(define SDL_INIT_TIMER          (foreign-value "SDL_INIT_TIMER"          Uint32))
-(define SDL_INIT_JOYSTICK       (foreign-value "SDL_INIT_JOYSTICK"       Uint32))
-(define SDL_INIT_HAPTIC         (foreign-value "SDL_INIT_HAPTIC"         Uint32))
-(define SDL_INIT_GAMECONTROLLER (foreign-value "SDL_INIT_GAMECONTROLLER" Uint32))
-(define SDL_INIT_EVENTS         (foreign-value "SDL_INIT_EVENTS"         Uint32))
-(define SDL_INIT_EVERYTHING     (foreign-value "SDL_INIT_EVERYTHING"     Uint32))
-(define SDL_INIT_NOPARACHUTE    (foreign-value "SDL_INIT_NOPARACHUTE"    Uint32))
+(define-and-export-foreign-constants Uint32
+  SDL_INIT_AUDIO
+  SDL_INIT_EVENTS
+  SDL_INIT_EVERYTHING
+  SDL_INIT_GAMECONTROLLER
+  SDL_INIT_HAPTIC
+  SDL_INIT_JOYSTICK
+  SDL_INIT_NOPARACHUTE
+  SDL_INIT_TIMER
+  SDL_INIT_VIDEO)

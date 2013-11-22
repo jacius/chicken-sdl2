@@ -61,6 +61,15 @@
        (define-enum enum-type value-name ...)))))
 
 
+(define-syntax define-and-export-foreign-constants
+  (syntax-rules ()
+    ((define-and-export-foreign-constants type name ...)
+     (begin
+       (export name ...)
+       (define name (foreign-value name type))
+       ...))))
+
+
 (include "lib/sdl2-types/enums/general.scm")
 (include "lib/sdl2-types/enums/audio.scm")
 (include "lib/sdl2-types/enums/events.scm")

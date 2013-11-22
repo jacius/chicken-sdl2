@@ -30,11 +30,10 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-(export SDL_ALPHA_OPAQUE
-        SDL_ALPHA_TRANSPARENT)
+(define-and-export-foreign-constants Uint8
+  SDL_ALPHA_OPAQUE
+  SDL_ALPHA_TRANSPARENT)
 
-(define SDL_ALPHA_OPAQUE      (foreign-value "SDL_ALPHA_OPAQUE"      Uint8))
-(define SDL_ALPHA_TRANSPARENT (foreign-value "SDL_ALPHA_TRANSPARENT" Uint8))
 
 (define-and-export-enum SDL_PixelTypeEnum
   SDL_PIXELTYPE_UNKNOWN
