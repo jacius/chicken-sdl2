@@ -30,11 +30,18 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-(define-and-export-foreign-constants Uint32
+(define-foreign-constants+ Uint32
+  (%sdl-window-pos->symbol
+   %symbol->sdl-window-pos
+   %sdl-window-pos->keyword
+   %keyword->sdl-window-pos)
+
+  ((SDL_WINDOWPOS_UNDEFINED  #:undefined)
+   (SDL_WINDOWPOS_CENTERED   #:centered)))
+
+(define-foreign-constants Uint32
   SDL_WINDOWPOS_UNDEFINED_MASK
-  SDL_WINDOWPOS_UNDEFINED
-  SDL_WINDOWPOS_CENTERED_MASK
-  SDL_WINDOWPOS_CENTERED)
+  SDL_WINDOWPOS_CENTERED_MASK)
 
 
 (export SDL_WINDOWPOS_UNDEFINED_DISPLAY
@@ -63,35 +70,45 @@
   body: "C_return(SDL_WINDOWPOS_ISCENTERED(value));")
 
 
-(define-and-export-enum SDL_WindowFlags
-  SDL_WINDOW_FULLSCREEN
-  SDL_WINDOW_FULLSCREEN_DESKTOP
-  SDL_WINDOW_OPENGL
-  SDL_WINDOW_SHOWN
-  SDL_WINDOW_HIDDEN
-  SDL_WINDOW_BORDERLESS
-  SDL_WINDOW_RESIZABLE
-  SDL_WINDOW_MINIMIZED
-  SDL_WINDOW_MAXIMIZED
-  SDL_WINDOW_INPUT_GRABBED
-  SDL_WINDOW_INPUT_FOCUS
-  SDL_WINDOW_MOUSE_FOCUS
-  SDL_WINDOW_FOREIGN)
+(define-foreign-constants+ SDL_WindowFlags
+  (%sdl-window-flag->symbol
+   %symbol->sdl-window-flag
+   %sdl-window-flag->keyword
+   %keyword->sdl-window-flag)
+
+  ((SDL_WINDOW_FULLSCREEN          #:fullscreen)
+   (SDL_WINDOW_FULLSCREEN_DESKTOP  #:fullscreen-desktop)
+   (SDL_WINDOW_OPENGL              #:opengl)
+   (SDL_WINDOW_SHOWN               #:shown)
+   (SDL_WINDOW_HIDDEN              #:hidden)
+   (SDL_WINDOW_BORDERLESS          #:borderless)
+   (SDL_WINDOW_RESIZABLE           #:resizable)
+   (SDL_WINDOW_MINIMIZED           #:minimized)
+   (SDL_WINDOW_MAXIMIZED           #:maximized)
+   (SDL_WINDOW_INPUT_GRABBED       #:input-grabbed)
+   (SDL_WINDOW_INPUT_FOCUS         #:input-focus)
+   (SDL_WINDOW_MOUSE_FOCUS         #:mouse-focus)
+   (SDL_WINDOW_FOREIGN             #:foreign)))
 
 
-(define-and-export-enum SDL_WindowEventID
-  SDL_WINDOWEVENT_NONE
-  SDL_WINDOWEVENT_SHOWN
-  SDL_WINDOWEVENT_HIDDEN
-  SDL_WINDOWEVENT_EXPOSED
-  SDL_WINDOWEVENT_MOVED
-  SDL_WINDOWEVENT_RESIZED
-  SDL_WINDOWEVENT_SIZE_CHANGED
-  SDL_WINDOWEVENT_MINIMIZED
-  SDL_WINDOWEVENT_MAXIMIZED
-  SDL_WINDOWEVENT_RESTORED
-  SDL_WINDOWEVENT_ENTER
-  SDL_WINDOWEVENT_LEAVE
-  SDL_WINDOWEVENT_FOCUS_GAINED
-  SDL_WINDOWEVENT_FOCUS_LOST
-  SDL_WINDOWEVENT_CLOSE)
+(define-foreign-constants+ SDL_WindowEventID
+  (%sdl-window-event-id->symbol
+   %symbol->sdl-window-event-id
+   %sdl-window-event-id->keyword
+   %keyword->sdl-window-event-id)
+
+  ((SDL_WINDOWEVENT_NONE          #:none)
+   (SDL_WINDOWEVENT_SHOWN         #:shown)
+   (SDL_WINDOWEVENT_HIDDEN        #:hidden)
+   (SDL_WINDOWEVENT_EXPOSED       #:exposed)
+   (SDL_WINDOWEVENT_MOVED         #:moved)
+   (SDL_WINDOWEVENT_RESIZED       #:resized)
+   (SDL_WINDOWEVENT_SIZE_CHANGED  #:size-changed)
+   (SDL_WINDOWEVENT_MINIMIZED     #:minimized)
+   (SDL_WINDOWEVENT_MAXIMIZED     #:maximized)
+   (SDL_WINDOWEVENT_RESTORED      #:restored)
+   (SDL_WINDOWEVENT_ENTER         #:enter)
+   (SDL_WINDOWEVENT_LEAVE         #:leave)
+   (SDL_WINDOWEVENT_FOCUS_GAINED  #:focus-gained)
+   (SDL_WINDOWEVENT_FOCUS_LOST    #:focus-lost)
+   (SDL_WINDOWEVENT_CLOSE         #:close)))

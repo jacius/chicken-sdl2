@@ -30,7 +30,7 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-(define-and-export-foreign-constants int
+(define-foreign-constants int
   SDL_AUDIO_MASK_BITSIZE
   SDL_AUDIO_MASK_DATATYPE
   SDL_AUDIO_MASK_ENDIAN
@@ -86,7 +86,7 @@
   body: "C_return(SDL_AUDIO_ISUNSIGNED(value));")
 
 
-(define-and-export-enum SDL_AudioFormatEnum
+(define-foreign-constants SDL_AudioFormatEnum
   AUDIO_U8
   AUDIO_S8
   AUDIO_U16LSB
@@ -107,7 +107,7 @@
   AUDIO_F32SYS)
 
 
-(define-and-export-enum SDL_AudioStatus
+(define-foreign-constants SDL_AudioStatus
   SDL_AUDIO_STOPPED
   SDL_AUDIO_PLAYING
   SDL_AUDIO_PAUSED)

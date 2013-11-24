@@ -56,7 +56,7 @@
         ;; TODO: sdl-filter-events
         ;; TODO: sdl-get-event-filter
         ;; TODO: sdl-set-event-filter
-        
+
         sdl-get-num-touch-devices
         sdl-get-num-touch-fingers
         sdl-get-touch-device
@@ -68,121 +68,39 @@
         sdl-load-dollar-templates)
 
 
-(define (%event-type->keyword type)
-  (select type
-    ((SDL_FIRSTEVENT)               #:first)
-    ((SDL_QUIT)                     #:quit)
-    ((SDL_APP_TERMINATING)          #:app-terminating)
-    ((SDL_APP_LOWMEMORY)            #:app-low-memory)
-    ((SDL_APP_WILLENTERBACKGROUND)  #:app-will-enter-background)
-    ((SDL_APP_DIDENTERBACKGROUND)   #:app-did-enter-background)
-    ((SDL_APP_WILLENTERFOREGROUND)  #:app-will-enter-foreground)
-    ((SDL_APP_DIDENTERFOREGROUND)   #:app-did-enter-foreground)
-    ((SDL_WINDOWEVENT)              #:window)
-    ((SDL_SYSWMEVENT)               #:sys-wm)
-    ((SDL_KEYDOWN)                  #:key-down)
-    ((SDL_KEYUP)                    #:key-up)
-    ((SDL_TEXTEDITING)              #:text-editing)
-    ((SDL_TEXTINPUT)                #:text-input)
-    ((SDL_MOUSEMOTION)              #:mouse-motion)
-    ((SDL_MOUSEBUTTONDOWN)          #:mouse-button-down)
-    ((SDL_MOUSEBUTTONUP)            #:mouse-button-up)
-    ((SDL_MOUSEWHEEL)               #:mouse-wheel)
-    ((SDL_JOYAXISMOTION)            #:joy-axis-motion)
-    ((SDL_JOYBALLMOTION)            #:joy-ball-motion)
-    ((SDL_JOYHATMOTION)             #:joy-hat-motion)
-    ((SDL_JOYBUTTONDOWN)            #:joy-button-down)
-    ((SDL_JOYBUTTONUP)              #:joy-button-up)
-    ((SDL_JOYDEVICEADDED)           #:joy-device-added)
-    ((SDL_JOYDEVICEREMOVED)         #:joy-device-removed)
-    ((SDL_CONTROLLERAXISMOTION)     #:controller-axis-motion)
-    ((SDL_CONTROLLERBUTTONDOWN)     #:controller-button-down)
-    ((SDL_CONTROLLERBUTTONUP)       #:controller-button-up)
-    ((SDL_CONTROLLERDEVICEADDED)    #:controller-device-added)
-    ((SDL_CONTROLLERDEVICEREMOVED)  #:controller-device-removed)
-    ((SDL_CONTROLLERDEVICEREMAPPED) #:controller-device-remapped)
-    ((SDL_FINGERDOWN)               #:finger-down)
-    ((SDL_FINGERUP)                 #:finger-up)
-    ((SDL_FINGERMOTION)             #:finger-motion)
-    ((SDL_DOLLARGESTURE)            #:dollar-gesture)
-    ((SDL_DOLLARRECORD)             #:dollar-record)
-    ((SDL_MULTIGESTURE)             #:multigesture)
-    ((SDL_CLIPBOARDUPDATE)          #:clipboard-update)
-    ((SDL_DROPFILE)                 #:drop-file)
-    ((SDL_USEREVENT)                #:user-event)
-    ((SDL_LASTEVENT)                #:last)
-    (else #:unknown)))
-
-(define (%keyword->event-type key)
-  (case key
-    ((#:first)                      SDL_FIRSTEVENT)
-    ((#:quit)                       SDL_QUIT)
-    ((#:app-terminating)            SDL_APP_TERMINATING)
-    ((#:app-low-memory)             SDL_APP_LOWMEMORY)
-    ((#:app-will-enter-background)  SDL_APP_WILLENTERBACKGROUND)
-    ((#:app-did-enter-background)   SDL_APP_DIDENTERBACKGROUND)
-    ((#:app-will-enter-foreground)  SDL_APP_WILLENTERFOREGROUND)
-    ((#:app-did-enter-foreground)   SDL_APP_DIDENTERFOREGROUND)
-    ((#:window)                     SDL_WINDOWEVENT)
-    ((#:sys-wm)                     SDL_SYSWMEVENT)
-    ((#:key-down)                   SDL_KEYDOWN)
-    ((#:key-up)                     SDL_KEYUP)
-    ((#:text-editing)               SDL_TEXTEDITING)
-    ((#:text-input)                 SDL_TEXTINPUT)
-    ((#:mouse-motion)               SDL_MOUSEMOTION)
-    ((#:mouse-button-down)          SDL_MOUSEBUTTONDOWN)
-    ((#:mouse-button-up)            SDL_MOUSEBUTTONUP)
-    ((#:mouse-wheel)                SDL_MOUSEWHEEL)
-    ((#:joy-axis-motion)            SDL_JOYAXISMOTION)
-    ((#:joy-ball-motion)            SDL_JOYBALLMOTION)
-    ((#:joy-hat-motion)             SDL_JOYHATMOTION)
-    ((#:joy-button-down)            SDL_JOYBUTTONDOWN)
-    ((#:joy-button-up)              SDL_JOYBUTTONUP)
-    ((#:joy-device-added)           SDL_JOYDEVICEADDED)
-    ((#:joy-device-removed)         SDL_JOYDEVICEREMOVED)
-    ((#:controller-axis-motion)     SDL_CONTROLLERAXISMOTION)
-    ((#:controller-button-down)     SDL_CONTROLLERBUTTONDOWN)
-    ((#:controller-button-up)       SDL_CONTROLLERBUTTONUP)
-    ((#:controller-device-added)    SDL_CONTROLLERDEVICEADDED)
-    ((#:controller-device-removed)  SDL_CONTROLLERDEVICEREMOVED)
-    ((#:controller-device-remapped) SDL_CONTROLLERDEVICEREMAPPED)
-    ((#:finger-down)                SDL_FINGERDOWN)
-    ((#:finger-up)                  SDL_FINGERUP)
-    ((#:finger-motion)              SDL_FINGERMOTION)
-    ((#:dollar-gesture)             SDL_DOLLARGESTURE)
-    ((#:dollar-record)              SDL_DOLLARRECORD)
-    ((#:multigesture)               SDL_MULTIGESTURE)
-    ((#:clipboard-update)           SDL_CLIPBOARDUPDATE)
-    ((#:drop-file)                  SDL_DROPFILE)
-    ((#:user-event)                 SDL_USEREVENT)
-    ((#:last)                       SDL_LASTEVENT)
-    (else (if (integer? key)
-              key
-              0))))
-
-
 (define (sdl-event-state type state)
-  (= 1 (SDL_EventState
-        (%keyword->event-type type)
-        (case state
-          ((#t) SDL_ENABLE)
-          ((#f) SDL_DISABLE)
-          (else SDL_QUERY)))))
+  (= SDL_ENABLE
+     (SDL_EventState
+      (keyword->sdl-event-type type)
+      (case state
+        ((#t) SDL_ENABLE)
+        ((#f) SDL_DISABLE)
+        (else SDL_QUERY)))))
 
 
 (define (sdl-flush-event type)
-  (SDL_FlushEvent (%keyword->event-type type)))
+  (SDL_FlushEvent (keyword->sdl-event-type type)))
 
 (define (sdl-flush-events min-type max-type)
-  (SDL_FlushEvents (%keyword->event-type min-type)
-                   (%keyword->event-type max-type)))
+  (SDL_FlushEvents
+   (if (integer? min-type)
+       min-type
+       (keyword->sdl-event-type min-type default: SDL_FIRSTEVENT))
+   (if (integer? max-type)
+       max-type
+       (keyword->sdl-event-type max-type default: SDL_LASTEVENT))))
 
 (define (sdl-has-event type)
-  (SDL_HasEvent (%keyword->event-type type)))
+  (SDL_HasEvent (keyword->sdl-event-type type)))
 
 (define (sdl-has-events min-type max-type)
-  (SDL_HasEvents (%keyword->event-type min-type)
-                 (%keyword->event-type max-type)))
+  (SDL_HasEvents
+   (if (integer? min-type)
+       min-type
+       (keyword->sdl-event-type min-type default: SDL_FIRSTEVENT))
+   (if (integer? max-type)
+       max-type
+       (keyword->sdl-event-type max-type default: SDL_LASTEVENT))))
 
 (define (sdl-quit-requested)
   (SDL_QuitRequested))
@@ -192,23 +110,22 @@
 (define (sdl-peep-events events/num action #!optional
                          (min-type #:first)
                          (max-type #:last))
-  (let ((act (%keyword->event-action action))
-        (min (%keyword->event-type min-type))
-        (max (%keyword->event-type max-type)))
-   (select act
-     ((SDL_ADDEVENT)
-      (%sdl-peep-events/add events/num act min max))
-     ((SDL_PEEKEVENT SDL_GETEVENT)
-      (%sdl-peep-events/peek-get events/num act min max)))))
-
-(define (%keyword->event-action action)
-  (case action
-    ((#:add)  SDL_ADDEVENT)
-    ((#:peek) SDL_PEEKEVENT)
-    ((#:get)  SDL_GETEVENT)
-    (else (if (integer? action)
-              action
-              0))))
+  (let ((act (if (integer? action)
+                 action
+                 (keyword->sdl-event-action action default: 0)))
+        (min (if (integer? min-type)
+                 min-type
+                 (keyword->sdl-event-type min-type default: SDL_FIRSTEVENT)))
+        (max (if (integer? max-type)
+                 max-type
+                 (keyword->sdl-event-type max-type default: SDL_LASTEVENT))))
+    (select act
+      ((SDL_ADDEVENT)
+       (%sdl-peep-events/add
+        events/num act min max))
+      ((SDL_PEEKEVENT SDL_GETEVENT)
+       (%sdl-peep-events/peek-get
+        events/num act min max)))))
 
 (define (%sdl-peep-events/add events act min max)
   (assert (every sdl-event? events))

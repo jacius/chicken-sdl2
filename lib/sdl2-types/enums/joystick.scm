@@ -30,15 +30,17 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-;;; Technically not an enum, but close enough.
-(define-and-export-enum SDL_JoystickHatPosition
-  SDL_HAT_CENTERED
-  SDL_HAT_UP
-  SDL_HAT_RIGHT
-  SDL_HAT_DOWN
-  SDL_HAT_LEFT
-  SDL_HAT_RIGHTUP
-  SDL_HAT_RIGHTDOWN
-  SDL_HAT_LEFTUP
-  SDL_HAT_LEFTDOWN)
-
+(define-foreign-constants+ SDL_JoystickHatPosition
+  (%sdl-joystick-hat-pos->symbol
+   %symbol->sdl-joystick-hat-pos
+   %sdl-joystick-hat-pos->keyword
+   %keyword->sdl-joystick-hat-pos)
+  ((SDL_HAT_CENTERED  #:centered)
+   (SDL_HAT_UP        #:up)
+   (SDL_HAT_RIGHT     #:right)
+   (SDL_HAT_DOWN      #:down)
+   (SDL_HAT_LEFT      #:left)
+   (SDL_HAT_RIGHTUP   #:right-up)
+   (SDL_HAT_RIGHTDOWN #:right-down)
+   (SDL_HAT_LEFTUP    #:left-up)
+   (SDL_HAT_LEFTDOWN  #:left-down)))

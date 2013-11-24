@@ -30,7 +30,7 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-(define-and-export-foreign-constants int
+(define-foreign-constants int
   SDL_RWOPS_UNKNOWN
   SDL_RWOPS_WINFILE
   SDL_RWOPS_STDFILE
@@ -38,8 +38,7 @@
   SDL_RWOPS_MEMORY
   SDL_RWOPS_MEMORY_RO)
 
-;;; Technically not an enum, but close enough.
-(define-and-export-enum SDL_RWopsWhenceEnum
+(define-foreign-constants SDL_RWopsWhenceEnum
   RW_SEEK_SET
   RW_SEEK_CUR
   RW_SEEK_END)

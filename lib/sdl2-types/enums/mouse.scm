@@ -30,41 +30,33 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-;;; Technically not an enum, but close enough.
-(define-and-export-enum (SDL_MouseButton sdl-mouse-button-name)
-  SDL_BUTTON_LEFT
-  SDL_BUTTON_MIDDLE
-  SDL_BUTTON_RIGHT
-  SDL_BUTTON_X1
-  SDL_BUTTON_X2)
+(define-foreign-constants+ SDL_MouseButton
+  (sdl-mouse-button-name
+   %symbol->sdl-mouse-button
+   %sdl-mouse-button->keyword
+   %keyword->sdl-mouse-button)
 
-;;; Technically not an enum, but close enough.
-(define-and-export-enum (SDL_MouseButtonMask sdl-mouse-button-mask-name)
-  SDL_BUTTON_LMASK
-  SDL_BUTTON_MMASK
-  SDL_BUTTON_RMASK
-  SDL_BUTTON_X1MASK
-  SDL_BUTTON_X2MASK)
-
-(define-and-export-enum SDL_SystemCursor
-  SDL_SYSTEM_CURSOR_ARROW
-  SDL_SYSTEM_CURSOR_IBEAM
-  SDL_SYSTEM_CURSOR_WAIT
-  SDL_SYSTEM_CURSOR_CROSSHAIR
-  SDL_SYSTEM_CURSOR_WAITARROW
-  SDL_SYSTEM_CURSOR_SIZENWSE
-  SDL_SYSTEM_CURSOR_SIZENESW
-  SDL_SYSTEM_CURSOR_SIZEWE
-  SDL_SYSTEM_CURSOR_SIZENS
-  SDL_SYSTEM_CURSOR_SIZEALL
-  SDL_SYSTEM_CURSOR_NO
-  SDL_SYSTEM_CURSOR_HAND
-  SDL_NUM_SYSTEM_CURSORS)
+  ((SDL_BUTTON_LEFT    #:left)
+   (SDL_BUTTON_MIDDLE  #:middle)
+   (SDL_BUTTON_RIGHT   #:right)
+   (SDL_BUTTON_X1      #:x1)
+   (SDL_BUTTON_X2      #:x2)))
 
 
-(export sdl-mouse-masks->list
-        sdl-mouse-mask->button)
+(define-foreign-constants+ SDL_MouseButtonMask
+  (sdl-mouse-button-mask-name
+   %symbol->sdl-mouse-button-mask
+   %sdl-mouse-button-mask->keyword
+   %keyword->sdl-mouse-button-mask)
 
+  ((SDL_BUTTON_LMASK   #:left-mask)
+   (SDL_BUTTON_MMASK   #:middle-mask)
+   (SDL_BUTTON_RMASK   #:right-mask)
+   (SDL_BUTTON_X1MASK  #:x1-mask)
+   (SDL_BUTTON_X2MASK  #:x2-mask)))
+
+
+(export sdl-mouse-masks->list)
 (define (sdl-mouse-masks->list state)
   (masks->list state
                (list SDL_BUTTON_LMASK
@@ -73,6 +65,8 @@
                      SDL_BUTTON_X1MASK
                      SDL_BUTTON_X2MASK)))
 
+
+(export sdl-mouse-mask->button)
 (define (sdl-mouse-mask->button mask)
   (select mask
     ((SDL_BUTTON_LMASK)  SDL_BUTTON_LEFT)

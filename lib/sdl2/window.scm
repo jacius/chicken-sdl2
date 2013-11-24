@@ -77,49 +77,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; CREATE / DESTROY WINDOW
 
-(define (%keyword->window-flag key)
-  (case key
-    ((#:fullscreen)         SDL_WINDOW_FULLSCREEN)
-    ((#:fullscreen-desktop) SDL_WINDOW_FULLSCREEN_DESKTOP)
-    ((#:opengl)             SDL_WINDOW_OPENGL)
-    ((#:shown)              SDL_WINDOW_SHOWN)
-    ((#:hidden)             SDL_WINDOW_HIDDEN)
-    ((#:borderless)         SDL_WINDOW_BORDERLESS)
-    ((#:resizable)          SDL_WINDOW_RESIZABLE)
-    ((#:minimized)          SDL_WINDOW_MINIMIZED)
-    ((#:maximized)          SDL_WINDOW_MAXIMIZED)
-    ((#:input-grabbed)      SDL_WINDOW_INPUT_GRABBED)
-    ((#:input-focus)        SDL_WINDOW_INPUT_FOCUS)
-    ((#:mouse-focus)        SDL_WINDOW_MOUSE_FOCUS)
-    ((#:foreign)            SDL_WINDOW_FOREIGN)
-    (else (if (integer? key)
-              key
-              0))))
-
-(define (%window-flag->keyword c)
-  (select c
-    ((SDL_WINDOW_FULLSCREEN)         #:fullscreen)
-    ((SDL_WINDOW_FULLSCREEN_DESKTOP) #:fullscreen-desktop)
-    ((SDL_WINDOW_OPENGL)             #:opengl)
-    ((SDL_WINDOW_SHOWN)              #:shown)
-    ((SDL_WINDOW_HIDDEN)             #:hidden)
-    ((SDL_WINDOW_BORDERLESS)         #:borderless)
-    ((SDL_WINDOW_RESIZABLE)          #:resizable)
-    ((SDL_WINDOW_MINIMIZED)          #:minimized)
-    ((SDL_WINDOW_MAXIMIZED)          #:maximized)
-    ((SDL_WINDOW_INPUT_GRABBED)      #:input-grabbed)
-    ((SDL_WINDOW_INPUT_FOCUS)        #:input-focus)
-    ((SDL_WINDOW_MOUSE_FOCUS)        #:mouse-focus)
-    ((SDL_WINDOW_FOREIGN)            #:foreign)))
-
-(define (%window-pos->int pos)
-  (case pos
-    ((#:centered) SDL_WINDOWPOS_CENTERED)
-    ((#f #:undefined) SDL_WINDOWPOS_UNDEFINED)
-    (else (if (integer? pos)
-              pos
-              SDL_WINDOWPOS_UNDEFINED))))
-
+(define (%window-pos->int p)
+  (if (number? p)
+      (inexact->exact (round p))
+      (%keyword->sdl-window-pos p default: 0)))
 
 (define (sdl-create-window title x y w h . flags)
   (SDL_CreateWindow
@@ -127,7 +88,9 @@
    (%window-pos->int x) (%window-pos->int y)
    w h
    (apply bitwise-ior
-          (map %keyword->window-flag flags))))
+     (map (lambda (flag)
+            (%keyword->sdl-window-flag flag default: 0))
+          flags))))
 
 (define (sdl-get-window-from-id id)
   (SDL_GetWindowFromID id))
@@ -200,7 +163,7 @@
 
 (define (sdl-window-flags window)
   (let ((result (SDL_GetWindowFlags window)))
-    (map %window-flag->keyword
+    (map %sdl-window-flag->keyword
          (masks->list result
                       (list SDL_WINDOW_FULLSCREEN
                             SDL_WINDOW_FULLSCREEN_DESKTOP
@@ -328,7 +291,8 @@
 
 (define (sdl-window-position-set! window pos)
   (SDL_SetWindowPosition
-   window (%window-pos->int (car pos)) (%window-pos->int (cadr pos))))
+   window
+   (%window-pos->int (car pos)) (%window-pos->int (cadr pos))))
 
 (set! sdl-window-position
       (getter-with-setter sdl-window-position

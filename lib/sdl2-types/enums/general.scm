@@ -33,22 +33,27 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; GENERAL
 
-(define-and-export-foreign-constants int
+(define-foreign-constants int
   SDL_ENABLE
   SDL_DISABLE
   SDL_QUERY
   SDL_IGNORE)
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; INIT / SUBSYSTEMS
 
-(define-and-export-foreign-constants Uint32
-  SDL_INIT_AUDIO
-  SDL_INIT_EVENTS
-  SDL_INIT_EVERYTHING
-  SDL_INIT_GAMECONTROLLER
-  SDL_INIT_HAPTIC
-  SDL_INIT_JOYSTICK
-  SDL_INIT_NOPARACHUTE
-  SDL_INIT_TIMER
-  SDL_INIT_VIDEO)
+(define-foreign-constants+ Uint32
+  (%sdl-init-flag->symbol
+   %symbol->sdl-init-flag
+   %sdl-init-flag->keyword
+   %keyword->sdl-init-flag)
+  ((SDL_INIT_TIMER           #:timer)
+   (SDL_INIT_AUDIO           #:audio)
+   (SDL_INIT_VIDEO           #:video)
+   (SDL_INIT_JOYSTICK        #:joystick)
+   (SDL_INIT_HAPTIC          #:haptic)
+   (SDL_INIT_GAMECONTROLLER  #:controller)
+   (SDL_INIT_EVENTS          #:events)
+   (SDL_INIT_EVERYTHING      #:everything)
+   (SDL_INIT_NOPARACHUTE     #:no-parachute)))

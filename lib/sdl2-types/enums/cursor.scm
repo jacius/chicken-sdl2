@@ -30,8 +30,21 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-(define-foreign-constants SDL_BlendMode
-  SDL_BLENDMODE_NONE
-  SDL_BLENDMODE_BLEND
-  SDL_BLENDMODE_ADD
-  SDL_BLENDMODE_MOD)
+(define-foreign-constants+ SDL_SystemCursor
+  (%sdl-system-cursor->symbol
+   %symbol->sdl-system-cursor
+   %sdl-system-cursor->keyword
+   %keyword->sdl-system-cursor)
+
+  ((SDL_SYSTEM_CURSOR_ARROW      #:arrow)
+   (SDL_SYSTEM_CURSOR_IBEAM      #:ibeam)
+   (SDL_SYSTEM_CURSOR_WAIT       #:wait)
+   (SDL_SYSTEM_CURSOR_CROSSHAIR  #:crosshair)
+   (SDL_SYSTEM_CURSOR_WAITARROW  #:waitarrow)
+   (SDL_SYSTEM_CURSOR_SIZENWSE   #:size-nwse)
+   (SDL_SYSTEM_CURSOR_SIZENESW   #:size-nesw)
+   (SDL_SYSTEM_CURSOR_SIZEWE     #:size-we)
+   (SDL_SYSTEM_CURSOR_SIZENS     #:size-ns)
+   (SDL_SYSTEM_CURSOR_SIZEALL    #:size-all)
+   (SDL_SYSTEM_CURSOR_NO         #:no)
+   (SDL_SYSTEM_CURSOR_HAND       #:hand)))

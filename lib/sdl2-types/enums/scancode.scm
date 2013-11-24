@@ -30,264 +30,267 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-(define-and-export-enum (SDL_Scancode sdl-scancode-name)
-  SDL_SCANCODE_UNKNOWN
+(define-foreign-constants+ SDL_Scancode
+  (sdl-scancode-name
+   %symbol->sdl-scancode
+   %sdl-scancode->keyword
+   %keyword->sdl-scancode)
 
-  SDL_SCANCODE_A
-  SDL_SCANCODE_B
-  SDL_SCANCODE_C
-  SDL_SCANCODE_D
-  SDL_SCANCODE_E
-  SDL_SCANCODE_F
-  SDL_SCANCODE_G
-  SDL_SCANCODE_H
-  SDL_SCANCODE_I
-  SDL_SCANCODE_J
-  SDL_SCANCODE_K
-  SDL_SCANCODE_L
-  SDL_SCANCODE_M
-  SDL_SCANCODE_N
-  SDL_SCANCODE_O
-  SDL_SCANCODE_P
-  SDL_SCANCODE_Q
-  SDL_SCANCODE_R
-  SDL_SCANCODE_S
-  SDL_SCANCODE_T
-  SDL_SCANCODE_U
-  SDL_SCANCODE_V
-  SDL_SCANCODE_W
-  SDL_SCANCODE_X
-  SDL_SCANCODE_Y
-  SDL_SCANCODE_Z
+  ((SDL_SCANCODE_UNKNOWN             #:scancode-unknown)
 
-  SDL_SCANCODE_1
-  SDL_SCANCODE_2
-  SDL_SCANCODE_3
-  SDL_SCANCODE_4
-  SDL_SCANCODE_5
-  SDL_SCANCODE_6
-  SDL_SCANCODE_7
-  SDL_SCANCODE_8
-  SDL_SCANCODE_9
-  SDL_SCANCODE_0
+   (SDL_SCANCODE_A                   #:scancode-a)
+   (SDL_SCANCODE_B                   #:scancode-b)
+   (SDL_SCANCODE_C                   #:scancode-c)
+   (SDL_SCANCODE_D                   #:scancode-d)
+   (SDL_SCANCODE_E                   #:scancode-e)
+   (SDL_SCANCODE_F                   #:scancode-f)
+   (SDL_SCANCODE_G                   #:scancode-g)
+   (SDL_SCANCODE_H                   #:scancode-h)
+   (SDL_SCANCODE_I                   #:scancode-i)
+   (SDL_SCANCODE_J                   #:scancode-j)
+   (SDL_SCANCODE_K                   #:scancode-k)
+   (SDL_SCANCODE_L                   #:scancode-l)
+   (SDL_SCANCODE_M                   #:scancode-m)
+   (SDL_SCANCODE_N                   #:scancode-n)
+   (SDL_SCANCODE_O                   #:scancode-o)
+   (SDL_SCANCODE_P                   #:scancode-p)
+   (SDL_SCANCODE_Q                   #:scancode-q)
+   (SDL_SCANCODE_R                   #:scancode-r)
+   (SDL_SCANCODE_S                   #:scancode-s)
+   (SDL_SCANCODE_T                   #:scancode-t)
+   (SDL_SCANCODE_U                   #:scancode-u)
+   (SDL_SCANCODE_V                   #:scancode-v)
+   (SDL_SCANCODE_W                   #:scancode-w)
+   (SDL_SCANCODE_X                   #:scancode-x)
+   (SDL_SCANCODE_Y                   #:scancode-y)
+   (SDL_SCANCODE_Z                   #:scancode-z)
 
-  SDL_SCANCODE_RETURN
-  SDL_SCANCODE_ESCAPE
-  SDL_SCANCODE_BACKSPACE
-  SDL_SCANCODE_TAB
-  SDL_SCANCODE_SPACE
+   (SDL_SCANCODE_1                   #:scancode-1)
+   (SDL_SCANCODE_2                   #:scancode-2)
+   (SDL_SCANCODE_3                   #:scancode-3)
+   (SDL_SCANCODE_4                   #:scancode-4)
+   (SDL_SCANCODE_5                   #:scancode-5)
+   (SDL_SCANCODE_6                   #:scancode-6)
+   (SDL_SCANCODE_7                   #:scancode-7)
+   (SDL_SCANCODE_8                   #:scancode-8)
+   (SDL_SCANCODE_9                   #:scancode-9)
+   (SDL_SCANCODE_0                   #:scancode-0)
 
-  SDL_SCANCODE_MINUS
-  SDL_SCANCODE_EQUALS
-  SDL_SCANCODE_LEFTBRACKET
-  SDL_SCANCODE_RIGHTBRACKET
-  SDL_SCANCODE_BACKSLASH
-  SDL_SCANCODE_NONUSHASH
-  SDL_SCANCODE_SEMICOLON
-  SDL_SCANCODE_APOSTROPHE
-  SDL_SCANCODE_GRAVE
-  SDL_SCANCODE_COMMA
-  SDL_SCANCODE_PERIOD
-  SDL_SCANCODE_SLASH
+   (SDL_SCANCODE_RETURN              #:scancode-return)
+   (SDL_SCANCODE_ESCAPE              #:scancode-escape)
+   (SDL_SCANCODE_BACKSPACE           #:scancode-backspace)
+   (SDL_SCANCODE_TAB                 #:scancode-tab)
+   (SDL_SCANCODE_SPACE               #:scancode-space)
 
-  SDL_SCANCODE_CAPSLOCK
+   (SDL_SCANCODE_MINUS               #:scancode-minus)
+   (SDL_SCANCODE_EQUALS              #:scancode-equals)
+   (SDL_SCANCODE_LEFTBRACKET         #:scancode-left-bracket)
+   (SDL_SCANCODE_RIGHTBRACKET        #:scancode-right-bracket)
+   (SDL_SCANCODE_BACKSLASH           #:scancode-backslash)
+   (SDL_SCANCODE_NONUSHASH           #:scancode-non-us-hash)
+   (SDL_SCANCODE_SEMICOLON           #:scancode-semicolon)
+   (SDL_SCANCODE_APOSTROPHE          #:scancode-apostrophe)
+   (SDL_SCANCODE_GRAVE               #:scancode-grave)
+   (SDL_SCANCODE_COMMA               #:scancode-comma)
+   (SDL_SCANCODE_PERIOD              #:scancode-period)
+   (SDL_SCANCODE_SLASH               #:scancode-slash)
 
-  SDL_SCANCODE_F1
-  SDL_SCANCODE_F2
-  SDL_SCANCODE_F3
-  SDL_SCANCODE_F4
-  SDL_SCANCODE_F5
-  SDL_SCANCODE_F6
-  SDL_SCANCODE_F7
-  SDL_SCANCODE_F8
-  SDL_SCANCODE_F9
-  SDL_SCANCODE_F10
-  SDL_SCANCODE_F11
-  SDL_SCANCODE_F12
+   (SDL_SCANCODE_CAPSLOCK            #:scancode-caps-lock)
 
-  SDL_SCANCODE_PRINTSCREEN
-  SDL_SCANCODE_SCROLLLOCK
-  SDL_SCANCODE_PAUSE
-  SDL_SCANCODE_INSERT
-  SDL_SCANCODE_HOME
-  SDL_SCANCODE_PAGEUP
-  SDL_SCANCODE_DELETE
-  SDL_SCANCODE_END
-  SDL_SCANCODE_PAGEDOWN
-  SDL_SCANCODE_RIGHT
-  SDL_SCANCODE_LEFT
-  SDL_SCANCODE_DOWN
-  SDL_SCANCODE_UP
+   (SDL_SCANCODE_F1                  #:scancode-f1)
+   (SDL_SCANCODE_F2                  #:scancode-f2)
+   (SDL_SCANCODE_F3                  #:scancode-f3)
+   (SDL_SCANCODE_F4                  #:scancode-f4)
+   (SDL_SCANCODE_F5                  #:scancode-f5)
+   (SDL_SCANCODE_F6                  #:scancode-f6)
+   (SDL_SCANCODE_F7                  #:scancode-f7)
+   (SDL_SCANCODE_F8                  #:scancode-f8)
+   (SDL_SCANCODE_F9                  #:scancode-f9)
+   (SDL_SCANCODE_F10                 #:scancode-f10)
+   (SDL_SCANCODE_F11                 #:scancode-f11)
+   (SDL_SCANCODE_F12                 #:scancode-f12)
 
-  SDL_SCANCODE_NUMLOCKCLEAR
-  SDL_SCANCODE_KP_DIVIDE
-  SDL_SCANCODE_KP_MULTIPLY
-  SDL_SCANCODE_KP_MINUS
-  SDL_SCANCODE_KP_PLUS
-  SDL_SCANCODE_KP_ENTER
-  SDL_SCANCODE_KP_1
-  SDL_SCANCODE_KP_2
-  SDL_SCANCODE_KP_3
-  SDL_SCANCODE_KP_4
-  SDL_SCANCODE_KP_5
-  SDL_SCANCODE_KP_6
-  SDL_SCANCODE_KP_7
-  SDL_SCANCODE_KP_8
-  SDL_SCANCODE_KP_9
-  SDL_SCANCODE_KP_0
-  SDL_SCANCODE_KP_PERIOD
+   (SDL_SCANCODE_PRINTSCREEN         #:scancode-print-screen)
+   (SDL_SCANCODE_SCROLLLOCK          #:scancode-scroll-lock)
+   (SDL_SCANCODE_PAUSE               #:scancode-pause)
+   (SDL_SCANCODE_INSERT              #:scancode-insert)
+   (SDL_SCANCODE_HOME                #:scancode-home)
+   (SDL_SCANCODE_PAGEUP              #:scancode-page-up)
+   (SDL_SCANCODE_DELETE              #:scancode-delete)
+   (SDL_SCANCODE_END                 #:scancode-end)
+   (SDL_SCANCODE_PAGEDOWN            #:scancode-page-down)
+   (SDL_SCANCODE_RIGHT               #:scancode-right)
+   (SDL_SCANCODE_LEFT                #:scancode-left)
+   (SDL_SCANCODE_DOWN                #:scancode-down)
+   (SDL_SCANCODE_UP                  #:scancode-up)
 
-  SDL_SCANCODE_NONUSBACKSLASH
-  SDL_SCANCODE_APPLICATION
-  SDL_SCANCODE_POWER
-  SDL_SCANCODE_KP_EQUALS
-  SDL_SCANCODE_F13
-  SDL_SCANCODE_F14
-  SDL_SCANCODE_F15
-  SDL_SCANCODE_F16
-  SDL_SCANCODE_F17
-  SDL_SCANCODE_F18
-  SDL_SCANCODE_F19
-  SDL_SCANCODE_F20
-  SDL_SCANCODE_F21
-  SDL_SCANCODE_F22
-  SDL_SCANCODE_F23
-  SDL_SCANCODE_F24
-  SDL_SCANCODE_EXECUTE
-  SDL_SCANCODE_HELP
-  SDL_SCANCODE_MENU
-  SDL_SCANCODE_SELECT
-  SDL_SCANCODE_STOP
-  SDL_SCANCODE_AGAIN
-  SDL_SCANCODE_UNDO
-  SDL_SCANCODE_CUT
-  SDL_SCANCODE_COPY
-  SDL_SCANCODE_PASTE
-  SDL_SCANCODE_FIND
-  SDL_SCANCODE_MUTE
-  SDL_SCANCODE_VOLUMEUP
-  SDL_SCANCODE_VOLUMEDOWN
-  SDL_SCANCODE_KP_COMMA
-  SDL_SCANCODE_KP_EQUALSAS400
+   (SDL_SCANCODE_NUMLOCKCLEAR        #:scancode-num-lock-clear)
+   (SDL_SCANCODE_KP_DIVIDE           #:scancode-kp-divide)
+   (SDL_SCANCODE_KP_MULTIPLY         #:scancode-kp-multiply)
+   (SDL_SCANCODE_KP_MINUS            #:scancode-kp-minus)
+   (SDL_SCANCODE_KP_PLUS             #:scancode-kp-plus)
+   (SDL_SCANCODE_KP_ENTER            #:scancode-kp-enter)
+   (SDL_SCANCODE_KP_1                #:scancode-kp-1)
+   (SDL_SCANCODE_KP_2                #:scancode-kp-2)
+   (SDL_SCANCODE_KP_3                #:scancode-kp-3)
+   (SDL_SCANCODE_KP_4                #:scancode-kp-4)
+   (SDL_SCANCODE_KP_5                #:scancode-kp-5)
+   (SDL_SCANCODE_KP_6                #:scancode-kp-6)
+   (SDL_SCANCODE_KP_7                #:scancode-kp-7)
+   (SDL_SCANCODE_KP_8                #:scancode-kp-8)
+   (SDL_SCANCODE_KP_9                #:scancode-kp-9)
+   (SDL_SCANCODE_KP_0                #:scancode-kp-0)
+   (SDL_SCANCODE_KP_PERIOD           #:scancode-kp-period)
 
-  SDL_SCANCODE_INTERNATIONAL1
-  SDL_SCANCODE_INTERNATIONAL2
-  SDL_SCANCODE_INTERNATIONAL3
-  SDL_SCANCODE_INTERNATIONAL4
-  SDL_SCANCODE_INTERNATIONAL5
-  SDL_SCANCODE_INTERNATIONAL6
-  SDL_SCANCODE_INTERNATIONAL7
-  SDL_SCANCODE_INTERNATIONAL8
-  SDL_SCANCODE_INTERNATIONAL9
-  SDL_SCANCODE_LANG1
-  SDL_SCANCODE_LANG2
-  SDL_SCANCODE_LANG3
-  SDL_SCANCODE_LANG4
-  SDL_SCANCODE_LANG5
-  SDL_SCANCODE_LANG6
-  SDL_SCANCODE_LANG7
-  SDL_SCANCODE_LANG8
-  SDL_SCANCODE_LANG9
+   (SDL_SCANCODE_NONUSBACKSLASH      #:scancode-non-us-backslash)
+   (SDL_SCANCODE_APPLICATION         #:scancode-application)
+   (SDL_SCANCODE_POWER               #:scancode-power)
+   (SDL_SCANCODE_KP_EQUALS           #:scancode-kp-equals)
+   (SDL_SCANCODE_F13                 #:scancode-f13)
+   (SDL_SCANCODE_F14                 #:scancode-f14)
+   (SDL_SCANCODE_F15                 #:scancode-f15)
+   (SDL_SCANCODE_F16                 #:scancode-f16)
+   (SDL_SCANCODE_F17                 #:scancode-f17)
+   (SDL_SCANCODE_F18                 #:scancode-f18)
+   (SDL_SCANCODE_F19                 #:scancode-f19)
+   (SDL_SCANCODE_F20                 #:scancode-f20)
+   (SDL_SCANCODE_F21                 #:scancode-f21)
+   (SDL_SCANCODE_F22                 #:scancode-f22)
+   (SDL_SCANCODE_F23                 #:scancode-f23)
+   (SDL_SCANCODE_F24                 #:scancode-f24)
+   (SDL_SCANCODE_EXECUTE             #:scancode-execute)
+   (SDL_SCANCODE_HELP                #:scancode-help)
+   (SDL_SCANCODE_MENU                #:scancode-menu)
+   (SDL_SCANCODE_SELECT              #:scancode-select)
+   (SDL_SCANCODE_STOP                #:scancode-stop)
+   (SDL_SCANCODE_AGAIN               #:scancode-again)
+   (SDL_SCANCODE_UNDO                #:scancode-undo)
+   (SDL_SCANCODE_CUT                 #:scancode-cut)
+   (SDL_SCANCODE_COPY                #:scancode-copy)
+   (SDL_SCANCODE_PASTE               #:scancode-paste)
+   (SDL_SCANCODE_FIND                #:scancode-find)
+   (SDL_SCANCODE_MUTE                #:scancode-mute)
+   (SDL_SCANCODE_VOLUMEUP            #:scancode-volume-up)
+   (SDL_SCANCODE_VOLUMEDOWN          #:scancode-volume-down)
+   (SDL_SCANCODE_KP_COMMA            #:scancode-kp-comma)
+   (SDL_SCANCODE_KP_EQUALSAS400      #:scancode-kp-equals-as400)
 
-  SDL_SCANCODE_ALTERASE
-  SDL_SCANCODE_SYSREQ
-  SDL_SCANCODE_CANCEL
-  SDL_SCANCODE_CLEAR
-  SDL_SCANCODE_PRIOR
-  SDL_SCANCODE_RETURN2
-  SDL_SCANCODE_SEPARATOR
-  SDL_SCANCODE_OUT
-  SDL_SCANCODE_OPER
-  SDL_SCANCODE_CLEARAGAIN
-  SDL_SCANCODE_CRSEL
-  SDL_SCANCODE_EXSEL
+   (SDL_SCANCODE_INTERNATIONAL1      #:scancode-international1)
+   (SDL_SCANCODE_INTERNATIONAL2      #:scancode-international2)
+   (SDL_SCANCODE_INTERNATIONAL3      #:scancode-international3)
+   (SDL_SCANCODE_INTERNATIONAL4      #:scancode-international4)
+   (SDL_SCANCODE_INTERNATIONAL5      #:scancode-international5)
+   (SDL_SCANCODE_INTERNATIONAL6      #:scancode-international6)
+   (SDL_SCANCODE_INTERNATIONAL7      #:scancode-international7)
+   (SDL_SCANCODE_INTERNATIONAL8      #:scancode-international8)
+   (SDL_SCANCODE_INTERNATIONAL9      #:scancode-international9)
+   (SDL_SCANCODE_LANG1               #:scancode-lang1)
+   (SDL_SCANCODE_LANG2               #:scancode-lang2)
+   (SDL_SCANCODE_LANG3               #:scancode-lang3)
+   (SDL_SCANCODE_LANG4               #:scancode-lang4)
+   (SDL_SCANCODE_LANG5               #:scancode-lang5)
+   (SDL_SCANCODE_LANG6               #:scancode-lang6)
+   (SDL_SCANCODE_LANG7               #:scancode-lang7)
+   (SDL_SCANCODE_LANG8               #:scancode-lang8)
+   (SDL_SCANCODE_LANG9               #:scancode-lang9)
 
-  SDL_SCANCODE_KP_00
-  SDL_SCANCODE_KP_000
-  SDL_SCANCODE_THOUSANDSSEPARATOR
-  SDL_SCANCODE_DECIMALSEPARATOR
-  SDL_SCANCODE_CURRENCYUNIT
-  SDL_SCANCODE_CURRENCYSUBUNIT
-  SDL_SCANCODE_KP_LEFTPAREN
-  SDL_SCANCODE_KP_RIGHTPAREN
-  SDL_SCANCODE_KP_LEFTBRACE
-  SDL_SCANCODE_KP_RIGHTBRACE
-  SDL_SCANCODE_KP_TAB
-  SDL_SCANCODE_KP_BACKSPACE
-  SDL_SCANCODE_KP_A
-  SDL_SCANCODE_KP_B
-  SDL_SCANCODE_KP_C
-  SDL_SCANCODE_KP_D
-  SDL_SCANCODE_KP_E
-  SDL_SCANCODE_KP_F
-  SDL_SCANCODE_KP_XOR
-  SDL_SCANCODE_KP_POWER
-  SDL_SCANCODE_KP_PERCENT
-  SDL_SCANCODE_KP_LESS
-  SDL_SCANCODE_KP_GREATER
-  SDL_SCANCODE_KP_AMPERSAND
-  SDL_SCANCODE_KP_DBLAMPERSAND
-  SDL_SCANCODE_KP_VERTICALBAR
-  SDL_SCANCODE_KP_DBLVERTICALBAR
-  SDL_SCANCODE_KP_COLON
-  SDL_SCANCODE_KP_HASH
-  SDL_SCANCODE_KP_SPACE
-  SDL_SCANCODE_KP_AT
-  SDL_SCANCODE_KP_EXCLAM
-  SDL_SCANCODE_KP_MEMSTORE
-  SDL_SCANCODE_KP_MEMRECALL
-  SDL_SCANCODE_KP_MEMCLEAR
-  SDL_SCANCODE_KP_MEMADD
-  SDL_SCANCODE_KP_MEMSUBTRACT
-  SDL_SCANCODE_KP_MEMMULTIPLY
-  SDL_SCANCODE_KP_MEMDIVIDE
-  SDL_SCANCODE_KP_PLUSMINUS
-  SDL_SCANCODE_KP_CLEAR
-  SDL_SCANCODE_KP_CLEARENTRY
-  SDL_SCANCODE_KP_BINARY
-  SDL_SCANCODE_KP_OCTAL
-  SDL_SCANCODE_KP_DECIMAL
-  SDL_SCANCODE_KP_HEXADECIMAL
+   (SDL_SCANCODE_ALTERASE            #:scancode-alt-erase)
+   (SDL_SCANCODE_SYSREQ              #:scancode-sys-req)
+   (SDL_SCANCODE_CANCEL              #:scancode-cancel)
+   (SDL_SCANCODE_CLEAR               #:scancode-clear)
+   (SDL_SCANCODE_PRIOR               #:scancode-prior)
+   (SDL_SCANCODE_RETURN2             #:scancode-return2)
+   (SDL_SCANCODE_SEPARATOR           #:scancode-separator)
+   (SDL_SCANCODE_OUT                 #:scancode-out)
+   (SDL_SCANCODE_OPER                #:scancode-oper)
+   (SDL_SCANCODE_CLEARAGAIN          #:scancode-clear-again)
+   (SDL_SCANCODE_CRSEL               #:scancode-crsel)
+   (SDL_SCANCODE_EXSEL               #:scancode-exsel)
 
-  SDL_SCANCODE_LCTRL
-  SDL_SCANCODE_LSHIFT
-  SDL_SCANCODE_LALT
-  SDL_SCANCODE_LGUI
-  SDL_SCANCODE_RCTRL
-  SDL_SCANCODE_RSHIFT
-  SDL_SCANCODE_RALT
-  SDL_SCANCODE_RGUI
+   (SDL_SCANCODE_KP_00               #:scancode-kp-00)
+   (SDL_SCANCODE_KP_000              #:scancode-kp-000)
+   (SDL_SCANCODE_THOUSANDSSEPARATOR  #:scancode-thousands-separator)
+   (SDL_SCANCODE_DECIMALSEPARATOR    #:scancode-decimal-separator)
+   (SDL_SCANCODE_CURRENCYUNIT        #:scancode-currency-unit)
+   (SDL_SCANCODE_CURRENCYSUBUNIT     #:scancode-currency-subunit)
+   (SDL_SCANCODE_KP_LEFTPAREN        #:scancode-kp-left-paren)
+   (SDL_SCANCODE_KP_RIGHTPAREN       #:scancode-kp-right-paren)
+   (SDL_SCANCODE_KP_LEFTBRACE        #:scancode-kp-left-brace)
+   (SDL_SCANCODE_KP_RIGHTBRACE       #:scancode-kp-right-brace)
+   (SDL_SCANCODE_KP_TAB              #:scancode-kp-tab)
+   (SDL_SCANCODE_KP_BACKSPACE        #:scancode-kp-backspace)
+   (SDL_SCANCODE_KP_A                #:scancode-kp-a)
+   (SDL_SCANCODE_KP_B                #:scancode-kp-b)
+   (SDL_SCANCODE_KP_C                #:scancode-kp-c)
+   (SDL_SCANCODE_KP_D                #:scancode-kp-d)
+   (SDL_SCANCODE_KP_E                #:scancode-kp-e)
+   (SDL_SCANCODE_KP_F                #:scancode-kp-f)
+   (SDL_SCANCODE_KP_XOR              #:scancode-kp-xor)
+   (SDL_SCANCODE_KP_POWER            #:scancode-kp-power)
+   (SDL_SCANCODE_KP_PERCENT          #:scancode-kp-percent)
+   (SDL_SCANCODE_KP_LESS             #:scancode-kp-less)
+   (SDL_SCANCODE_KP_GREATER          #:scancode-kp-greater)
+   (SDL_SCANCODE_KP_AMPERSAND        #:scancode-kp-ampersand)
+   (SDL_SCANCODE_KP_DBLAMPERSAND     #:scancode-kp-dbl-ampersand)
+   (SDL_SCANCODE_KP_VERTICALBAR      #:scancode-kp-vertical-bar)
+   (SDL_SCANCODE_KP_DBLVERTICALBAR   #:scancode-kp-dbl-vertical-bar)
+   (SDL_SCANCODE_KP_COLON            #:scancode-kp-colon)
+   (SDL_SCANCODE_KP_HASH             #:scancode-kp-hash)
+   (SDL_SCANCODE_KP_SPACE            #:scancode-kp-space)
+   (SDL_SCANCODE_KP_AT               #:scancode-kp-at)
+   (SDL_SCANCODE_KP_EXCLAM           #:scancode-kp-exclam)
+   (SDL_SCANCODE_KP_MEMSTORE         #:scancode-kp-mem-store)
+   (SDL_SCANCODE_KP_MEMRECALL        #:scancode-kp-mem-recall)
+   (SDL_SCANCODE_KP_MEMCLEAR         #:scancode-kp-mem-clear)
+   (SDL_SCANCODE_KP_MEMADD           #:scancode-kp-mem-add)
+   (SDL_SCANCODE_KP_MEMSUBTRACT      #:scancode-kp-mem-subtract)
+   (SDL_SCANCODE_KP_MEMMULTIPLY      #:scancode-kp-mem-multiply)
+   (SDL_SCANCODE_KP_MEMDIVIDE        #:scancode-kp-mem-divide)
+   (SDL_SCANCODE_KP_PLUSMINUS        #:scancode-kp-plus-minus)
+   (SDL_SCANCODE_KP_CLEAR            #:scancode-kp-clear)
+   (SDL_SCANCODE_KP_CLEARENTRY       #:scancode-kp-clear-entry)
+   (SDL_SCANCODE_KP_BINARY           #:scancode-kp-binary)
+   (SDL_SCANCODE_KP_OCTAL            #:scancode-kp-octal)
+   (SDL_SCANCODE_KP_DECIMAL          #:scancode-kp-decimal)
+   (SDL_SCANCODE_KP_HEXADECIMAL      #:scancode-kp-hexadecimal)
 
-  SDL_SCANCODE_MODE
+   (SDL_SCANCODE_LCTRL               #:scancode-lctrl)
+   (SDL_SCANCODE_LSHIFT              #:scancode-lshift)
+   (SDL_SCANCODE_LALT                #:scancode-lalt)
+   (SDL_SCANCODE_LGUI                #:scancode-lgui)
+   (SDL_SCANCODE_RCTRL               #:scancode-rctrl)
+   (SDL_SCANCODE_RSHIFT              #:scancode-rshift)
+   (SDL_SCANCODE_RALT                #:scancode-ralt)
+   (SDL_SCANCODE_RGUI                #:scancode-rgui)
 
-  SDL_SCANCODE_AUDIONEXT
-  SDL_SCANCODE_AUDIOPREV
-  SDL_SCANCODE_AUDIOSTOP
-  SDL_SCANCODE_AUDIOPLAY
-  SDL_SCANCODE_AUDIOMUTE
-  SDL_SCANCODE_MEDIASELECT
-  SDL_SCANCODE_WWW
-  SDL_SCANCODE_MAIL
-  SDL_SCANCODE_CALCULATOR
-  SDL_SCANCODE_COMPUTER
-  SDL_SCANCODE_AC_SEARCH
-  SDL_SCANCODE_AC_HOME
-  SDL_SCANCODE_AC_BACK
-  SDL_SCANCODE_AC_FORWARD
-  SDL_SCANCODE_AC_STOP
-  SDL_SCANCODE_AC_REFRESH
-  SDL_SCANCODE_AC_BOOKMARKS
+   (SDL_SCANCODE_MODE                #:scancode-mode)
 
-  SDL_SCANCODE_BRIGHTNESSDOWN
-  SDL_SCANCODE_BRIGHTNESSUP
-  SDL_SCANCODE_DISPLAYSWITCH
-  SDL_SCANCODE_KBDILLUMTOGGLE
-  SDL_SCANCODE_KBDILLUMDOWN
-  SDL_SCANCODE_KBDILLUMUP
-  SDL_SCANCODE_EJECT
-  SDL_SCANCODE_SLEEP
+   (SDL_SCANCODE_AUDIONEXT           #:scancode-audio-next)
+   (SDL_SCANCODE_AUDIOPREV           #:scancode-audio-prev)
+   (SDL_SCANCODE_AUDIOSTOP           #:scancode-audio-stop)
+   (SDL_SCANCODE_AUDIOPLAY           #:scancode-audio-play)
+   (SDL_SCANCODE_AUDIOMUTE           #:scancode-audio-mute)
+   (SDL_SCANCODE_MEDIASELECT         #:scancode-media-select)
+   (SDL_SCANCODE_WWW                 #:scancode-www)
+   (SDL_SCANCODE_MAIL                #:scancode-mail)
+   (SDL_SCANCODE_CALCULATOR          #:scancode-calculator)
+   (SDL_SCANCODE_COMPUTER            #:scancode-computer)
+   (SDL_SCANCODE_AC_SEARCH           #:scancode-ac-search)
+   (SDL_SCANCODE_AC_HOME             #:scancode-ac-home)
+   (SDL_SCANCODE_AC_BACK             #:scancode-ac-back)
+   (SDL_SCANCODE_AC_FORWARD          #:scancode-ac-forward)
+   (SDL_SCANCODE_AC_STOP             #:scancode-ac-stop)
+   (SDL_SCANCODE_AC_REFRESH          #:scancode-ac-refresh)
+   (SDL_SCANCODE_AC_BOOKMARKS        #:scancode-ac-bookmarks)
 
-  SDL_SCANCODE_APP1
-  SDL_SCANCODE_APP2
+   (SDL_SCANCODE_BRIGHTNESSDOWN      #:scancode-brightness-down)
+   (SDL_SCANCODE_BRIGHTNESSUP        #:scancode-brightness-up)
+   (SDL_SCANCODE_DISPLAYSWITCH       #:scancode-display-switch)
+   (SDL_SCANCODE_KBDILLUMTOGGLE      #:scancode-kbd-illum-toggle)
+   (SDL_SCANCODE_KBDILLUMDOWN        #:scancode-kbd-illum-down)
+   (SDL_SCANCODE_KBDILLUMUP          #:scancode-kbdillum-up)
+   (SDL_SCANCODE_EJECT               #:scancode-eject)
+   (SDL_SCANCODE_SLEEP               #:scancode-sleep)
 
-  SDL_NUM_SCANCODES)
+   (SDL_SCANCODE_APP1                #:scancode-app1)
+   (SDL_SCANCODE_APP2                #:scancode-app2)))

@@ -33,281 +33,291 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; KEYCODE
 
-(define-and-export-enum (SDL_Keycode sdl-keycode-name)
-  SDLK_UNKNOWN
+(define-foreign-constants+ SDL_Keycode
+  (sdl-keycode-name
+   %symbol->sdl-keycode
+   %sdl-keycode->keyword
+   %keyword->sdl-keycode)
 
-  SDLK_RETURN
-  SDLK_ESCAPE
-  SDLK_BACKSPACE
-  SDLK_TAB
-  SDLK_SPACE
-  SDLK_EXCLAIM
-  SDLK_QUOTEDBL
-  SDLK_HASH
-  SDLK_PERCENT
-  SDLK_DOLLAR
-  SDLK_AMPERSAND
-  SDLK_QUOTE
-  SDLK_LEFTPAREN
-  SDLK_RIGHTPAREN
-  SDLK_ASTERISK
-  SDLK_PLUS
-  SDLK_COMMA
-  SDLK_MINUS
-  SDLK_PERIOD
-  SDLK_SLASH
-  SDLK_0
-  SDLK_1
-  SDLK_2
-  SDLK_3
-  SDLK_4
-  SDLK_5
-  SDLK_6
-  SDLK_7
-  SDLK_8
-  SDLK_9
-  SDLK_COLON
-  SDLK_SEMICOLON
-  SDLK_LESS
-  SDLK_EQUALS
-  SDLK_GREATER
-  SDLK_QUESTION
-  SDLK_AT
+  ((SDLK_UNKNOWN             #:unknown)
+   (SDLK_RETURN              #:return)
+   (SDLK_ESCAPE              #:escape)
+   (SDLK_BACKSPACE           #:backspace)
+   (SDLK_TAB                 #:tab)
+   (SDLK_SPACE               #:space)
+   (SDLK_EXCLAIM             #:exclaim)
+   (SDLK_QUOTEDBL            #:quote-dbl)
+   (SDLK_HASH                #:hash)
+   (SDLK_PERCENT             #:percent)
+   (SDLK_DOLLAR              #:dollar)
+   (SDLK_AMPERSAND           #:ampersand)
+   (SDLK_QUOTE               #:quote)
+   (SDLK_LEFTPAREN           #:left-paren)
+   (SDLK_RIGHTPAREN          #:right-paren)
+   (SDLK_ASTERISK            #:asterisk)
+   (SDLK_PLUS                #:plus)
+   (SDLK_COMMA               #:comma)
+   (SDLK_MINUS               #:minus)
+   (SDLK_PERIOD              #:period)
+   (SDLK_SLASH               #:slash)
+   (SDLK_0                   #:0)
+   (SDLK_1                   #:1)
+   (SDLK_2                   #:2)
+   (SDLK_3                   #:3)
+   (SDLK_4                   #:4)
+   (SDLK_5                   #:5)
+   (SDLK_6                   #:6)
+   (SDLK_7                   #:7)
+   (SDLK_8                   #:8)
+   (SDLK_9                   #:9)
+   (SDLK_COLON               #:colon)
+   (SDLK_SEMICOLON           #:semicolon)
+   (SDLK_LESS                #:less)
+   (SDLK_EQUALS              #:equals)
+   (SDLK_GREATER             #:greater)
+   (SDLK_QUESTION            #:question)
+   (SDLK_AT                  #:at)
 
-  SDLK_LEFTBRACKET
-  SDLK_BACKSLASH
-  SDLK_RIGHTBRACKET
-  SDLK_CARET
-  SDLK_UNDERSCORE
-  SDLK_BACKQUOTE
-  SDLK_a
-  SDLK_b
-  SDLK_c
-  SDLK_d
-  SDLK_e
-  SDLK_f
-  SDLK_g
-  SDLK_h
-  SDLK_i
-  SDLK_j
-  SDLK_k
-  SDLK_l
-  SDLK_m
-  SDLK_n
-  SDLK_o
-  SDLK_p
-  SDLK_q
-  SDLK_r
-  SDLK_s
-  SDLK_t
-  SDLK_u
-  SDLK_v
-  SDLK_w
-  SDLK_x
-  SDLK_y
-  SDLK_z
+   (SDLK_LEFTBRACKET         #:left-bracket)
+   (SDLK_BACKSLASH           #:backslash)
+   (SDLK_RIGHTBRACKET        #:right-bracket)
+   (SDLK_CARET               #:caret)
+   (SDLK_UNDERSCORE          #:underscore)
+   (SDLK_BACKQUOTE           #:backquote)
 
-  SDLK_CAPSLOCK
+   (SDLK_a                   #:a)
+   (SDLK_b                   #:b)
+   (SDLK_c                   #:c)
+   (SDLK_d                   #:d)
+   (SDLK_e                   #:e)
+   (SDLK_f                   #:f)
+   (SDLK_g                   #:g)
+   (SDLK_h                   #:h)
+   (SDLK_i                   #:i)
+   (SDLK_j                   #:j)
+   (SDLK_k                   #:k)
+   (SDLK_l                   #:l)
+   (SDLK_m                   #:m)
+   (SDLK_n                   #:n)
+   (SDLK_o                   #:o)
+   (SDLK_p                   #:p)
+   (SDLK_q                   #:q)
+   (SDLK_r                   #:r)
+   (SDLK_s                   #:s)
+   (SDLK_t                   #:t)
+   (SDLK_u                   #:u)
+   (SDLK_v                   #:v)
+   (SDLK_w                   #:w)
+   (SDLK_x                   #:x)
+   (SDLK_y                   #:y)
+   (SDLK_z                   #:z)
 
-  SDLK_F1
-  SDLK_F2
-  SDLK_F3
-  SDLK_F4
-  SDLK_F5
-  SDLK_F6
-  SDLK_F7
-  SDLK_F8
-  SDLK_F9
-  SDLK_F10
-  SDLK_F11
-  SDLK_F12
+   (SDLK_CAPSLOCK            #:caps-lock)
 
-  SDLK_PRINTSCREEN
-  SDLK_SCROLLLOCK
-  SDLK_PAUSE
-  SDLK_INSERT
-  SDLK_HOME
-  SDLK_PAGEUP
-  SDLK_DELETE
-  SDLK_END
-  SDLK_PAGEDOWN
-  SDLK_RIGHT
-  SDLK_LEFT
-  SDLK_DOWN
-  SDLK_UP
+   (SDLK_F1                  #:f1)
+   (SDLK_F2                  #:f2)
+   (SDLK_F3                  #:f3)
+   (SDLK_F4                  #:f4)
+   (SDLK_F5                  #:f5)
+   (SDLK_F6                  #:f6)
+   (SDLK_F7                  #:f7)
+   (SDLK_F8                  #:f8)
+   (SDLK_F9                  #:f9)
+   (SDLK_F10                 #:f10)
+   (SDLK_F11                 #:f11)
+   (SDLK_F12                 #:f12)
 
-  SDLK_NUMLOCKCLEAR
-  SDLK_KP_DIVIDE
-  SDLK_KP_MULTIPLY
-  SDLK_KP_MINUS
-  SDLK_KP_PLUS
-  SDLK_KP_ENTER
-  SDLK_KP_1
-  SDLK_KP_2
-  SDLK_KP_3
-  SDLK_KP_4
-  SDLK_KP_5
-  SDLK_KP_6
-  SDLK_KP_7
-  SDLK_KP_8
-  SDLK_KP_9
-  SDLK_KP_0
-  SDLK_KP_PERIOD
+   (SDLK_PRINTSCREEN         #:print-screen)
+   (SDLK_SCROLLLOCK          #:scroll-lock)
+   (SDLK_PAUSE               #:pause)
+   (SDLK_INSERT              #:insert)
+   (SDLK_HOME                #:home)
+   (SDLK_PAGEUP              #:page-up)
+   (SDLK_DELETE              #:delete)
+   (SDLK_END                 #:end)
+   (SDLK_PAGEDOWN            #:page-down)
+   (SDLK_RIGHT               #:right)
+   (SDLK_LEFT                #:left)
+   (SDLK_DOWN                #:down)
+   (SDLK_UP                  #:up)
 
-  SDLK_APPLICATION
-  SDLK_POWER
-  SDLK_KP_EQUALS
-  SDLK_F13
-  SDLK_F14
-  SDLK_F15
-  SDLK_F16
-  SDLK_F17
-  SDLK_F18
-  SDLK_F19
-  SDLK_F20
-  SDLK_F21
-  SDLK_F22
-  SDLK_F23
-  SDLK_F24
-  SDLK_EXECUTE
-  SDLK_HELP
-  SDLK_MENU
-  SDLK_SELECT
-  SDLK_STOP
-  SDLK_AGAIN
-  SDLK_UNDO
-  SDLK_CUT
-  SDLK_COPY
-  SDLK_PASTE
-  SDLK_FIND
-  SDLK_MUTE
-  SDLK_VOLUMEUP
-  SDLK_VOLUMEDOWN
-  SDLK_KP_COMMA
-  SDLK_KP_EQUALSAS400
+   (SDLK_NUMLOCKCLEAR        #:num-lock-clear)
+   (SDLK_KP_DIVIDE           #:kp-divide)
+   (SDLK_KP_MULTIPLY         #:kp-multiply)
+   (SDLK_KP_MINUS            #:kp-minus)
+   (SDLK_KP_PLUS             #:kp-plus)
+   (SDLK_KP_ENTER            #:kp-enter)
+   (SDLK_KP_1                #:kp-1)
+   (SDLK_KP_2                #:kp-2)
+   (SDLK_KP_3                #:kp-3)
+   (SDLK_KP_4                #:kp-4)
+   (SDLK_KP_5                #:kp-5)
+   (SDLK_KP_6                #:kp-6)
+   (SDLK_KP_7                #:kp-7)
+   (SDLK_KP_8                #:kp-8)
+   (SDLK_KP_9                #:kp-9)
+   (SDLK_KP_0                #:kp-0)
+   (SDLK_KP_PERIOD           #:kp-period)
 
-  SDLK_ALTERASE
-  SDLK_SYSREQ
-  SDLK_CANCEL
-  SDLK_CLEAR
-  SDLK_PRIOR
-  SDLK_RETURN2
-  SDLK_SEPARATOR
-  SDLK_OUT
-  SDLK_OPER
-  SDLK_CLEARAGAIN
-  SDLK_CRSEL
-  SDLK_EXSEL
+   (SDLK_APPLICATION         #:application)
+   (SDLK_POWER               #:power)
+   (SDLK_KP_EQUALS           #:kp-equals)
+   (SDLK_F13                 #:f13)
+   (SDLK_F14                 #:f14)
+   (SDLK_F15                 #:f15)
+   (SDLK_F16                 #:f16)
+   (SDLK_F17                 #:f17)
+   (SDLK_F18                 #:f18)
+   (SDLK_F19                 #:f19)
+   (SDLK_F20                 #:f20)
+   (SDLK_F21                 #:f21)
+   (SDLK_F22                 #:f22)
+   (SDLK_F23                 #:f23)
+   (SDLK_F24                 #:f24)
+   (SDLK_EXECUTE             #:execute)
+   (SDLK_HELP                #:help)
+   (SDLK_MENU                #:menu)
+   (SDLK_SELECT              #:select)
+   (SDLK_STOP                #:stop)
+   (SDLK_AGAIN               #:again)
+   (SDLK_UNDO                #:undo)
+   (SDLK_CUT                 #:cut)
+   (SDLK_COPY                #:copy)
+   (SDLK_PASTE               #:paste)
+   (SDLK_FIND                #:find)
+   (SDLK_MUTE                #:mute)
+   (SDLK_VOLUMEUP            #:volume-up)
+   (SDLK_VOLUMEDOWN          #:volume-down)
+   (SDLK_KP_COMMA            #:kp-comma)
+   (SDLK_KP_EQUALSAS400      #:kp-equals-as400)
 
-  SDLK_KP_00
-  SDLK_KP_000
-  SDLK_THOUSANDSSEPARATOR
-  SDLK_DECIMALSEPARATOR
-  SDLK_CURRENCYUNIT
-  SDLK_CURRENCYSUBUNIT
-  SDLK_KP_LEFTPAREN
-  SDLK_KP_RIGHTPAREN
-  SDLK_KP_LEFTBRACE
-  SDLK_KP_RIGHTBRACE
-  SDLK_KP_TAB
-  SDLK_KP_BACKSPACE
-  SDLK_KP_A
-  SDLK_KP_B
-  SDLK_KP_C
-  SDLK_KP_D
-  SDLK_KP_E
-  SDLK_KP_F
-  SDLK_KP_XOR
-  SDLK_KP_POWER
-  SDLK_KP_PERCENT
-  SDLK_KP_LESS
-  SDLK_KP_GREATER
-  SDLK_KP_AMPERSAND
-  SDLK_KP_DBLAMPERSAND
-  SDLK_KP_VERTICALBAR
-  SDLK_KP_DBLVERTICALBAR
-  SDLK_KP_COLON
-  SDLK_KP_HASH
-  SDLK_KP_SPACE
-  SDLK_KP_AT
-  SDLK_KP_EXCLAM
-  SDLK_KP_MEMSTORE
-  SDLK_KP_MEMRECALL
-  SDLK_KP_MEMCLEAR
-  SDLK_KP_MEMADD
-  SDLK_KP_MEMSUBTRACT
-  SDLK_KP_MEMMULTIPLY
-  SDLK_KP_MEMDIVIDE
-  SDLK_KP_PLUSMINUS
-  SDLK_KP_CLEAR
-  SDLK_KP_CLEARENTRY
-  SDLK_KP_BINARY
-  SDLK_KP_OCTAL
-  SDLK_KP_DECIMAL
-  SDLK_KP_HEXADECIMAL
+   (SDLK_ALTERASE            #:alt-erase)
+   (SDLK_SYSREQ              #:sys-req)
+   (SDLK_CANCEL              #:cancel)
+   (SDLK_CLEAR               #:clear)
+   (SDLK_PRIOR               #:prior)
+   (SDLK_RETURN2             #:return2)
+   (SDLK_SEPARATOR           #:separator)
+   (SDLK_OUT                 #:out)
+   (SDLK_OPER                #:oper)
+   (SDLK_CLEARAGAIN          #:clear-again)
+   (SDLK_CRSEL               #:crsel)
+   (SDLK_EXSEL               #:exsel)
 
-  SDLK_LCTRL
-  SDLK_LSHIFT
-  SDLK_LALT
-  SDLK_LGUI
-  SDLK_RCTRL
-  SDLK_RSHIFT
-  SDLK_RALT
-  SDLK_RGUI
+   (SDLK_KP_00               #:kp-00)
+   (SDLK_KP_000              #:kp-000)
+   (SDLK_THOUSANDSSEPARATOR  #:thousands-separator)
+   (SDLK_DECIMALSEPARATOR    #:decimal-separator)
+   (SDLK_CURRENCYUNIT        #:currency-unit)
+   (SDLK_CURRENCYSUBUNIT     #:currency-subunit)
+   (SDLK_KP_LEFTPAREN        #:kp-left-paren)
+   (SDLK_KP_RIGHTPAREN       #:kp-right-paren)
+   (SDLK_KP_LEFTBRACE        #:kp-left-brace)
+   (SDLK_KP_RIGHTBRACE       #:kp-right-brace)
+   (SDLK_KP_TAB              #:kp-tab)
+   (SDLK_KP_BACKSPACE        #:kp-backspace)
+   (SDLK_KP_A                #:kp-a)
+   (SDLK_KP_B                #:kp-b)
+   (SDLK_KP_C                #:kp-c)
+   (SDLK_KP_D                #:kp-d)
+   (SDLK_KP_E                #:kp-e)
+   (SDLK_KP_F                #:kp-f)
+   (SDLK_KP_XOR              #:kp-xor)
+   (SDLK_KP_POWER            #:kp-power)
+   (SDLK_KP_PERCENT          #:kp-percent)
+   (SDLK_KP_LESS             #:kp-less)
+   (SDLK_KP_GREATER          #:kp-greater)
+   (SDLK_KP_AMPERSAND        #:kp-ampersand)
+   (SDLK_KP_DBLAMPERSAND     #:kp-dbl-ampersand)
+   (SDLK_KP_VERTICALBAR      #:kp-vertical-bar)
+   (SDLK_KP_DBLVERTICALBAR   #:kp-dbl-vertical-bar)
+   (SDLK_KP_COLON            #:kp-colon)
+   (SDLK_KP_HASH             #:kp-hash)
+   (SDLK_KP_SPACE            #:kp-space)
+   (SDLK_KP_AT               #:kp-at)
+   (SDLK_KP_EXCLAM           #:kp-exclam)
+   (SDLK_KP_MEMSTORE         #:kp-mem-store)
+   (SDLK_KP_MEMRECALL        #:kp-mem-recall)
+   (SDLK_KP_MEMCLEAR         #:kp-mem-clear)
+   (SDLK_KP_MEMADD           #:kp-mem-add)
+   (SDLK_KP_MEMSUBTRACT      #:kp-mem-subtract)
+   (SDLK_KP_MEMMULTIPLY      #:kp-mem-multiply)
+   (SDLK_KP_MEMDIVIDE        #:kp-mem-divide)
+   (SDLK_KP_PLUSMINUS        #:kp-plus-minus)
+   (SDLK_KP_CLEAR            #:kp-clear)
+   (SDLK_KP_CLEARENTRY       #:kp-clear-entry)
+   (SDLK_KP_BINARY           #:kp-binary)
+   (SDLK_KP_OCTAL            #:kp-octal)
+   (SDLK_KP_DECIMAL          #:kp-decimal)
+   (SDLK_KP_HEXADECIMAL      #:kp-hexadecimal)
 
-  SDLK_MODE
+   (SDLK_LCTRL               #:lctrl)
+   (SDLK_LSHIFT              #:lshift)
+   (SDLK_LALT                #:lalt)
+   (SDLK_LGUI                #:lgui)
+   (SDLK_RCTRL               #:rctrl)
+   (SDLK_RSHIFT              #:rshift)
+   (SDLK_RALT                #:ralt)
+   (SDLK_RGUI                #:rgui)
 
-  SDLK_AUDIONEXT
-  SDLK_AUDIOPREV
-  SDLK_AUDIOSTOP
-  SDLK_AUDIOPLAY
-  SDLK_AUDIOMUTE
-  SDLK_MEDIASELECT
-  SDLK_WWW
-  SDLK_MAIL
-  SDLK_CALCULATOR
-  SDLK_COMPUTER
-  SDLK_AC_SEARCH
-  SDLK_AC_HOME
-  SDLK_AC_BACK
-  SDLK_AC_FORWARD
-  SDLK_AC_STOP
-  SDLK_AC_REFRESH
-  SDLK_AC_BOOKMARKS
+   (SDLK_MODE                #:mode)
 
-  SDLK_BRIGHTNESSDOWN
-  SDLK_BRIGHTNESSUP
-  SDLK_DISPLAYSWITCH
-  SDLK_KBDILLUMTOGGLE
-  SDLK_KBDILLUMDOWN
-  SDLK_KBDILLUMUP
-  SDLK_EJECT
-  SDLK_SLEEP)
+   (SDLK_AUDIONEXT           #:audio-next)
+   (SDLK_AUDIOPREV           #:audio-prev)
+   (SDLK_AUDIOSTOP           #:audio-stop)
+   (SDLK_AUDIOPLAY           #:audio-play)
+   (SDLK_AUDIOMUTE           #:audio-mute)
+   (SDLK_MEDIASELECT         #:media-select)
+   (SDLK_WWW                 #:www)
+   (SDLK_MAIL                #:mail)
+   (SDLK_CALCULATOR          #:calculator)
+   (SDLK_COMPUTER            #:computer)
+   (SDLK_AC_SEARCH           #:ac-search)
+   (SDLK_AC_HOME             #:ac-home)
+   (SDLK_AC_BACK             #:ac-back)
+   (SDLK_AC_FORWARD          #:ac-forward)
+   (SDLK_AC_STOP             #:ac-stop)
+   (SDLK_AC_REFRESH          #:ac-refresh)
+   (SDLK_AC_BOOKMARKS        #:ac-bookmarks)
+
+   (SDLK_BRIGHTNESSDOWN      #:brightness-down)
+   (SDLK_BRIGHTNESSUP        #:brightness-up)
+   (SDLK_DISPLAYSWITCH       #:display-switch)
+   (SDLK_KBDILLUMTOGGLE      #:kbd-illum-toggle)
+   (SDLK_KBDILLUMDOWN        #:kbd-illum-down)
+   (SDLK_KBDILLUMUP          #:kbd-illum-up)
+   (SDLK_EJECT               #:eject)
+   (SDLK_SLEEP               #:sleep)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; KEYMOD
 
-(define-and-export-enum (SDL_Keymod sdl-keymod-name)
-  KMOD_NONE
+(define-foreign-constants+ SDL_Keymod
+  (sdl-keymod-name
+   %symbol->sdl-keymod
+   %sdl-keymod->keyword
+   %keyword->sdl-keymod)
 
-  KMOD_LSHIFT
-  KMOD_RSHIFT
-  KMOD_SHIFT
+  ((KMOD_NONE      #:none)
 
-  KMOD_LCTRL
-  KMOD_RCTRL
-  KMOD_CTRL
+   (KMOD_LSHIFT    #:lshift)
+   (KMOD_RSHIFT    #:rshift)
+   (KMOD_SHIFT     #:shift)
 
-  KMOD_LALT
-  KMOD_RALT
-  KMOD_ALT
+   (KMOD_LCTRL     #:lctrl)
+   (KMOD_RCTRL     #:rctrl)
+   (KMOD_CTRL      #:ctrl)
 
-  KMOD_LGUI
-  KMOD_RGUI
-  KMOD_GUI
+   (KMOD_LALT      #:lalt)
+   (KMOD_RALT      #:ralt)
+   (KMOD_ALT       #:alt)
 
-  KMOD_NUM
-  KMOD_CAPS
-  KMOD_MODE
-  KMOD_RESERVED)
+   (KMOD_LGUI      #:lgui)
+   (KMOD_RGUI      #:rgui)
+   (KMOD_GUI       #:gui)
+
+   (KMOD_NUM       #:num)
+   (KMOD_CAPS      #:caps)
+   (KMOD_MODE      #:mode)
+   (KMOD_RESERVED  #:reserved)))

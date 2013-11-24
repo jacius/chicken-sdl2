@@ -30,12 +30,12 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-(define-and-export-foreign-constants Uint8
+(define-foreign-constants Uint8
   SDL_ALPHA_OPAQUE
   SDL_ALPHA_TRANSPARENT)
 
 
-(define-and-export-enum SDL_PixelTypeEnum
+(define-foreign-constants SDL_PixelTypeEnum
   SDL_PIXELTYPE_UNKNOWN
   SDL_PIXELTYPE_INDEX1
   SDL_PIXELTYPE_INDEX4
@@ -49,12 +49,12 @@
   SDL_PIXELTYPE_ARRAYF16
   SDL_PIXELTYPE_ARRAYF32)
 
-(define-and-export-enum SDL_BitmapOrderEnum
+(define-foreign-constants SDL_BitmapOrderEnum
   SDL_BITMAPORDER_NONE
   SDL_BITMAPORDER_4321
   SDL_BITMAPORDER_1234)
 
-(define-and-export-enum SDL_PackedOrderEnum
+(define-foreign-constants SDL_PackedOrderEnum
   SDL_PACKEDORDER_NONE
   SDL_PACKEDORDER_XRGB
   SDL_PACKEDORDER_RGBX
@@ -65,7 +65,7 @@
   SDL_PACKEDORDER_ABGR
   SDL_PACKEDORDER_BGRA)
 
-(define-and-export-enum SDL_ArrayOrderEnum
+(define-foreign-constants SDL_ArrayOrderEnum
   SDL_ARRAYORDER_NONE
   SDL_ARRAYORDER_RGB
   SDL_ARRAYORDER_RGBA
@@ -74,7 +74,7 @@
   SDL_ARRAYORDER_BGRA
   SDL_ARRAYORDER_ABGR)
 
-(define-and-export-enum SDL_PackedLayoutEnum
+(define-foreign-constants SDL_PackedLayoutEnum
   SDL_PACKEDLAYOUT_NONE
   SDL_PACKEDLAYOUT_332
   SDL_PACKEDLAYOUT_4444
@@ -86,7 +86,7 @@
   SDL_PACKEDLAYOUT_1010102)
 
 
-(define-and-export-enum SDL_PixelFormatEnum
+(define-foreign-constants SDL_PixelFormatEnum
   SDL_PIXELFORMAT_UNKNOWN
   SDL_PIXELFORMAT_INDEX1LSB
   SDL_PIXELFORMAT_INDEX1MSB

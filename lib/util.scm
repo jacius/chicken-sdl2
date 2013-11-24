@@ -35,6 +35,26 @@
             things))
 
 
+;;; Ignore the body of the form if the first argument is #f. Used for
+;;; conditional expansion in macros like define-foreign-constants+.
+;;;
+;;;   (ignore-if-false foo
+;;;     (bar) (baz))
+;;;   ; =>  (begin (bar) (baz))
+;;;
+;;;   (ignore-if-false #f
+;;;     (bar) (baz))
+;;;   ; =>  (void)
+;;;
+(define-syntax ignore-if-false
+  (er-macro-transformer
+   (lambda (form rename compare?)
+     (if (cadr form)
+         (cons (rename 'begin)
+               (cddr form))
+         '(void)))))
+
+
 ;;; Convenience and descriptiveness wrapper around foreign-lambda.
 ;;; Usage (stuff in square brackets can be omitted):
 ;;;

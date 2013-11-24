@@ -30,7 +30,7 @@
 ;; OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-(define-and-export-enum SDL_GLattr
+(define-foreign-constants SDL_GLattr
   SDL_GL_RED_SIZE
   SDL_GL_GREEN_SIZE
   SDL_GL_BLUE_SIZE
@@ -56,13 +56,13 @@
   SDL_GL_SHARE_WITH_CURRENT_CONTEXT)
 
 
-(define-and-export-enum SDL_GLprofile
+(define-foreign-constants SDL_GLprofile
   SDL_GL_CONTEXT_PROFILE_CORE
   SDL_GL_CONTEXT_PROFILE_COMPATIBILITY
   SDL_GL_CONTEXT_PROFILE_ES)
 
 
-(define-and-export-enum SDL_GLcontextFlag
+(define-foreign-constants SDL_GLcontextFlag
   SDL_GL_CONTEXT_DEBUG_FLAG
   SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG
   SDL_GL_CONTEXT_ROBUST_ACCESS_FLAG
