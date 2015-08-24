@@ -3,10 +3,12 @@
 
 Bindings to [[http://libsdl.org/][SDL]] 2 (Simple DirectMedia Layer 2).
 
+*ATTENTION:* The [[https://gitlab.com/jcroisant/chicken-sdl2][project has moved]]. Updates will no longer be pushed to GitHub.
+
 - Version: 0.1
 - Date:    (Not yet released)
 - Author:  John Croisant <john+chicken@croisant.net>
-- Project: [[http://github.com/jacius/chicken-sdl2/]]
+- Project: [[https://gitlab.com/jcroisant/chicken-sdl2]]
 - License: [[http://opensource.org/licenses/BSD-2-Clause][BSD 2-Clause]]
 
 * Installation and Usage
@@ -33,7 +35,7 @@ demos/sdl2-raw/basics
 
 chicken-sdl2 is being developed based on the needs of its users and
 contributors. If you don't see bindings for an SDL 2 feature you need,
-[[https://github.com/jacius/chicken-sdl2/issues][file an issue]] or [[https://github.com/jacius/chicken-sdl2/pulls][submit a pull request]]!
+[[https://gitlab.com/jcroisant/chicken-sdl2/issues][file an issue]] or [[https://gitlab.com/jcroisant/chicken-sdl2/merge_requests][submit a pull request]]!
 
 * License
 
